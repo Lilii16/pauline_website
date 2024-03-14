@@ -9,8 +9,10 @@ if(isset($_GET['type'])) {
     $type = $_GET['type'];
 } else {
     // Redirection en cas d'absence du type
+  var_dump($type);
     exit;
 }
+$type = $_GET['type'];
 ?>
 
 <!DOCTYPE html>
@@ -27,10 +29,11 @@ if(isset($_GET['type'])) {
 </head>
 <body>
     <div class="d-flex flex-column justify-content-center align-items-center">
-        <h2>Ajouter une question</h2>
+        <h2>Ajouter <?php $type ?></h2>
 <!-- Affichage dynamique du formulaire en fonction du type -->
 <?php if ($type === 'question') { ?>
         <form action="addQuestion.php" method="post" class="d-flex flex-column justify-content-center align-items-center"><br>
+            <input type="hidden" name="type" value="question">
             <label for="question">Question : </label>
             <input type="text" name="question"><br>
             <label for="reponse">Réponse : </label>
@@ -42,6 +45,7 @@ if(isset($_GET['type'])) {
     <!-- Formulaire pour ajouter un article -->
     <form action="addQuestion.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
         <!-- Autres champs du formulaire pour ajouter un article -->
+        <input type="hidden" name="type" value="article">
         <label for="title">Titre : </label>
         <input type="text" name="title"><br>
         <label for="origine">Lien : </label>

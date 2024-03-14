@@ -12,7 +12,8 @@ if(isset($_GET['type'])) {
     $type = $_GET['type'];
 } else {
     // Redirection en cas d'absence du type
-    header("Location: ../dashboard.php");
+    // header("Location: ../dashboard.php");
+    var_dump($type);
     exit;
 }
 ?>
@@ -28,12 +29,12 @@ if(isset($_GET['type'])) {
 <body>
     <div class="card decoration-none">
 <?php if($type === 'question') {?>
-    <form action="updated.php" method="post">
+    <form action="update.php" method="post">
         <input type="hidden" name="id" value="<?= isset($question['id']) ? $question['id'] : '' ?>">
         <ul>
             <li>
                 <label for="ask">Question : </label>
-                <textarea id="ask" name="question"><?= isset($question['question']) ? $question['question'] : '' ?></textarea>
+                <textarea id="ask" name="question" ><?= isset($question['question']) ? $question['question'] : '' ?></textarea>
             </li>
             <li>
                 <label for="msg">Réponse : </label>
@@ -47,7 +48,7 @@ if(isset($_GET['type'])) {
         </ul>
     </form>
 <?php } elseif ($type === 'article') { ?>
-    <form action="updated.php" method="post">
+    <form action="update.php" method="post">
     <input type="hidden" name="type" value="article">
         <input type="hidden" name="id" value="<?= isset($article['id']) ? $article['id'] : '' ?>">
         <ul>
@@ -71,7 +72,8 @@ if(isset($_GET['type'])) {
         </ul>
     </form>
 <?php } else {
-  header("Location: ../dashboard.php");
+//   header("Location: ../dashboard.php");
+    var_dump($type);
   exit;
 } ?>
     

@@ -8,7 +8,7 @@ require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
 if (isset($_POST['type']) && ($_POST['type'] === 'question' || $_POST['type'] === 'article')) {
     $type = $_POST['type'];
 } else {
-    // Redirection en cas de type non valide (vreer une page erreur qi rederige ensuite vers dashboard)
+    // Redirection en cas de type non valide (vers une page erreur qi rederige ensuite vers dashboard)
     header("Location: ../dashboard.php");
     exit();
 }

@@ -73,7 +73,7 @@ if (!isset($_SESSION['user'])) {
 
                         <!-- Boutons pour modifier la question -->
                         <div class="d-flex justify-content-end mt-2">
-                            <a href="./CRUD/toUpdate.php?id=<?php echo $question['id']; ?>" class="btn btn-warning me-2">Modifier</a>
+                            <a href="./CRUD/toUpdateForm.php?type=question&id=<?php echo $question['id']; ?>" class="btn btn-warning me-2">Modifier</a>
                          <!-- Boutons pour  supprimer la question -->
                             <form action="./CRUD/confirmdelete.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo $question['id']; ?>">
@@ -85,7 +85,14 @@ if (!isset($_SESSION['user'])) {
                     </div>
                 <?php } ?>
                 <!-- Bouton Ajouter -->
-                <a href="./CRUD/add.php" class="btn btn-primary mb-3">Ajouter une Question</a>
+                <!-- pour envoyer le type, on peut utiliser deux méthodes: soit un lien dans laquel on précise le type
+                (?type=question)=> méthode $GET, soit en formulaire avec la méthode POST dans lequel on rajoute 
+                un input invisible avec (name = type value= question) -->
+                <form action="./CRUD/addForm.php" method="get">
+                <input type="hidden" name="type" value="question">
+                <button type="submit" class="btn btn-primary mb-3">Ajouer</button>
+                </form>
+                    
             </div>
 
 
@@ -96,7 +103,10 @@ if (!isset($_SESSION['user'])) {
             <div class="tab-pane fade" id="articlesContent" role="tabpanel" aria-labelledby="articles-tab">
                 <h2>Articles</h2>
                 <!-- Bouton Ajouter -->
-                <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addArticleModal">Ajouter Article</button>
+                <form action="./CRUD/addForm.php" method="get">
+                <input type="hidden" name="type" value="article">
+                <button type="submit" class="btn btn-primary mb-3">Ajouer</button>
+                </form>
                 <!-- Tableau pour afficher les articles -->
                 <!-- Structure du tableau -->
                 <!-- Insérer les données dynamiquement ici -->
@@ -119,7 +129,7 @@ if (!isset($_SESSION['user'])) {
                     </div>
                     <!-- Boutons pour modifier et supprimer l'article -->
                     <div class="d-flex justify-content-end mt-2">
-                        <a href="./CRUD/toUpdate.php?id=<?php echo $article['id']; ?>" class="btn btn-warning me-2">Modifier</a>
+                        <a href="./CRUD/toUpdateForm.php?type=article&id=<?php echo $article['id']; ?>" class="btn btn-warning me-2">Modifier</a>
                         <form action="./CRUD/confirmdelete.php" method="post">
                             <input type="hidden" name="id" value="<?php echo $article['id']; ?>">
                             <input type="hidden" name="type" value="article">
