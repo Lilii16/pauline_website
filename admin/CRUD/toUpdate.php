@@ -1,8 +1,20 @@
 <?php
 require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
+require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
 $conn = getPDOlink($config);
 $question = findQuestionById($conn, $_GET['id']); 
+$article = findArticleById($conn, $_GET['id']);
+
+
+// Vérifiez si le type est passé dans l'URL
+if(isset($_GET['type'])) {
+    $type = $_GET['type'];
+} else {
+    // Redirection en cas d'absence du type
+    header("Location: ../dashboard.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +27,7 @@ $question = findQuestionById($conn, $_GET['id']);
 
 <body>
     <div class="card decoration-none">
+<?php if($type === 'question') {?>
     <form action="updated.php" method="post">
         <input type="hidden" name="id" value="<?= isset($question['id']) ? $question['id'] : '' ?>">
         <ul>
@@ -33,6 +46,34 @@ $question = findQuestionById($conn, $_GET['id']);
             </li>
         </ul>
     </form>
+<?php } elseif ($type === 'article') { ?>
+    <form action="updated.php" method="post">
+    <input type="hidden" name="type" value="article">
+        <input type="hidden" name="id" value="<?= isset($article['id']) ? $article['id'] : '' ?>">
+        <ul>
+            <li>
+                <label for="title">Titre : </label>
+                <textarea id="title" name="title"><?= isset($article['title']) ? $article['title'] : '' ?></textarea>
+            </li>
+            <li>
+                <label for="origine">Lien : </label>
+                <textarea id="origine" name="origine"><?= isset($article['origine']) ? $article['origine'] : '' ?></textarea>
+            </li>
+            <li>
+                <label for="deskription">Description: </label>
+                <textarea id="deskription" name="deskription"><?= isset($article['deskription']) ? $article['deskription'] : '' ?></textarea>
+            </li>
+            <li>
+            <div class="button">
+                <button type="submit">Valider les modifications</button>
+            </div>
+            </li>
+        </ul>
+    </form>
+<?php } else {
+  header("Location: ../dashboard.php");
+  exit;
+} ?>
     
     </div>
 

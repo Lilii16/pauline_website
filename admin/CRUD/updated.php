@@ -1,88 +1,91 @@
 <?php 
 require_once dirname(__DIR__, 2) . '/config/conn.php';
-require_once dirname(__DIR__, 2) . '/function/database.fn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
+require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
 
-// $item = $_POST['id'];
-// $name = $_POST['name'];
-// $description = $_POST['description'];
-// $price = $_POST['price'];
-// $capacity = $_POST['ml'];
-$updatedData = $_POST; // les données envoyées lors de la modification
+// Récupérer les données extérieures
 $currentId = $_POST['id'];
-$currentData = findQuestionById($conn, $currentId); // la fonction qui récupère les données 
-// actuelles de la base de données
-$diff = array_diff_assoc($updatedData, $currentData); 
+$type = $_POST['type'];
 
-var_dump($updatedData);
-var_dump($currentData);
-var_dump($diff);
-// la prochaine étape sera de faire un UPDATE sur les tables SQL items_cards, pictures et 
-// capacities
-
-// $sql = "UPDATE items_cards SET price WHERE id"; 
-// for each catégorie du tableau $differences, je veux que tu 
-
-// Récupération des données du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $currentId = $_POST['id'];
-    $question = $_POST['question'];
-    $reponse = $_POST['reponse'];
+    // Récupération des valeurs du formulaire
+        if ($type === 'question') {
+            try {
+               // Stocker les données actuelles avant la mise à jour
+               $question = htmlspecialchars($_POST['question']);
+               $reponse = htmlspecialchars($_POST['reponse']);
+               $currentData = findQuestionById($conn, $currentId); 
+               $oldData = $currentData;
 
-    try {
-        // Récupération des données actuelles de la question
-        $currentData = findQuestionById($conn, $currentId); // Supposant que vous avez une fonction pour récupérer les données actuelles
+               // Préparer les valeurs à mettre à jour
+               $updateValues = array();
+       
+               // Vérifier chaque champ s'il a changé
+               if ($question != $oldData['question']) {
+                   $updateValues[] = "question = '$question'";
+               }
+               if ($reponse != $oldData['reponse']) {
+                   $updateValues[] = "reponse = '$reponse'";
+               }
+       
+               // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+               if (!empty($updateValues)) {
+                //transformation de tableau en string pour envoyer dans la requete sql
+                // implode(string $separator, array $array): string
+                   $updateString = implode(', ', $updateValues);
+                   $sql = "UPDATE questions SET $updateString WHERE id = '$currentId'";
+                   $conn->query($sql);
+               }
 
-        // Comparaison des données actuelles avec les nouvelles données
-        $updatedData = [
-            'question' => $question,
-            'reponse' => $reponse
-        ];
-
-        $diff = array_diff_assoc($updatedData, $currentData);
-
-        // Construction de la requête SQL en fonction des données modifiées
-        $sql = "UPDATE questions SET ";
-        $updates = [];
-
-        foreach ($diff as $key => $value) {
-            $updates[] = "$key = '$value'";
+            
+               // Message de réussite
+               echo "Question updated successfully";
+       
+               // Redirection après un court délai
+               header("Refresh: 3; url=/admin/dashboard.php");
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+    } elseif ($type === 'article') {
+        $titre = htmlspecialchars($_POST['title']);
+        $lien = htmlspecialchars($_POST['origine']);
+        $description = htmlspecialchars($_POST['deskription']);
+        $currentData = findArticleById($conn, $currentId); 
+        $oldData = $currentData;
+        try {
+             // Préparer les valeurs à mettre à jour
+             $updateValues = array();
+       
+             // Vérifier chaque champ s'il a changé
+             if ($title != $oldData['title']) {
+                 $updateValues[] = "title = '$title'";
+             }
+             if ($origine != $oldData['origine']) {
+                 $updateValues[] = "origine = '$origine'";
+             }
+             if ($deskription != $oldData['deskription']) {
+                $updateValues[] = "deskription = '$deskription'";
+            }
+     
+             // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+             if (!empty($updateValues)) {
+                 $updateString = implode(', ', $updateValues);
+                 $sql = "UPDATE articles SET $updateString WHERE id = '$currentId'";
+                 $conn->query($sql);
+             }
+     
+             // Message de réussite
+             echo "Article modifié avec succes";
+     
+             // Redirection après un court délai
+             header("Refresh: 3; url=/admin/dashboard.php");
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
-
-        $sql .= implode(", ", $updates);
-        $sql .= " WHERE id = '$currentId'";
-
-        // Exécution de la requête SQL si des changements ont été détectés
-        if (!empty($diff)) {
-            $conn->exec($sql);
-            echo "Question mise à jour avec succès.";
-        } else {
-            echo "Aucune modification détectée.";
-        }
-
-        // Redirection après un court délai
-        header("Refresh: 5; url=/admin/dashboard.php");
-    } catch (PDOException $e) {
-        // Gestion des erreurs
-        echo "Erreur lors de la mise à jour de la question: " . $e->getMessage();
+    } else {
+        // Redirection en cas de type invalide
+     
+        exit;
     }
 }
-//songer à rajouter la sécurité
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-
-<form action="dashboard.php" method="get">
-    <button type="submit" class="btn btn-green">Revenir au dashboard</button>
-</form>
-    
-</body>
-</html>
