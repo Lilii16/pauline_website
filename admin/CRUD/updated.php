@@ -1,6 +1,7 @@
 <?php 
 require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/database.fn.php';
+require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 
 // $item = $_POST['id'];
 // $name = $_POST['name'];
