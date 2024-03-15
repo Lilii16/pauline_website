@@ -3,9 +3,10 @@
 require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
+require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
 
 // Vérification du type avant de récupérer les données du formulaire
-if (isset($_POST['type']) && ($_POST['type'] === 'question' || $_POST['type'] === 'article')) {
+if (isset($_POST['type']) && ($_POST['type'] === 'question' || $_POST['type'] === 'article' || $_POST['type'] === 'publication')) {
     $type = $_POST['type'];
 } else {
     // Redirection en cas de type non valide (vers une page erreur qi rederige ensuite vers dashboard)
@@ -25,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->query($sql);
        
         // Message de réussite
-        echo "Question ajouté avec succès";
+        echo "Question ajoutée avec succès";
 
         // Redirection après un court délai
         header("Refresh: 3; url=/admin/dashboard.php");
@@ -55,11 +56,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //annuler tous les changements de la transaction en cours
         echo "Erreur : " . $e->getMessage();
     }
+} elseif ($type === 'publication') {
+    $titre = htmlspecialchars($_POST['titre']);
+    $description = htmlspecialchars($_POST['description']);
+    $source = htmlspecialchars($_POST['source']);
+    $lien = htmlspecialchars($_POST['lien']);
+
+    try {
+        $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `lien`) VALUES ('$titre', '$description', '$source', '$lien')";
+        $conn->query($sql);
+       
+        // Message de réussite
+        echo "
+        <h1> Publication ajoutée avec succès</h1>
+    ";
+
+        // Redirection après un court délai
+        header("Refresh: 3; url=/admin/dashboard.php");
+        exit; // Sortir du script après la redirection
+    } catch (PDOException $e) {
+        //annuler tous les changements de la transaction en cours
+        echo "Erreur : " . $e->getMessage();
+    }
 } else {
     // Redirection en cas de type invalide
     header("Location: ../dashborard.php");
     exit;
-}
+} 
 } else {
 // Redirection si le formulaire n'a pas été soumis via POST
 header("Location: ../dashborard.php");

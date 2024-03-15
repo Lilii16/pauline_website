@@ -43,11 +43,15 @@ if (!isset($_SESSION['user'])) {
             <li class="nav-item">
                 <a class="nav-link" id="articles-tab" data-toggle="tab" href="#articlesContent" role="tab" aria-controls="articles" aria-selected="false">Articles</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="publications-tab" data-toggle="tab" href="#publicationsContent" role="tab" aria-controls="publications" aria-selected="false">Publications</a>
+            </li>
         </ul>
 
         <?php
         $questions = findAllQuestions($conn);
         $articles = findAllArticles($conn);
+        $publications = findAllPublications($conn);
         ?>
 
         <!-- Tab panes -->
@@ -90,23 +94,14 @@ if (!isset($_SESSION['user'])) {
                 un input invisible avec (name = type value= question) -->
                 <form action="./CRUD/addForm.php" method="get">
                 <input type="hidden" name="type" value="question">
-                <button type="submit" class="btn btn-primary mb-3">Ajouer</button>
+                <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
                 </form>
                     
             </div>
 
-
-
-
-
             <!-- Articles -->
             <div class="tab-pane fade" id="articlesContent" role="tabpanel" aria-labelledby="articles-tab">
                 <h2>Articles</h2>
-                <!-- Bouton Ajouter -->
-                <form action="./CRUD/addForm.php" method="get">
-                <input type="hidden" name="type" value="article">
-                <button type="submit" class="btn btn-primary mb-3">Ajouer</button>
-                </form>
                 <!-- Tableau pour afficher les articles -->
                 <!-- Structure du tableau -->
                 <!-- Insérer les données dynamiquement ici -->
@@ -137,8 +132,53 @@ if (!isset($_SESSION['user'])) {
                         </form>
                     </div>
             
-        <?php } ?>
-        </div>
+                <?php } ?>
+                    <!-- Bouton Ajouter -->
+                    <form action="./CRUD/addForm.php" method="get">
+                            <input type="hidden" name="type" value="article">
+                            <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
+                    </form>
+            </div>
+            <!-- Publications -->
+            <div class="tab-pane fade" id="publicationsContent" role="tabpanel" aria-labelledby="publications-tab">
+                <h2>Publications</h2>
+                <!-- Tableau pour afficher les articles -->
+                <!-- Structure du tableau -->
+                <!-- Insérer les données dynamiquement ici -->
+                <?php foreach ($publications as $i => $publication) { ?>
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col">
+                            <div class="card">
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title heading<?php echo $i; ?>" id="heading<?php echo $publication['titre']; ?>"></h5>
+                                    <p> <?php echo $publication['description']; ?></p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">
+                                        <a href="<?php echo $publication['source']; ?>"><?php echo $publication['source']; ?></a>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Boutons pour modifier et supprimer l'article -->
+                    <div class="d-flex justify-content-end mt-2">
+                        <a href="./CRUD/toUpdateForm.php?type=publication&id=<?php echo $publication['id']; ?>" class="btn btn-warning me-2">Modifier</a>
+                        <form action="./CRUD/confirmdelete.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $publication['id']; ?>">
+                            <input type="hidden" name="type" value="publication">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+            
+                <?php } ?>
+                    <!-- Bouton Ajouter -->
+                    <form action="./CRUD/addForm.php" method="get">
+                            <input type="hidden" name="type" value="publication">
+                            <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
+                    </form>
+            </div>
         </div>
 
     </div>
@@ -150,6 +190,11 @@ if (!isset($_SESSION['user'])) {
 
     <!-- Modal d'ajout d'article -->
     <div class="modal fade" id="addArticleModal" tabindex="-1" role="dialog" aria-labelledby="addArticleModalLabel" aria-hidden="true">
+        <!-- Contenu du modal -->
+    </div>
+
+    <!-- Modal d'ajout d'article -->
+    <div class="modal fade" id="addPublicationModal" tabindex="-1" role="dialog" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
         <!-- Contenu du modal -->
     </div>
 

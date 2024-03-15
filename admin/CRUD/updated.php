@@ -2,6 +2,7 @@
 require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
+require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
 
 // Récupérer les données extérieures
 $currentId = $_POST['id'];
@@ -47,9 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Error: " . $e->getMessage();
             }
     } elseif ($type === 'article') {
-        $titre = htmlspecialchars($_POST['title']);
-        $lien = htmlspecialchars($_POST['origine']);
-        $description = htmlspecialchars($_POST['deskription']);
+        $title = htmlspecialchars($_POST['title']);
+        $origine = htmlspecialchars($_POST['origine']);
+        $deskription = htmlspecialchars($_POST['deskription']);
         $currentData = findArticleById($conn, $currentId); 
         $oldData = $currentData;
         try {
@@ -71,6 +72,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              if (!empty($updateValues)) {
                  $updateString = implode(', ', $updateValues);
                  $sql = "UPDATE articles SET $updateString WHERE id = '$currentId'";
+                 $conn->query($sql);
+             }
+     
+             // Message de réussite
+             echo "Article modifié avec succes";
+     
+             // Redirection après un court délai
+             header("Refresh: 3; url=/admin/dashboard.php");
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    } elseif ($type === 'publication') {
+        $titre = htmlspecialchars($_POST['titre']);
+        $description = htmlspecialchars($_POST['description']);
+        $source = htmlspecialchars($_POST['source']);
+        $lien = htmlspecialchars($_POST['lien']);
+        $currentData = findArticleById($conn, $currentId); 
+        $oldData = $currentData;
+        try {
+             // Préparer les valeurs à mettre à jour
+             $updateValues = array();
+       
+             // Vérifier chaque champ s'il a changé
+             if ($titre != $oldData['titre']) {
+                 $updateValues[] = "titre = '$titre'";
+             } if ($description != $oldData['description']) {
+                $updateValues[] = "description = '$description'";
+             } if ($source != $oldData['source']) {
+                $updateValues[] = "source = '$source'";
+             } if ($lien != $oldData['lien']) {
+                $updateValues[] = "lien = '$lien'";
+             }
+     
+             // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+                if (!empty($updateValues)) {
+                 $updateString = implode(', ', $updateValues);
+                 $sql = "UPDATE publications SET $updateString WHERE id = '$currentId'";
                  $conn->query($sql);
              }
      

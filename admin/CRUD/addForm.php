@@ -1,4 +1,3 @@
-
 <?php
 require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
@@ -52,6 +51,22 @@ $type = $_GET['type'];
         <input type="text" name="origine"><br>
         <label for="deskription">Description : </label>
         <textarea name="deskription" style="height: 100px"></textarea><br>
+        <!-- Ajoutez d'autres champs pour les articles si nécessaire -->
+        <input type="submit" value="Ajouter"><br>
+    </form>
+<?php } elseif ($type === 'publication') { ?>
+    <!-- Formulaire pour ajouter un article -->
+    <form action="addQuestion.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
+        <!-- Autres champs du formulaire pour ajouter un article -->
+        <input type="hidden" name="type" value="publication">
+        <label for="titre">Titre : </label>
+        <input type="text" name="titre"><br>
+        <label for="description">Description : </label>
+        <textarea name="description" style="height: 100px"></textarea><br>
+        <label for="source">Source : </label>
+        <input type="text" name="source"><br>
+        <label for="lien">Lien : </label>
+        <input type="text" name="lien"><br>
         <!-- Ajoutez d'autres champs pour les articles si nécessaire -->
         <input type="submit" value="Ajouter"><br>
     </form>

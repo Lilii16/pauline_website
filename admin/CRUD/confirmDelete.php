@@ -10,7 +10,7 @@ $currentId = $_POST['id'];
 <?php
 // Vérification du type avant de confirmer la suppression
 // Rajouter un type avec 'publication' ?
-if(isset($_POST['type']) && ($_POST['type'] === 'question' || $_POST['type'] === 'article')) {
+if(isset($_POST['type']) && ($_POST['type'] === 'question' || $_POST['type'] === 'article' || $_POST['type'] === 'publication')) {
     $id = $_POST['id'];
     $type = $_POST['type'];
 } else {
