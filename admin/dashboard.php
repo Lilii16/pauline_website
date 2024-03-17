@@ -108,10 +108,9 @@ if (!isset($_SESSION['user'])) {
                 <?php foreach ($articles as $i => $article) { ?>
                     <div class="row row-cols-1 row-cols-md-2 g-4">
                         <div class="col">
-                            <div class="card">
-                                <img src="..." class="card-img-top" alt="...">
+                            <div class="card p-3">
+                            <h5 class="card-title heading <?php echo $i; ?>" id="heading<?php echo $article['title']; ?>"><?php echo $article['title']; ?></h5>
                                 <div class="card-body">
-                                    <h5 class="card-title heading<?php echo $i; ?>" id="heading<?php echo $article['title']; ?>"></h5>
                                     <p> <?php echo $article['deskription']; ?></p>
                                 </div>
                                 <div class="card-footer">
@@ -148,15 +147,17 @@ if (!isset($_SESSION['user'])) {
                 <?php foreach ($publications as $i => $publication) { ?>
                     <div class="row row-cols-1 row-cols-md-2 g-4">
                         <div class="col">
-                            <div class="card">
-                                <img src="..." class="card-img-top" alt="...">
+                            <div class="card p-3">
+                            <h5 class="card-title heading<?php echo $i; ?>" id="heading<?php echo $publication['titre']; ?>"><?php echo $publication['titre']; ?></h5>
                                 <div class="card-body">
-                                    <h5 class="card-title heading<?php echo $i; ?>" id="heading<?php echo $publication['titre']; ?>"></h5>
                                     <p> <?php echo $publication['description']; ?></p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-muted">
-                                        <a href="<?php echo $publication['source']; ?>"><?php echo $publication['source']; ?></a>
+                                        <p> <?php echo $publication['source']; ?>"><?php echo $publication['source']; ?></p>
+                                    </small>
+                                    <small class="text-muted">
+                                        <a href="<?php echo $publication['lien']; ?>"><?php echo $publication['lien']; ?></a>
                                     </small>
                                 </div>
                             </div>

@@ -32,6 +32,7 @@ if(isset($_GET['type'])) {
     <div class="card decoration-none">
 <?php if($type === 'question') {?>
     <form action="update.php" method="post">
+    <input type="hidden" name="type" value="question">
         <input type="hidden" name="id" value="<?= isset($question['id']) ? $question['id'] : '' ?>">
         <ul>
             <li>
