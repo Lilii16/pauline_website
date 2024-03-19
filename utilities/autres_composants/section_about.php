@@ -2,7 +2,6 @@
 require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
 ?>
 
-<body>
 <div class="container-fluid background-image w-100 justify-content-center">
 <div class="row justify-content-center"> <!-- Nouvelle ligne pour centrer le contenu -->
         <div class="col-md-12"> 
@@ -55,4 +54,3 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
     </div>
     </div>
 </div>
-</body>

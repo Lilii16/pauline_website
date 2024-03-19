@@ -10,9 +10,9 @@
     color: #F5ECD4;
 }
 body{
- background-image: url(assets\pictures\grenades.jpg);  
- font-family: "Ruluko", serif;
- color: #F5ECD4;
+ background-image: url("assets/pictures/grenades.jpg") !important;  
+ font-family: "Ruluko", serif !important;
+ color: #F5ECD4 !important;
  
 }
 
@@ -27,8 +27,22 @@ body{
 .bg-light-beige {
   background-color: #f5ecd4;
 }
+.bg-light-90-beige {
+  background-color: #f5ecd4e9 !important;
+}
+
 .bg-red-70 {
-  background-color: #a3000150;
+  background-color: #a3000170;
+}
+.bg-red {
+  background-color: #a3000195;
+}
+
+.blur-beige {
+  box-shadow: 0 0 5px 10px #f5ecd4e9;
+}
+.blur-red {
+  box-shadow: 0 0 5px 10px #a3000195;
 }
 
 /* style texte */
@@ -72,4 +86,53 @@ a :hover {
     color :#A30001;
     opacity: 0.10;
 
+}
+
+
+.front{
+  z-index: 2 !important;
+  position: relative !important;
+}
+
+
+/* styles section juridique */
+.rotate {
+  width: 150vw; 
+  height:40vw;
+  transform: rotate(10deg);
+  background-color: #f5f5dc; 
+  margin-left: -10%;
+  margin-top: 100px; 
+  padding: 20px; 
+  box-sizing: border-box;
+  z-index: -1;
+}
+
+.rotate-minus20 {
+   /* position: absolute; */
+  transform: translateY(40%) rotate(-10deg) translateX(50%); 
+ 
+}
+
+/* bulles section compétences juridiques */
+.section_juridique {
+  position: relative; /* Permet de positionner les images de bulles par rapport à ce conteneur */
+}
+
+.bubble {
+  position: absolute; /* Position absolue pour placer les bulles */
+  height: 60vw; 
+  z-index: 2 !important;
+}
+
+.left {
+  left: 0; /* Pour placer la bulle à gauche */
+  top: 10%; 
+  transform: translateY(-175%) rotate(-70deg) translateX(-170%); 
+}
+
+.right {
+  right: 0; /* Pour placer la bulle à droite */
+  top: 10%; 
+  transform: translateY(90%) rotate(-50deg) translateX(110%); 
 }

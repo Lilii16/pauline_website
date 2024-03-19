@@ -3,7 +3,6 @@
     require_once dirname(__DIR__, 2) . '/config/conn.php';
     require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
     require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
-    $publications =  findAllPublications($conn);
     ?>
 
 <section class="bg-red-70 pb-5">
@@ -47,7 +46,7 @@
                     <div class="m-3 text-center text-light-beige py-2">
                         <p><?php echo $article['title']; ?></p>
                         <p><?php echo $article['deskription']; ?></p>
-                        <a href="<?php echo $article['origine']; ?>" class="bg-light-beige p-1" download>Telecharger</a>
+                        <a href="<?php echo $article['origine']; ?>" class="bg-light-beige p-1">suivre le lien</a>
                     </div>
                 </div>
 
@@ -76,8 +75,8 @@
 
 
 
-
-code utile
+<!-- 
+code utile -->
 <!-- <div class="container liens" style="max-width:  90% !important;">
             <h3 class="text-red bg-light-beige p-0 my-5">Publications personnelles en ligne ou à télécharger en PDF</h3>
                
