@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Namdhinggo:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ruluko&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Namdhinggo:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ruluko&display=swap");
 
 *{
     margin: 0;
@@ -15,21 +15,47 @@ body{
  color: #F5ECD4;
  
 }
-.bg-bk, .dropdown-menu{
-    background-color: #C14525 !important; 
+
+/* style bg */
+.bg-bk,
+.dropdown-menu {
+  background-color: #c14525 !important;
 }
+.bg-orange {
+  background-color: #c14525;
+}
+.bg-light-beige {
+  background-color: #f5ecd4;
+}
+.bg-red-70 {
+  background-color: #a3000150;
+}
+
+/* style texte */
+.text-light-beige {
+  color: #f5ecd4 !important;
+}
+
+.text-red {
+  color: #a30001 !important;
+}
+
+.text-blue{
+  color: #0010a3;
+}
+
 .border {
-    border-bottom-left-radius: 10px; /* arrondi le coin inférieur gauche */
-    border-bottom-right-radius: 10px; /* arrondi le coin inférieur droit */
-    justify-content: center !important;
-    width: 100vh;
+  border-bottom-left-radius: 10px; /* arrondi le coin inférieur gauche */
+  border-bottom-right-radius: 10px; /* arrondi le coin inférieur droit */
+  justify-content: center !important;
+  width: 100vh;
 }
 a :hover {
-    color: #0010A3;
+  color: #0010a3;
 }
 /* Ajoutez ce CSS pour centrer les éléments */
 .navbar-nav {
-    justify-content: center !important;
+  justify-content: center !important;
 }
 .background-image {
     background-image: url('assets/pictures/grenade.png');
@@ -45,4 +71,5 @@ a :hover {
     background-color:#FFFFFF;
     color :#A30001;
     opacity: 0.10;
+
 }
