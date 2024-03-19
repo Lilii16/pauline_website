@@ -2,13 +2,17 @@
 require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
 ?>
 
-<div class="container">
-    <div class="col-md-12 text-center mb-4">
-        <img src="assets/pictures/Pauline-Rhenter.png" alt="image de profil de l'avocate Pauline Rhenter">
-        <h2> Pauline Rhenter</h2>
-    </div>
-    <div class="row">
-        <div class="col-md-6 text-center my-4">
+<body>
+<div class="container-fluid background-image w-100 justify-content-center">
+<div class="row justify-content-center"> <!-- Nouvelle ligne pour centrer le contenu -->
+        <div class="col-md-12"> 
+    <div class="bg-color-red center">
+        <div class="col-md-12 text-center mb-4">
+            <img src="assets/pictures/Pauline-Rhenter.png" alt="image de profil de l'avocate Pauline Rhenter">
+            <h2> Pauline Rhenter</h2>
+        </div>
+    <div class="row p-4">
+        <div class="col-md-6 text-center my-4 bg-color-orange rounded-4 p-4" style="color: #F5ECD4">
             <p>«Aucune personne accédant à des soins et à un soutien en matière de santé mentale ne devrait être 
                 limitée dans ses droits»<br>
                 Organisation mondiale de la santé et Haut-Commissaire des Nations Unies aux Droits de l'Homme, 
@@ -41,15 +45,14 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
             <img src="assets/logos/logoFond.png" alt="logo de Pauline Rhenter, formatrice et avocate.">
         </div>
     </div>
-
     <div class="row mt-5">
         <div class="col-md-10 mx-4">
-            <button class="btn btn-primary mx-4">Aide juridique</button>
-            <button class="btn btn-primary mx-4">Se former</button>
+            <button class="btn btn-light mx-4 rounded-5"><a href="#" class="text-decoration-none">Aide juridique</a></button>
+            <button class="btn btn-light mx-4 rounded-5"><a href="#" class="text-decoration-none">Se former</a></button>
         </div>
     </div>
+    </div>
+    </div>
+    </div>
 </div>
-
-<?php
-require_once dirname(__DIR__, 2) . '/utilities/composant_general/footer.php';
-?>
+</body>
