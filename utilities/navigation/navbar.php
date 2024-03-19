@@ -68,11 +68,11 @@
                                 Formatrice
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">J'ai besoin de me former</a></li>
+                                <li><a class="menu dropdown-item" href="#">J'ai besoin de me former</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">FAQ</a></li>
+                                <li><a class="menu dropdown-item" href="#">FAQ</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Demander un devis</a></li>
+                                <li><a class="menu dropdown-item" href="#">Demander un devis</a></li>
                             </ul>
                         </li>
                     </div>
