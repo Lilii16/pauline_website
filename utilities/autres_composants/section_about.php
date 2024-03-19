@@ -8,7 +8,7 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
         <div class="col-md-12"> 
     <div class="bg-color-red center">
         <div class="col-md-12 text-center mb-4">
-            <img src="assets/pictures/Pauline-Rhenter.png" alt="image de profil de l'avocate Pauline Rhenter">
+            <img src="../../assets/pictures/Pauline-Rhenter.png" alt="image de profil de l'avocate Pauline Rhenter">
             <h2> Pauline Rhenter</h2>
         </div>
     <div class="row p-4">
@@ -42,7 +42,7 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
                 rhenter.avocat@protonmail.com
             </p>
             <p>formulaire de contact, <a href="#">cliquez-ici</a></p>
-            <img src="assets/logos/logoFond.png" alt="logo de Pauline Rhenter, formatrice et avocate.">
+            <img src="../../assets/logos/logoFond.png" alt="logo de Pauline Rhenter, formatrice et avocate.">
         </div>
     </div>
     <div class="row mt-5">
