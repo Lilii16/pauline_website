@@ -2,16 +2,22 @@
 require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
 ?>
 
-<div class="container-fluid background-image w-100 justify-content-center">
+<body>
+<div class="container-fluid background-image vw-100 h-200 justify-content-center">
 <div class="row justify-content-center"> <!-- Nouvelle ligne pour centrer le contenu -->
-        <div class="col-md-12"> 
-    <div class="bg-color-red center">
-        <div class="col-md-12 text-center mb-4">
-            <img src="../../assets/pictures/Pauline-Rhenter.png" alt="image de profil de l'avocate Pauline Rhenter">
-            <h2> Pauline Rhenter</h2>
-        </div>
+    
+    <div class="col-md-12"> 
+            <div class="col-md-12 text-center mb-4 position-relative d-flex justify-content">
+                <img src="../../assets/pictures/pauline.png" alt="image de profil de l'avocate Pauline Rhenter"
+                class="w-25 profil col-md-4">
+                <h2 class="col-md-4"> Pauline Rhenter</h2>
+            </div>
+    </div>
+    <div class="bg-color-red center position-absolute vh-75 w-75">
+    <img src="../../assets/pictures/pauline.png" alt="image de profil de l'avocate Pauline Rhenter"
+    class="w-25 profil col-md-4">
     <div class="row p-4">
-        <div class="col-md-6 text-center my-4 bg-color-orange rounded-4 p-4" style="color: #F5ECD4">
+        <div class="col-md-6 text-center my-4 rounded-4 p-4" style="color: #F5ECD4">
             <p>«Aucune personne accédant à des soins et à un soutien en matière de santé mentale ne devrait être 
                 limitée dans ses droits»<br>
                 Organisation mondiale de la santé et Haut-Commissaire des Nations Unies aux Droits de l'Homme, 
@@ -41,10 +47,11 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
                 rhenter.avocat@protonmail.com
             </p>
             <p>formulaire de contact, <a href="#">cliquez-ici</a></p>
-            <img src="../../assets/logos/logoFond.png" alt="logo de Pauline Rhenter, formatrice et avocate.">
+            <img src="../../assets/logos/logoRond.png" alt="logo de Pauline Rhenter, formatrice et avocate."
+            class="w-25">
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-5 mb-5">
         <div class="col-md-10 mx-4">
             <button class="btn btn-light mx-4 rounded-5"><a href="#" class="text-decoration-none">Aide juridique</a></button>
             <button class="btn btn-light mx-4 rounded-5"><a href="#" class="text-decoration-none">Se former</a></button>
@@ -54,3 +61,4 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
     </div>
     </div>
 </div>
+</body>

@@ -79,7 +79,8 @@ a :hover {
 .bg-color-red {
     background-color: #A30001;
     opacity: 0.7;
-    width: 95%
+    width: 95%;
+    border-radius: 10px 100px / 140px;
 }
 .bg-color-orange {
     background-color:#FFFFFF;
@@ -113,6 +114,9 @@ a :hover {
   transform: translateY(40%) rotate(-10deg) translateX(50%); 
  
 }
+.logo {
+  transform:rotate(30deg) ;
+}
 
 /* bulles section compétences juridiques */
 .section_juridique {
@@ -135,4 +139,8 @@ a :hover {
   right: 0; /* Pour placer la bulle à droite */
   top: 10%; 
   transform: translateY(90%) rotate(-50deg) translateX(110%); 
+}
+.profil {
+  transform: translateY(30%) translateX(-40%);
+  
 }

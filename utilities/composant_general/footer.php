@@ -1,4 +1,6 @@
-
+<?php
+include 'header.php';
+?>
 </body>
 <div class="container-fluid bg-bk">
     <footer class="pt-5" style="overflow-x: hidden;">
@@ -27,7 +29,7 @@
                 <div class="border-top d-md-none "></div>
             </div>
             <div class="col-md-2 mb-3 p-0  d-flex justify-content-center">
-                <img src="C:\wamp64\www\pauline_website\assets\logos\logoFondRemoved.png" class="img-fluid mb-2 col-4 col-md-12" alt="logo footer"   >
+                <img src="../../../assets/logos/logoFondRemoved.png" class="logo img-fluid mb-2 col-4 col-md-12 " alt="logo w-50 footer"   >
             </div>
         </div>
     <div class="container-fluid">
