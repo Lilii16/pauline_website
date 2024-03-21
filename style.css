@@ -7,7 +7,7 @@
   box-sizing: border-box;
   font-family: "Source Serif 4", serif;
   text-decoration: none;
-  color: #f5ecd4;
+  color: #f5ecd4 !important;
 }
 body {
   background-image: url("assets/pictures/grenades.jpg") !important;
@@ -58,8 +58,8 @@ body {
 }
 
 .border {
-  border-bottom-left-radius: 10px; /* arrondi le coin inférieur gauche */
-  border-bottom-right-radius: 10px; /* arrondi le coin inférieur droit */
+  border-bottom-left-radius: 30px; /* arrondi le coin inférieur gauche */
+  border-bottom-right-radius: 30px; /* arrondi le coin inférieur droit */
   justify-content: center !important;
   width: 100vh;
 }
