@@ -8,12 +8,12 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
     <h3>Formulaire de contact</h3>
     <p>Fill in the data below.</p>
     </div>
-  <div class="form-group col-md-12 mx-4 justify-content-center">
-    <div class="form-group col-md-3 mx-4">
+  <div class="form-group text-start col-md-12 mx-4 d-flex justify-content-center">
+    <div class="form-group col-md-2 mx-2">
       <label for="inputLastName">Nom</label>
       <input type="nom" class="form-control" id="inputLastName" placeholder="Nom">
     </div>
-    <div class="form-group col-md-3 mx-4">
+    <div class="form-group col-md-2 mx-2">
       <label for="inputFirstName">Prénom</label>
       <input type="prénom" class="form-control" id="inputFirstName" placeholder="Prénom">
     </div>
