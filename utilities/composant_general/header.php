@@ -40,3 +40,4 @@
     </script>
 </head>
 <body>
+  <main class="bg-red-70">
