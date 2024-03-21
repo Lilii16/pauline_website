@@ -61,6 +61,21 @@ body {
   justify-content: center !important;
   width: 100vh;
 }
+.radius {
+  background-color: rgb(163,0,1,0.50);
+  width: 95vw;
+  height: 100vh;
+  border-radius: 50% 50% 0 0;
+}
+#inputChoice option {
+  color: black !important;
+}
+.raradius {
+  background-color: rgb(245,236,212,0.50);
+  width: 60vw;
+  height: 100vh;
+  border-radius: 180% 180% 0 0;
+}
 a :hover {
   color: #0010a3;
 }
