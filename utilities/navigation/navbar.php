@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md">
                         <li class="nav-item flex-grow-1">
-                            <a class="nav-link" aria-disabled="true" href="../page_conseils.php">Conseils</a>
+                            <a class="nav-link" aria-disabled="true" href="../page_conseils.php">Contact</a>
                         </li>
                     </div>
                 </div>
