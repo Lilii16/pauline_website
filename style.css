@@ -7,7 +7,7 @@
   box-sizing: border-box;
   font-family: "Source Serif 4", serif;
   text-decoration: none;
-  color: #f5ecd4 !important;
+  /* color: #f5ecd4 !important; */
 }
 body {
   background-image: url("assets/pictures/grenades.jpg") !important;
@@ -15,6 +15,12 @@ body {
   color: #f5ecd4 !important;
 }
 
+ul{
+  list-style: none !important;
+}
+li{
+  list-style: none !important;
+}
 /* style bg */
 .bg-bk,
 .dropdown-menu {
@@ -29,10 +35,16 @@ body {
 .bg-light-90-beige {
   background-color: #f5ecd4e9 !important;
 }
-
+.bg-beige{
+  background-color: #f4ead2 !important;
+}
 
 .bg-red {
   background-color: #a3000195;
+}
+
+.bg-wine{
+  background-color: #bb443c !important;
 }
 
 .blur-beige {
@@ -89,10 +101,10 @@ a :hover {
   background-repeat: no-repeat;
 }
 .bg-color-red {
-    background-color: #A30001;
-    opacity: 0.7;
-    width: 95%;
-    border-radius: 10px 100px / 140px;
+  background-color: #a30001;
+  opacity: 0.7;
+  width: 95%;
+  border-radius: 10px 100px / 140px;
 }
 .bg-color-orange {
   background-color: #ffffff;
@@ -106,6 +118,7 @@ a :hover {
 }
 
 /* styles section juridique */
+
 /* section compétences */
 .rotate {
   width: 160%;
@@ -117,27 +130,35 @@ a :hover {
   z-index: -1;
 }
 
-.rotate-minus20 ul,
-.rotate-minus20 p {
-  font-size: 1.1em !important;
-  padding-right: 20vw !important;
-  padding-left: 10vw !important;
-}
-
 .rotate-minus20 {
   transform: rotate(-10deg);
   height: fit-content;
-  padding-right: 20vw !important;
-  padding-left: 45vw !important;
+  font-size: 1.1em !important;
+  padding-right: 35vw !important;
+  padding-left: 55vw !important;
   padding-bottom: 5% !important;
   padding-top: 10vw !important;
 }
+
+
+.rotate-minus-20 p
+ {
+  padding-right: 30vw !important;
+  padding-left: 10vw !important;
+}
+
+.rotate-minus-20 li,
+.rotate-minus-20 p
+ {
+  color: #f5ecd4 !important;
+  font-size: 1.1em !important;
+}
 .logo {
-  transform:rotate(30deg) ;
+  transform: rotate(30deg);
 }
 
 /* bulles section compétences juridiques */
-.section_juridique {
+.section_juridique, .section_formation {
   position: relative; /* Permet de positionner les images de bulles par rapport à ce conteneur */
 }
 
@@ -149,14 +170,52 @@ a :hover {
 
 .left {
   left: 0; /* Pour placer la bulle à gauche */
-  top: 17%;
+  top: 15%;
   transform: translateY(-175%) rotate(-70deg) translateX(-190%);
 }
 
-.right {
+.right:not(.formation)  {
   right: 0; /* Pour placer la bulle à droite */
-  top: 20%;
+  top: 40%;
   transform: translateY(90%) rotate(-50deg) translateX(135%);
+}
+
+/* section honoraires */
+
+.rotate-10 {
+  width: 160%;
+  height: fit-content;
+  transform: rotate(-10deg);
+  margin-left: -30%;
+  margin-top: 8%;
+  box-sizing: border-box;
+  z-index: -1;
+}
+.rotate-20 p
+ {
+  padding-right: 10vw !important;
+  padding-left: 10vw !important;
+}
+
+.rotate-20 li,
+.rotate-20 p
+ {
+  color: #f5ecd4 !important;
+  font-size: 1.1em !important;
+}
+
+.rotate-20 {
+  transform: rotate(10deg);
+  height: fit-content;
+  padding-right: 20vw !important;
+  padding-left: 45vw !important;
+  padding-bottom: 5% !important;
+  padding-top: 10vw !important;
+}
+
+/* section contact */
+.profil {
+  transform: translateY(30%) translateX(-40%);
 }
 
 /* responsive */
@@ -170,37 +229,54 @@ a :hover {
     top: 15%;
     transform: translateY(-175%) rotate(-70deg) translateX(-180%);
   }
-  .right {
+  .right:not(.formation) {
     top: 35%;
   }
-  .rotate-minus20 ul,
+
   .rotate-minus20 p {
     font-size: 1.3em !important;
     padding-right: 10vw !important;
     padding-left: 15vw !important;
   }
-  .rotate-minus20 {
+  .rotate-minus20,
+  .rotate-20 {
     padding-right: 0% !important;
     padding-left: 0% !important;
     padding-top: 4% !important;
   }
+  .container, .container-lg, .container-md, .container-sm {
+    max-width: 1100px !important;
+}
 }
 
 /* pour ecrans extra larges */
 @media screen and (min-width: 1451px) {
-  .rotate-minus20 ul,
+  .rotate-20 p,
   .rotate-minus20 p {
     font-size: 2em !important;
     width: 80vw !important;
   }
-  .rotate-minus20 {
+  .rotate-minus20,
+  .rotate-20 {
     padding-bottom: 5% !important;
     padding-top: 5% !important;
     margin: unset !important;
     margin-left: 40vw !important;
   }
 }
-.profil {
-  transform: translateY(30%) translateX(-40%);
-  
+
+
+/* section formation */
+.formation.fa-solid{
+  font-size: 4em !important;
+}
+
+.bubble.formation {
+  position: absolute; /* Position absolue pour placer les bulles */
+  height: 60vh;
+  z-index: 2 !important;
+}
+.right.formation{
+  right: 0; /* Pour placer la bulle à droite */
+  transform: rotate(-85deg) translateY(50%) translateX(150%);
 }
