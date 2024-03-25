@@ -1,5 +1,4 @@
 <?php 
-include "../../composant_general/header.php";
 require_once dirname(__DIR__, 3) . '/config/conn.php';
 require_once dirname(__DIR__, 3) . '/function/questions.fn.php';
 ?>

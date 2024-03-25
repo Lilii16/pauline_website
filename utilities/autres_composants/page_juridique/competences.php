@@ -1,6 +1,3 @@
-<?php include "../../composant_general/header.php"; ?>
-
-
 <section class="py-5 section_juridique" style="overflow: hidden;">
   <div class="bg-red wh-100 front py-3">
     <h1 class="text-center " style="z-index: 1;">
@@ -56,57 +53,4 @@
         <button class="text-center bg-beige btn text-red  col-md-4  col-6 rounded-pill border-3 m-auto">En savoir plus</button>
       </div>
     </div>
-</section>
-      
-<!-- section questions -->
-<section class="py-5 section_juridique" style="overflow: hidden;">
-  <div class="bg-red wh-100 front py-3">
-    <h1 class="text-center " style="z-index: 1;">
-      Domaines de compétences
-    </h1>
-  </div>
-  <div class="rotate bg-light-90-beige blur-beige" style="overflow: hidden;">
-    <div class=" container rotate-minus20 ">
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- ca va probablement dans le css -->
-  <img src="../../../assets/deco/deco_bulle.svg" alt="Bulle droite" class="bubble right">
 </section>

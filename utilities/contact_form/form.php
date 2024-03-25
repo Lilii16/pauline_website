@@ -1,8 +1,3 @@
-<?php
-require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
-require_once dirname(__DIR__, 2) . '/utilities/navigation/navbar.php';
-?>
-
 <div class="w-100 radius">
 <div class="m-4 p-4"></div>
 <form class="d-flex align-items-center justify-content-center raradius mx-auto">

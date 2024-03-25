@@ -1,8 +1,8 @@
 <?php
-    include "../composant_general/header.php";
-    require_once dirname(__DIR__, 2) . '/config/conn.php';
-    require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
-    require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
+    // include "../composant_general/header.php";
+    // require_once dirname(__DIR__, 2) . '/config/conn.php';
+    // require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
+    // require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
     ?>
 
 <section class="bg-red-70 pb-5">

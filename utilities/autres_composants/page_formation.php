@@ -1,5 +1,3 @@
-<?php include "../composant_general/header.php"; ?>
-
 <section class="py-5" style="overflow-x: hidden;">
     <div class="bg-red wh-100 py-3">
         <h1 class="text-center" style="z-index: 1;">
