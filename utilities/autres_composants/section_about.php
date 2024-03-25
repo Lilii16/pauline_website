@@ -46,7 +46,7 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
                         </div>
                         <div class="row mt-5 mb-5 d-flex justify-content-center">
                     <div class="col-md-10 mx-4">
-                        <button class="btn btn-light mx-4 rounded-5 border-"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Aide juridique</a></button>
+                        <button class="btn btn-light mx-4 rounded-5 border-about"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Aide juridique</a></button>
                         <button class="btn btn-light mx-4 rounded-5"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Se former</a></button>
                     </div>
                 </div>

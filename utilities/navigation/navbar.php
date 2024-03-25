@@ -38,7 +38,7 @@
 
 <main class="w-100">
     <div class="d-flex justify-content-center">
-        <nav class="bg-bk navbar navbar-expand-lg border center w-50 p-2">
+        <nav class="bg-bk navbar navbar-expand-lg border-nav center w-50 p-2">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -67,7 +67,8 @@ li{
   color: #0010a3;
 }
 
-.border {
+/* section about */
+.border-nav{
   border-bottom-left-radius: 30px; /* arrondi le coin inférieur gauche */
   border-bottom-right-radius: 30px; /* arrondi le coin inférieur droit */
   justify-content: center !important;
@@ -88,7 +89,7 @@ li{
   height: 100vh;
   border-radius: 180% 180% 0 0;
 }
-a :hover {
+a:hover {
   color: #0010a3;
 }
 /* Ajoutez ce CSS pour centrer les éléments */
@@ -101,11 +102,9 @@ a :hover {
   background-repeat: no-repeat;
 }
 .bg-color-red {
-
     background-color: rgb(163,	0, 0, 0.70);
     width: 95%;
     border-radius: 10px 100px / 140px 160px;
-
 }
 .bg-color-orange {
   background-color: rgb(255,255,255, 0.20);
@@ -147,7 +146,6 @@ a :hover {
   padding-left: 10vw !important;
 }
 
-.rotate-minus-20 li,
 .rotate-minus-20 p
  {
   color: #f5ecd4 !important;
@@ -157,7 +155,7 @@ a :hover {
   transform: rotate(30deg);
 }
 
-/* bulles section compétences juridiques */
+/* bulles section compétences juridiques*/
 .section_juridique, .section_formation {
   position: relative; /* Permet de positionner les images de bulles par rapport à ce conteneur */
 }
@@ -183,40 +181,29 @@ a :hover {
 
 /* section honoraires */
 
-.rotate-10 {
-  width: 160%;
-  height: fit-content;
-  transform: rotate(-10deg);
-  margin-left: -30%;
-  margin-top: 8%;
-  box-sizing: border-box;
-  z-index: -1;
-}
-.rotate-20 p
- {
-  padding-right: 10vw !important;
-  padding-left: 10vw !important;
-}
-
-.rotate-20 li,
 .rotate-20 p
  {
   color: #f5ecd4 !important;
-  font-size: 1.1em !important;
+  font-size: 1em !important;
 }
-
-.rotate-20 {
-  transform: rotate(10deg);
-  height: fit-content;
-  padding-right: 20vw !important;
-  padding-left: 45vw !important;
-  padding-bottom: 5% !important;
-  padding-top: 10vw !important;
-}
-
 /* section contact */
 .profil {
   transform: translateY(30%) translateX(-40%);
+}
+
+/* section formation */
+.formation.fa-solid{
+  font-size: 4em !important;
+}
+
+.bubble.formation {
+  position: absolute; /* Position absolue pour placer les bulles */
+  height: 60vh;
+  z-index: 2 !important;
+}
+.right.formation{
+  right: 0; /* Pour placer la bulle à droite */
+  transform: rotate(-85deg) translateY(50%) translateX(150%);
 }
 
 .cardsRight {
@@ -228,8 +215,8 @@ a :hover {
 
 /* responsive */
 
-/* Media queries pour les écrans de taille  */
-@media screen and (min-width: 681px) {
+/* Media queries pour les écrans  */
+@media screen and (min-width: 500px){
   .bubble {
     height: 60vw;
   }
@@ -246,32 +233,51 @@ a :hover {
     padding-right: 10vw !important;
     padding-left: 15vw !important;
   }
-  .rotate-minus20,
-  .rotate-20 {
+  .rotate-minus20 {
     padding-right: 0% !important;
     padding-left: 0% !important;
-    padding-top: 4% !important;
+    padding-top: 5% !important;
   }
-  .container, .container-lg, .container-md, .container-sm {
+
+  
+.rotate-10 {
+  width: 105%;
+  height: fit-content;
+  transform: rotate(-10deg);
+  box-sizing: border-box;
+  z-index: -1;
+}
+
+.rotate-20 {
+  transform: rotate(10deg);
+}
+  /* .container, .container-lg, .container-md, .container-sm {
     max-width: 1100px !important;
+} */
+.rotate-20 p
+ {
+  font-size: 1.3em !important;
 }
 }
 
 /* pour ecrans extra larges */
-@media screen and (min-width: 1451px) {
-  .rotate-20 p,
-  .rotate-minus20 p {
-    font-size: 2em !important;
+@media screen and (min-width: 1441px) {
+  .rotate-minus20 p
+   {
+    font-size: 1.3em !important;
     width: 80vw !important;
+    padding-right: 10vw !important;
+    padding-left: 5vw !important;
   }
-  .rotate-minus20,
-  .rotate-20 {
+  .rotate-minus20
+ {
     padding-bottom: 5% !important;
     padding-top: 5% !important;
     margin: unset !important;
-    margin-left: 40vw !important;
+    margin-left: 37vw !important;
   }
 }
+
 
 
 /* section formation */
