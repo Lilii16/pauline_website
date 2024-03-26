@@ -1,9 +1,6 @@
-<?php
-require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
-?>
 
-<body>
-    <div class="container-fluid background-image vw-100 h-200 justify-content-center">
+
+    <div class="container-fluid h-200 justify-content-center py-5">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-md-8 bg-color-red vh-75 m-4">
                 <div class="col-md-10 text-center d-flex justify-content-center">
@@ -68,4 +65,4 @@ require_once dirname(__DIR__, 2) . '/utilities/composant_general/header.php';
             </div>
         </div>
     </div>
-</body>
+

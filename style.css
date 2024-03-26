@@ -7,12 +7,24 @@
   box-sizing: border-box;
   font-family: "Source Serif 4", serif;
   text-decoration: none;
-  /* color: #f5ecd4 !important; */
 }
 body {
+  position: relative;
   background-image: url("assets/pictures/grenades.jpg") !important;
+  background-size: contain;
   font-family: "Ruluko", serif !important;
   color: #f5ecd4 !important;
+}
+/* couleur sur le background */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #c1442577 !important;
+  z-index: -1; 
 }
 
 ul{
@@ -101,11 +113,11 @@ a:hover {
 .navbar-nav {
   justify-content: center !important;
 }
-.background-image {
+/* .background-image {
   background-image: url("assets/pictures/grenade.png");
   background-size: cover;
   background-repeat: no-repeat;
-}
+} */
 .bg-color-red {
     background-color: rgb(163,	0, 0, 0.70);
     width: 95%;
