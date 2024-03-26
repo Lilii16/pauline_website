@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changer la couleur du carré au survol</title>
+<style>
+  #carre {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    transition: background-color 0.3s ease; /* Ajoute une transition pour une animation fluide */
+  }
+  #border{
+    border: 10px solid green;
+    color: red;
+  }
+</style>
+</head>
+<body>
+
+<div id="border">
+    <ul>
+        <li>hello</li>
+        <li>hello</li>
+    </ul>
+</div>
+<a id="link">Survolez-moi</a>
+
+<script>
+var bouton = document.getElementById("link");
+var carre = document.getElementById("border");
+
+bouton.addEventListener("mouseover", function() {
+  var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16); // Génère une couleur aléatoire
+  carre.style.border = "10px solid black";
+});
+
+bouton.addEventListener("mouseout", function() {
+  carre.style.border = "10px solid red"; // Réinitialise la couleur du carré à rouge
+});
+</script>
+
+</body>
+</html>

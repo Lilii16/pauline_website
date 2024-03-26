@@ -1,6 +1,4 @@
-<?php
-include "./script.js";
-?>
+
 <section id="thematik-section" class="py-5" style="overflow-x: hidden;">
     <div class="bg-red wh-100 py-3">
         <h1 class="text-center" style="z-index: 1;">
@@ -12,15 +10,45 @@ include "./script.js";
         <div class="formation row row-cols-1 row-cols-md-3 g-4 m-5 ">
             <?php
             require "table_formation.php";
+            // Compteur pour créer des ID uniques pour chaque modal
+            $modal_count = 0;
             // Boucle foreach pour parcourir le tableau des formations
             foreach ($formations as $formation) {
+                $modal_count++;
             ?>
                 <div class="col mb-5">
                     <div class="text-red text-center h-100 mb-5">
                         <i class="formation fa-solid <?php echo $formation['icone']; ?> card-img-top pb-4" alt="..."></i>
                         <div class="card-body text-dark">
                             <h5 class="card-title"><?php echo $formation['titre']; ?></h5>
-                            <a href="<?php echo $formation['lien']; ?>" class="btn text-red col-md-4 col-6 rounded-pill border-3"><u>En savoir plus</u></a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn text-red col-md-4 col-6 rounded-pill border-3" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $modal_count; ?>">
+                                <u>En savoir plus</u>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade " id="exampleModal<?php echo $modal_count; ?>" tabindex="-1" aria-labelledby="exampleModalLabel<?php echo $modal_count; ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title text-red text-center fs-5" id="exampleModalLabel<?php echo $modal_count; ?>"><?php echo $formation['titre']; ?></h1>
+                                <button type="button" class="btn-close bg-red" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-dark">
+                                <p class="h5">
+                                     <?php if (isset($formation['description'])) {
+                                    echo $formation['description'];
+                                } else {
+                                    echo "Contactez-moi pour plus d'informations";
+                                } ?> 
+                                </p>
+                              
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn bg-red" data-bs-dismiss="modal">Fermer</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -28,17 +56,18 @@ include "./script.js";
             }
             ?>
 
-        <section id="devis-section">
-        <div class="card text-center bg-beige col-md-6 m-auto">
-            <div class="card-body">
-                <p class="card-text">Chaque formation étant différente et personnalisable, il est nécéssaire d’estimer le coût via un devis. <br>
-                    Contactez Pauline Renther afin d’avoir plus d’informations. </p>
-                <a href="#" class="btn text-red border border-warning col-md-4  col-6 rounded-pill border-3">Demander un devis</a>
-            </div>
+
         </div>
+
+        <section id="devis-section">
+            <div class="card text-center bg-beige col-md-6 m-auto">
+                <div class="card-body">
+                    <p class="card-text">Chaque formation étant différente et personnalisable, il est nécéssaire d’estimer le coût via un devis. <br>
+                        Contactez Pauline Renther afin d’avoir plus d’informations. </p>
+                    <a href="#" class="btn text-red border border-warning col-md-4  col-6 rounded-pill border-3">Demander un devis</a>
+                </div>
+            </div>
         </section>
-
-
     </div>
 </section>
 

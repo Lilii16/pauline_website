@@ -79,15 +79,16 @@ li{
   color: #0010a3;
 }
 
-/* section about */
-.border-nav{
+#border{
   border-bottom-left-radius: 30px; /* arrondi le coin inférieur gauche */
   border-bottom-right-radius: 30px; /* arrondi le coin inférieur droit */
   justify-content: center !important;
   width: 100vh;
-  border: 2px solid  #f5ecd4 !important; 
+  border: 2px solid  #f5ecd4; 
   position: fixed;
 }
+/* section about */
+
 .radius {
   background-color: rgb(163,0,1,0.50);
   width: 95vw;
@@ -113,12 +114,6 @@ a:hover {
 .navbar-nav {
   justify-content: center !important;
 }
-
-/* .background-image {
-  background-image: url("assets/pictures/grenade.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-} */
 
 
 .bg-color-red {
