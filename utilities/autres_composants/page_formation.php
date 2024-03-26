@@ -1,4 +1,7 @@
-<section class="py-5" style="overflow-x: hidden;">
+<?php
+include "./script.js";
+?>
+<section id="thematik-section" class="py-5" style="overflow-x: hidden;">
     <div class="bg-red wh-100 py-3">
         <h1 class="text-center" style="z-index: 1;">
             Usager ou professionnel, je souhaite me former 
@@ -25,7 +28,7 @@
             }
             ?>
 
-
+        <section id="devis-section">
         <div class="card text-center bg-beige col-md-6 m-auto">
             <div class="card-body">
                 <p class="card-text">Chaque formation étant différente et personnalisable, il est nécéssaire d’estimer le coût via un devis. <br>
@@ -33,6 +36,7 @@
                 <a href="#" class="btn text-red border border-warning col-md-4  col-6 rounded-pill border-3">Demander un devis</a>
             </div>
         </div>
+        </section>
 
 
     </div>
@@ -40,6 +44,7 @@
 
 <section class="py-5 section_formation" style="overflow-x: hidden !important;">
     <div class="bg-red wh-100 py-3" id="faq-section">
+
         <h1 class="text-center" style="z-index: 1;">
             Questions fréquentes
         </h1>

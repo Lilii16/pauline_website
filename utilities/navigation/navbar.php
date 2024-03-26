@@ -20,9 +20,9 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownAvocate">
                                 <li><a class="dropdown-item" href="avocate.php">J'ai besoin d'une avocate</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Cas pratiques</a></li>
+                                <li><a class="dropdown-item" href="avocate.php">Cas pratiques</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Honoraires</a></li>
+                                <li><a class="dropdown-item" href="avocate.php">Honoraires</a></li>
                             </ul>
                         </li>
                     </div>
@@ -34,9 +34,9 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownFormatrice">
                                 <li><a class="menu dropdown-item" href="formations.php">J'ai besoin de me former</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="menu dropdown-item" href="#faq-section">FAQ</a></li>
+                                <li><a class="menu dropdown-item" href="formations.php">FAQ</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="menu dropdown-item" href="#">Demander un devis</a></li>
+                                <li><a class="menu dropdown-item" href="formations.php">Demander un devis</a></li>
                             </ul>
                         </li>
                     </div>

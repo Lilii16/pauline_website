@@ -4,8 +4,7 @@ require_once('./utilities/navigation/navbar.php');
 ?>
 
 <?php
-require_once('./utilities/autres_composants/page_juridique/competences.php');
-require_once('./utilities/autres_composants/page_juridique/cardsQuestions.php');
+require_once('./utilities/autres_composants/page_avocate.php');
 ?>
 
 <?php

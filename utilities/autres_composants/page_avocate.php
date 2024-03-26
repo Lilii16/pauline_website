@@ -1,4 +1,7 @@
-<section class="py-5 section_juridique" style="overflow: hidden;">
+<?php
+require_once "../script.js";
+?>
+<section id="competences-section" class="py-5 section_juridique" style="overflow: hidden;">
   <div class="bg-red wh-100 front py-3">
     <h1 class="text-center " style="z-index: 1;">
       Domaines de compétences
@@ -29,7 +32,7 @@
 
 <!-- section  honoraires -->
 
-<section class="py-5 section_juridique" style="overflow: hidden;">
+<section id="honoraires-section" class="py-5 section_juridique" style="overflow: hidden;">
   <div class="bg-light-90-beige wh-100 front py-3">
     <h1 class="text-center text-red" style="z-index: 1;">
       Honoraires
@@ -52,5 +55,36 @@
           Pour savoir si vous y avez droit : https://www.service-public.fr/particuliers/vosdroits/F18074</p>
         <button class="text-center bg-beige btn text-red  col-md-4  col-6 rounded-pill border-3 m-auto">En savoir plus</button>
       </div>
+    </div>
+</section>
+
+<section id="questions-section" class="py-5 section_juridique" style="overflow: hidden;">
+    <div class="titre bg-red wh-100 front py-3">
+        <h1 class="text-center" style="z-index: 1;">Questions fréquentes</h1>
+    </div>
+    <div class="rotate bg-light-90-beige blur-beige" style="overflow: hidden;">
+        <div class="container container-lg rotate-minus20">
+            <div class="row row-cols-lg-4 row-cols-md-3">
+                <?php
+                $questions = findAllQuestions($conn);
+                foreach ($questions as $question) {
+                    ?>
+                    <div class="m-auto py-3">
+                        <span class="border-4" style="color: #F0C587 !important;">
+                            <div class="card w-100 bg-wine custom-card">
+                                <div class="card-header">
+                                    <h5 class="card-title text-center" style="color:#f5ecd4e9 !important;"><?php echo $question['question']; ?></h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-text text-center" style="color:#f5ecd4e9 !important;"><?php echo $question['reponse']; ?></h6>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+        </div>
     </div>
 </section>

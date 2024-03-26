@@ -3,6 +3,8 @@ require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
 require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
 require_once dirname(__DIR__, 2) . '/function/faq_formations.fn.php';
+require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +21,7 @@ require_once dirname(__DIR__, 2) . '/function/faq_formations.fn.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>
+    <script src="../../script.js"></script>
 
     <script type="application/ld+json">
     {
