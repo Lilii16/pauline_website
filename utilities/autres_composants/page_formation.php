@@ -74,7 +74,7 @@
 </section>
 
 <section class="py-5 section_formation"  style="overflow-x: hidden !important;">
-    <div class="bg-red wh-100 py-3">
+    <div class="bg-red wh-100 py-3" id="faq-section">
         <h1 class="text-center" style="z-index: 1;">
             Questions fréquentes
         </h1>

@@ -74,7 +74,7 @@ li{
   justify-content: center !important;
   width: 100vh;
   border: 2px solid  #f5ecd4 !important; 
-  color:#f5ecd4 !important;
+  position: fixed;
 }
 .radius {
   background-color: rgb(163,0,1,0.50);
@@ -90,6 +90,9 @@ li{
   width: 60vw;
   height: 100vh;
   border-radius: 180% 180% 0 0;
+}
+a{
+  color: #f5ecd4 !important;
 }
 a:hover {
   color: #0010a3;

@@ -1,6 +1,6 @@
 <main class="w-100">
     <div class="d-flex justify-content-center">
-        <nav class="bg-bk navbar navbar-expand-lg border-nav center w-50 p-2">
+        <nav class="bg-bk navbar navbar-expand-lg border-nav w-50 p-2 fixed-top mx-auto">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,7 +34,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownFormatrice">
                                 <li><a class="menu dropdown-item" href="formations.php">J'ai besoin de me former</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="menu dropdown-item" href="#">FAQ</a></li>
+                                <li><a class="menu dropdown-item" href="#faq-section">FAQ</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="menu dropdown-item" href="#">Demander un devis</a></li>
                             </ul>
