@@ -113,19 +113,22 @@ a:hover {
 .navbar-nav {
   justify-content: center !important;
 }
+
 /* .background-image {
   background-image: url("assets/pictures/grenade.png");
   background-size: cover;
   background-repeat: no-repeat;
 } */
+
+
 .bg-color-red {
     background-color: rgb(163,	0, 0, 0.70);
     width: 95%;
-    border-radius: 10px 100px / 140px 160px;
+    border-radius: 10px 100px 10px 100px ;
 }
 .bg-color-orange {
   background-color: rgb(255,255,255, 0.20);
-  border-radius: 30px 100px / 140px;
+  border-radius: 30px 100px  140px;
 }
 
 .front {

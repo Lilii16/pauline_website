@@ -5,13 +5,13 @@
             <div class="col-md-8 bg-color-red vh-75 m-4">
                 <div class="col-md-10 text-center d-flex justify-content-center">
                     <img src="../../assets/pictures/pauline.png" alt="image de profil de l'avocate Pauline Rhenter" 
-                    class=" col-md-2 w-25 m-4 img-fluid" style="margin-bottom: -100px !important; z-index: 2 !important; position:relative; transform: translateX(-25%) translateY(35%)">
+                    class="h-25 col-md-3 col-3 m-md-4 img-fluid" style="margin-bottom: -100px !important; z-index: 2 !important; position:relative; transform: translateX(-25%) translateY(35%)">
                     <h2 class="col-md-6 fs-1 m-4 text-center">Pauline Rhenter</h2>
                 </div>
                 <div class="row p-4">
                     <div class="bg-color-orange col-md-8 text-center my-4 rounded-4 p-4" >
                         <div class="d-flex justify-content-end">
-                        <p class="col-md-8 ps-4 text-end">«Aucune personne accédant à des soins et à un soutien en matière de santé mentale <br>ne devrait être 
+                        <p class="col-sm-8 ps-sm-4 text-sm-end">«Aucune personne accédant à des soins et à un soutien en matière de santé mentale <br>ne devrait être 
                             limitée dans ses droits»<br>
                             Organisation mondiale de la santé et Haut-Commissaire des Nations Unies aux Droits de l'Homme, 
                             9 octobre 2023.
@@ -42,15 +42,15 @@
                             <hr class="w-25 fw-bold" style="color: #0010A3 !important;"></hr>
                         </div>
                         <div class="row mt-5 mb-5 d-flex justify-content-center">
-                    <div class="col-md-10 mx-4">
-                        <button class="btn btn-light mx-4 rounded-5"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Aide juridique</a></button>
-                        <button class="btn btn-light mx-4 rounded-5"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Se former</a></button>
+                    <div class="col-md-10 row justify-content-md-between justify-content-center gap-5">
+                        <button class="btn btn-light p-1 col-lg-4 col-8 rounded-5"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Aide juridique</a></button>
+                        <button class="btn btn-light p-1 col-lg-4 col-8 rounded-5"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Se former</a></button>
                     </div>
                 </div>
                     </div>
                     <div class="col-md-4 order-md-2 text-center my-4">
                         <h4 class="m-4 pb-4" style="color: #0010A3 !important;">Nothing about us, without us.</h4>
-                        <p>
+                        <p class="text-break">
                             Pauline Rhenter <br>
                             Avocate au Barreau de Marseille <br>
                             127 rue de Rome <br>
