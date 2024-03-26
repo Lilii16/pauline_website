@@ -14,14 +14,14 @@ require_once dirname(__DIR__, 3) . '/function/questions.fn.php';
                 $questions = findAllQuestions($conn);
                 foreach ($questions as $question) {
                     ?>
-                    <div class="col-lg-4 col-md-6 col-sm-10 py-3">
+                    <div class="col-lg-5 col-md-2 col-sm-1 m-auto py-3">
                         <span class="border-4" style="color: #F0C587 !important;">
-                            <div class="card w-100 custom-card shadow-sm" style="background-color: #A30001">
+                            <div class="card w-100 bg-wine custom-card">
                                 <div class="card-header">
-                                    <h5 class="card-title text-center"><?php echo $question['question']; ?></h5>
+                                    <h5 class="card-title text-center" style="color:#f5ecd4e9 !important;"><?php echo $question['question']; ?></h5>
                                 </div>
                                 <div class="card-body">
-                                    <h6 class="card-text text-center"><?php echo $question['reponse']; ?></h6>
+                                    <h6 class="card-text text-center" style="color:#f5ecd4e9 !important;"><?php echo $question['reponse']; ?></h6>
                                 </div>
                             </div>
                         </span>

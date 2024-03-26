@@ -73,6 +73,8 @@ li{
   border-bottom-right-radius: 30px; /* arrondi le coin inférieur droit */
   justify-content: center !important;
   width: 100vh;
+  border: 2px solid  #f5ecd4 !important; 
+  color:#f5ecd4 !important;
 }
 .radius {
   background-color: rgb(163,0,1,0.50);
@@ -187,9 +189,7 @@ a:hover {
   font-size: 1em !important;
 }
 /* section contact */
-.profil {
-  transform: translateY(30%) translateX(-40%);
-}
+
 
 /* section formation */
 .formation.fa-solid{
@@ -301,7 +301,5 @@ a:hover {
 }
 
 .custom-card {
-  border-radius: 0; /* Coins carrés */
-  box-shadow: 10px 10px 10px rgba(47, 2, 2, 0.1); /* Ombre */
-  background-color: #A30001; /* Couleur de fond */
+  box-shadow: 10px 10px #a30000!important;
 }
