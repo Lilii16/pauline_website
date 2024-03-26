@@ -2,6 +2,7 @@
 require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
 require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
+require_once dirname(__DIR__, 2) . '/function/faq_formations.fn.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

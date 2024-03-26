@@ -6,7 +6,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Source Serif 4", serif;
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 body {
   position: relative;
@@ -107,7 +107,7 @@ a{
   color: #f5ecd4 !important;
 }
 a:hover {
-  color: #0010a3;
+  color: #0010a3 !important;
 }
 /* Ajoutez ce CSS pour centrer les éléments */
 .navbar-nav {

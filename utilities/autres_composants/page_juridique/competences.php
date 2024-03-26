@@ -6,7 +6,7 @@
   </div>
   <div class="rotate bg-light-90-beige blur-beige" style="overflow: hidden;">
     <div class="container rotate-minus20 col-md-8 ">
-      <div class="container">
+      <div class="container ms-md-5">
         <p class="text-red">
           Ma pratique est essentiellement centrée sur la défense des droits des personnes accompagnées en psychiatrie, et plus particulièrement de leur droit de contester des soins contraints ou de demander réparation pour des préjudices subis du fait de soins imposés.
         </p>
