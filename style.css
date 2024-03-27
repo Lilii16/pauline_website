@@ -47,11 +47,15 @@ li{
 .bg-light-90-beige {
   background-color: #f5ecd4e9 !important;
 }
+
+.bg-light-50-beige {
+  background-color: #f4ead281 !important;
+}
 .bg-beige{
   background-color: #f4ead2 !important;
 }
 
-.bg-red {
+.bg-red{
   background-color: #a3000195;
 }
 
@@ -59,7 +63,7 @@ li{
   background-color: #bb443c !important;
 }
 
-.blur-beige {
+.blur-beige{
   box-shadow: 0 0 5px 10px #f5ecd4e9;
 }
 .blur-red {
@@ -90,19 +94,15 @@ li{
 /* section about */
 
 .radius {
-  background-color: rgb(163,0,1,0.50);
-  width: 95vw;
-  height: 100vh;
-  border-radius: 50% 50% 0 0;
+  border-radius: 150px  150px 0 0 ;
+}
+.inner-radius {
+  border-radius: 150px  150px 0 0 ;
+  min-height: 100vh;
 }
 #inputChoice option {
   color: black !important;
-}
-.raradius {
-  background-color: rgb(245,236,212,0.50);
-  width: 60vw;
-  height: 100vh;
-  border-radius: 180% 180% 0 0;
+  
 }
 a{
   color: #f5ecd4 !important;
@@ -230,6 +230,18 @@ a:hover {
 
 /* Media queries pour les écrans  */
 @media screen and (min-width: 500px){
+
+  /* section responsive about */
+  
+.radius {
+  border-radius: 50% 50% 0 0;
+}
+.inner-radius {
+  border-radius: 180% 180% 0 0;
+  min-height: 100vh;
+}
+
+/*  section responsive avocatie */
   .bubble {
     height: 60vw;
   }

@@ -1,4 +1,4 @@
-<div class="w-100">
+<div class="w-100 mb-5">
     <div class="d-flex justify-content-center">
         <nav class="bg-bk navbar navbar-expand-lg border-nav w-50 p-2 fixed-top mx-auto" id="border">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

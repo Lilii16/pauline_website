@@ -1,5 +1,5 @@
 <?php
-require_once "../script.js";
+// require_once "../script.js";
 ?>
 <section id="competences-section" class="py-5 section_juridique" style="overflow: hidden;">
   <div class="bg-red wh-100 front py-3">

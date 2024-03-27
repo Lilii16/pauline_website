@@ -20,7 +20,7 @@ function findAllPublications($conn){
 function findPublicationById($conn, $currentID) {
     try {
         // Préparation de la requête SQL pour sélectionner l'article avec l'ID spécifié
-        $sql = "SELECT id, titre, `description`, source, lien FROM publications WHERE id = :id";
+        $sql = "SELECT id, titre, `description`, source, `path` FROM publications WHERE id = :id";
         
         // Préparation de la requête
         $stmt = $conn->prepare($sql);
@@ -33,6 +33,8 @@ function findPublicationById($conn, $currentID) {
         
         // Récupération de l'article
         $publication = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
         
         // Retourne l'article
         return $publication;
@@ -42,6 +44,38 @@ function findPublicationById($conn, $currentID) {
         return false;
     }
 }
+
+
+// dowload 
+
+
+// Cette fonction permet de télécharger un fichier à partir de la base de données en utilisant son ID
+// Cette fonction permet de télécharger le fichier d'une publication à partir de la base de données en utilisant son ID
+function downloadPublicationById($conn, $publicationID) {
+    try {
+        // Récupérer les informations de la publication
+        $publication = findPublicationById($conn, $publicationID);
+
+        // Vérifier si la publication existe
+        if ($publication) {
+           // Définir les en-têtes pour le téléchargement
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/pdf'); // Modifier le type MIME selon le type de fichier (PDF ici)
+    header('Content-Disposition: attachment; filename="' . $publication['titre'] . '"');
+
+    // Lire le contenu du fichier PDF et l'envoyer au navigateur
+    readfile($publication['path']);
+        } else {
+            // Si la publication n'existe pas, afficher un message d'erreur
+            echo "La publication n'existe pas.";
+        }
+    } catch (PDOException $e) {
+        // Gestion des erreurs PDO
+        echo "Erreur: " . $e->getMessage();
+    }
+}
+
+
 
 function deletePublicationById($conn, $currentID) {
     try {

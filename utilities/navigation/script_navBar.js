@@ -3,7 +3,8 @@
 var border = document.getElementById("border");
 var links = document.querySelectorAll(".link");
 
-links.forEach(function(link) {
+links.forEach(
+    function(link) {
     link.addEventListener("mouseover", function() {
         border.style.border = "2px solid #0010a3";
     });
