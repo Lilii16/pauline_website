@@ -70,6 +70,16 @@ $type = $_GET['type'];
         <!-- Ajoutez d'autres champs pour les articles si nécessaire -->
         <input type="submit" value="Ajouter"><br>
     </form>
+<?php } else if ($type === 'faq_formation') { ?>
+        <form action="addQuestion.php" method="post" class="d-flex flex-column justify-content-center align-items-center"><br>
+            <input type="hidden" name="type" value="faq_formation">
+            <label for="question">Question : </label>
+            <input type="text" name="question"><br>
+            <label for="reponse">Réponse : </label>
+            <textarea name="reponse" style="height: 100px"></textarea><br>
+            <input type="submit" value="Ajouter"><br>
+        </form>
+    </div>
 <?php } else {
     // Redirection en cas de type invalide
     header("Location: error.php");

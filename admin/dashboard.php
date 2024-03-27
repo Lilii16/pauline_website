@@ -4,6 +4,7 @@ require_once '../function/database.fn.php';
 require_once dirname(__DIR__) . '/function/questions.fn.php';
 require_once dirname(__DIR__) . '/function/publications.fn.php';
 require_once dirname(__DIR__) . '/function/articles.fn.php';
+require_once dirname(__DIR__) . '/function/faq_formations.fn.php';
 
 
 //vérifie si on s'est connécté sinon redirection vers page de connexion
@@ -31,10 +32,10 @@ if (!isset($_SESSION['user'])) {
     <div class="container">
         <h1 class="mt-5 mb-4">Administration - Gestion du Droit du Travail</h1>
         <div class="d-flex justify-content-between">
-             <p>Bienvenue, <?php echo $_SESSION['user']; ?>!</p>
-    <a href="./login/logout.php">Se déconnecter</a> 
+            <p>Bienvenue, <?php echo $_SESSION['user']; ?>!</p>
+            <a href="./login/logout.php">Se déconnecter</a>
         </div>
-  
+
         <!-- Nav tabs -->
         <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
             <li class="nav-item">
@@ -46,12 +47,16 @@ if (!isset($_SESSION['user'])) {
             <li class="nav-item">
                 <a class="nav-link" id="publications-tab" data-toggle="tab" href="#publicationsContent" role="tab" aria-controls="publications" aria-selected="false">Publications</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="faq-formation-tab" data-toggle="tab" href="#faq-formationContent" role="tab" aria-controls="faq-formation" aria-selected="false">FAQ-formations</a>
+            </li>
         </ul>
 
         <?php
         $questions = findAllQuestions($conn);
         $articles = findAllArticles($conn);
         $publications = findAllPublications($conn);
+        $faq_formations = findAllQuestionsFormation($conn);
         ?>
 
         <!-- Tab panes -->
@@ -78,7 +83,7 @@ if (!isset($_SESSION['user'])) {
                         <!-- Boutons pour modifier la question -->
                         <div class="d-flex justify-content-end mt-2">
                             <a href="./CRUD/toUpdateForm.php?type=question&id=<?php echo $question['id']; ?>" class="btn btn-warning me-2">Modifier</a>
-                         <!-- Boutons pour  supprimer la question -->
+                            <!-- Boutons pour  supprimer la question -->
                             <form action="./CRUD/confirmdelete.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo $question['id']; ?>">
                                 <input type="hidden" name="type" value="question">
@@ -93,10 +98,10 @@ if (!isset($_SESSION['user'])) {
                 (?type=question)=> méthode $GET, soit en formulaire avec la méthode POST dans lequel on rajoute 
                 un input invisible avec (name = type value= question) -->
                 <form action="./CRUD/addForm.php" method="get">
-                <input type="hidden" name="type" value="question">
-                <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
+                    <input type="hidden" name="type" value="question">
+                    <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
                 </form>
-                    
+
             </div>
 
             <!-- Articles -->
@@ -109,7 +114,7 @@ if (!isset($_SESSION['user'])) {
                     <div class="row row-cols-1 row-cols-md-2 g-4">
                         <div class="col">
                             <div class="card p-3">
-                            <h5 class="card-title heading <?php echo $i; ?>" id="heading<?php echo $article['title']; ?>"><?php echo $article['title']; ?></h5>
+                                <h5 class="card-title heading <?php echo $i; ?>" id="heading<?php echo $article['title']; ?>"><?php echo $article['title']; ?></h5>
                                 <div class="card-body">
                                     <p> <?php echo $article['deskription']; ?></p>
                                 </div>
@@ -130,13 +135,13 @@ if (!isset($_SESSION['user'])) {
                             <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
                     </div>
-            
+
                 <?php } ?>
-                    <!-- Bouton Ajouter -->
-                    <form action="./CRUD/addForm.php" method="get">
-                            <input type="hidden" name="type" value="article">
-                            <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
-                    </form>
+                <!-- Bouton Ajouter -->
+                <form action="./CRUD/addForm.php" method="get">
+                    <input type="hidden" name="type" value="article">
+                    <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
+                </form>
             </div>
             <!-- Publications -->
             <div class="tab-pane fade" id="publicationsContent" role="tabpanel" aria-labelledby="publications-tab">
@@ -148,7 +153,7 @@ if (!isset($_SESSION['user'])) {
                     <div class="row row-cols-1 row-cols-md-2 g-4">
                         <div class="col">
                             <div class="card p-3">
-                            <h5 class="card-title heading<?php echo $i; ?>" id="heading<?php echo $publication['titre']; ?>"><?php echo $publication['titre']; ?></h5>
+                                <h5 class="card-title heading<?php echo $i; ?>" id="heading<?php echo $publication['titre']; ?>"><?php echo $publication['titre']; ?></h5>
                                 <div class="card-body">
                                     <p> <?php echo $publication['description']; ?></p>
                                 </div>
@@ -172,14 +177,59 @@ if (!isset($_SESSION['user'])) {
                             <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
                     </div>
-            
+
                 <?php } ?>
-                    <!-- Bouton Ajouter -->
-                    <form action="./CRUD/addForm.php" method="get">
-                            <input type="hidden" name="type" value="publication">
-                            <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
-                    </form>
+                <!-- Bouton Ajouter -->
+                <form action="./CRUD/addForm.php" method="get">
+                    <input type="hidden" name="type" value="publication">
+                    <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
+                </form>
             </div>
+            <!-- faq-formation -->
+            <div class="tab-pane fade" id="faq-formationContent" role="tabpanel" aria-labelledby="faq-formation-tab">
+                <h2>FAQ-formations</h2>
+                <!-- Tableau pour afficher les questions -->
+
+                <?php foreach ($faq_formations as $index => $faq_formation) { ?>
+                    <div class="accordion-item mb-4 shadow-sm">
+                        <h2 class="accordion-header" id="heading<?php echo $index; ?>">
+                            <button class="accordion-button collapsed bg-transparent fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse<?php echo $index; ?>">
+                                <?php echo $faq_formation['question']; ?>
+                            </button>
+                        </h2>
+                        <div id="collapse<?php echo $index; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $index; ?>">
+                            <div class="accordion-body">
+                                <?php echo $faq_formation['reponse']; ?>
+                            </div>
+                        </div>
+
+                        <!-- Boutons pour modifier la question -->
+                        <div class="d-flex justify-content-end mt-2">
+                            <a href="./CRUD/toUpdateForm.php?type=faq_formation&id=<?php echo $faq_formation['id']; ?>" class="btn btn-warning me-2">Modifier</a>
+                            <!-- Boutons pour  supprimer la question -->
+                            <form action="./CRUD/confirmdelete.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo $faq_formation['id']; ?>">
+                                <input type="hidden" name="type" value="faq_formation">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+
+                        </div>
+                    </div>
+                <?php } ?>
+                <!-- Bouton Ajouter -->
+                <!-- pour envoyer le type, on peut utiliser deux méthodes: soit un lien dans laquel on précise le type
+                (?type=question)=> méthode $GET, soit en formulaire avec la méthode POST dans lequel on rajoute 
+                un input invisible avec (name = type value= question) -->
+                <form action="./CRUD/addForm.php" method="get">
+                    <input type="hidden" name="type" value="faq_formation">
+                    <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
+                </form>
+
+            </div>
+
+
+
+
         </div>
 
     </div>
@@ -194,8 +244,13 @@ if (!isset($_SESSION['user'])) {
         <!-- Contenu du modal -->
     </div>
 
-    <!-- Modal d'ajout d'article -->
+    <!-- Modal d'ajout de publication -->
     <div class="modal fade" id="addPublicationModal" tabindex="-1" role="dialog" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
+        <!-- Contenu du modal -->
+    </div>
+
+    <!-- Modal d'ajout de faq-formation -->
+    <div class="modal fade" id="addFaq-formationModal" tabindex="-1" role="dialog" aria-labelledby="addFaq-formationModalLabel" aria-hidden="true">
         <!-- Contenu du modal -->
     </div>
 

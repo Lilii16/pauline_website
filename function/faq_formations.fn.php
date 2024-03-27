@@ -16,7 +16,7 @@ function findAllQuestionsFormation($conn){
 function findAllQuestionsFormationById($conn, $currentID) {
     try {
         // Préparation de la requête SQL pour sélectionner l'article avec l'ID spécifié
-        $sql = "SELECT id, question, `reponse` FROM faq-formation WHERE id = :id";
+        $sql = "SELECT id, question, `reponse` FROM `faq-formation`WHERE id = :id";
         
         // Préparation de la requête
         $stmt = $conn->prepare($sql);
@@ -42,7 +42,7 @@ function findAllQuestionsFormationById($conn, $currentID) {
 function deleteQuestionsFormationById($conn, $currentID) {
     try {
         // Préparation de la requête SQL pour supprimer l'élément avec l'ID spécifié
-        $sql = "DELETE FROM faq-formation WHERE id = :id";
+        $sql = "DELETE FROM `faq-formation` WHERE id = :id";
         
         // Préparation de la requête
         $stmt = $conn->prepare($sql);

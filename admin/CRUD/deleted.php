@@ -25,6 +25,10 @@ require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
         // Supprimer la question avec l'ID correspondant
         $stmt = $conn->prepare("DELETE FROM publications WHERE id = ?");
         $stmt->execute([$_POST['id']]);
+      } elseif($_POST['type'] === 'faq_formation') {
+        // Supprimer la question avec l'ID correspondant
+        $stmt = $conn->prepare("DELETE FROM `faq-formation` WHERE id = ?");
+        $stmt->execute([$_POST['id']]);
       } else {
           // Gérer le cas où le type n'est pas reconnu
           echo "Type d'élément non valide.";

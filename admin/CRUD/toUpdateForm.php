@@ -3,11 +3,12 @@ require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
 require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
+require_once dirname(__DIR__, 2) . '/function/faq_formations.fn.php';
 $conn = getPDOlink($config);
 $question = findQuestionById($conn, $_GET['id']); 
 $article = findArticleById($conn, $_GET['id']);
 $publication = findPublicationById($conn, $_GET['id']);
-
+$faq_formation = findAllQuestionsFormationById($conn, $_GET['id']);
 
 // Vérifiez si le type est passé dans l'URL
 if(isset($_GET['type'])) {
@@ -102,7 +103,27 @@ if(isset($_GET['type'])) {
             </li>
         </ul>
     </form>
-    <?php } else {
+    <?php } if($type === 'faq_formation') {?>
+    <form action="update.php" method="post">
+    <input type="hidden" name="type" value="faq_formation">
+        <input type="hidden" name="id" value="<?= isset($faq_formation ['id']) ? $faq_formation ['id'] : '' ?>">
+        <ul>
+            <li>
+                <label for="ask">Question : </label>
+                <textarea id="ask" name="question" ><?= isset($faq_formation ['question']) ? $faq_formation ['question'] : '' ?></textarea>
+            </li>
+            <li>
+                <label for="msg">Réponse : </label>
+                <textarea id="msg" name="reponse"><?= isset($faq_formation ['reponse']) ? $faq_formation ['reponse'] : '' ?></textarea>
+            </li>
+            <li>
+            <div class="button">
+                <button type="submit">Valider les modifications</button>
+            </div>
+            </li>
+        </ul>
+    </form>
+<?php }  else {
             //   header("Location: ../dashboard.php");
             var_dump($type);
             exit;
