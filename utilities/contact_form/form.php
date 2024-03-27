@@ -2,39 +2,40 @@
 <div class="m-4 p-4"></div>
 <form class="d-flex align-items-center justify-content-center raradius mx-auto">
 <div class="col-md-12 mx-auto my-4"> <!-- Utilisation de mx-auto pour centrer le formulaire horizontalement -->
-    <div class="mx-auto text-center mb-4"> <!-- Utilisation de mx-auto pour centrer le texte horizontalement et ajout de mb-4 pour plus d'espace en bas -->
+    <div class="mx-auto text-center  mb-4"> <!-- Utilisation de mx-auto pour centrer le texte horizontalement et ajout de mb-4 pour plus d'espace en bas -->
         <h3 class="text-danger">Formulaire de contact</h3>
         <p class="text-danger">Fill in the data below.</p>
     </div>
     <div class="form-group text-start col-md-12 mx-auto d-flex justify-content-center"> <!-- Utilisation de mx-auto pour centrer le formulaire horizontalement -->
         <div class="form-group col-md-2 mx-2">
-            <label for="inputLastName">Nom</label>
+            <label for="inputLastName"></label>
             <input type="nom" class="form-control shadow rounded-4" id="inputLastName" placeholder="Nom">
         </div>
         <div class="form-group col-md-2 mx-2">
-            <label for="inputFirstName">Prénom</label>
+            <label for="inputFirstName"></label>
             <input type="prénom" class="form-control shadow rounded-4" id="inputFirstName" placeholder="Prénom">
         </div>
     </div>
     <div class="form-group col-md-12 mx-auto d-flex flex-column align-items-center justify-content-center"> <!-- Utilisation de mx-auto pour centrer le formulaire horizontalement -->
         <div class="form-group col-md-4 mx-2">
-            <label for="inputEmail">E-mail</label>
+            <label for="inputEmail"></label>
             <input type="email" class="form-control shadow rounded-5" id="inputEmail" placeholder="Votre adresse e-mail">
         </div>
         <div class="form-group col-md-4 mx-2">
-            <label for="inputChoice">Votre choix</label>
+            <label for="inputChoice"></label>
             <select id="inputChoice" class="selectedOption form-control shadow rounded-5">
-                <option selected>Aide juridique (avocatie)</option>
+                <option selected>Votre choix</option>
+                <option >Aide juridique (avocatie)</option>
                 <option>Formations</option>
             </select>
         </div>
         <div class="form-group col-md-4 mx-2">
-            <label for="inputSubject">Sujet</label>
+            <label for="inputSubject"></label>
             <input type="subject" class="form-control rounded-5" id="inputSubject" placeholder="Sujet">
         </div>
         <!-- Champ pour le message -->
         <div class="form-group col-md-4 mx-2">
-            <label for="inputCity">Message</label>
+            <label for="inputCity"></label>
             <textarea class="form-control shadow rounded-5" id="message" name="message" rows="5" maxlength="500" placeholder="Votre message"  required></textarea>
             <!-- Information sur la limite de caractères -->
         </div>

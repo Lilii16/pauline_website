@@ -1,6 +1,31 @@
-<?php
-require_once "../script.js";
-?>
+<script>
+window.onload = function() {
+    // Sélectionne les sections correspondant à l'identifiant unique sur la page avocate.php
+    let competencesSection = document.getElementById('competences-section');
+    let honorairesSection = document.getElementById('honoraires-section');
+    let questionsSectionAvocate = document.getElementById('questions-section');
+
+    // Vérifie si les sections correspondantes ont été trouvées sur la page avocate.php
+    if (competencesSection && honorairesSection && questionsSectionAvocate) {
+        // Ajoute un écouteur d'événement au clic sur un élément du menu dropdown
+        document.querySelectorAll('.dropdown-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                // Récupère l'identifiant de la section cible à partir de l'attribut href
+                let targetId = this.getAttribute('href').substring(1);
+                // Sélectionne la section cible par son identifiant
+                let targetSection = document.getElementById(targetId);
+                // Si la section cible existe, faites défiler jusqu'à elle en douceur
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    }
+
+}
+
+</script>
+
 <section id="competences-section" class="py-5 section_juridique" style="overflow: hidden;">
   <div class="bg-red wh-100 front py-3">
     <h1 class="text-center " style="z-index: 1;">
@@ -11,7 +36,7 @@ require_once "../script.js";
     <div class="container rotate-minus20 col-md-8 ">
       <div class="container ms-md-5">
         <p class="text-red">
-          Ma pratique est essentiellement centrée sur la défense des droits des personnes accompagnées en psychiatrie, et plus particulièrement de leur droit de contester des soins contraints ou de demander réparation pour des préjudices subis du fait de soins imposés.
+          Ma pratique est essentiellement centrée sur la défense des droits des personnes accompagnées en psychiatrie, et plus particulièrement de leur droit à contester des soins contraints ou de demander réparation pour des préjudices subis du fait de soins imposés.
         </p>
         <p class=" text-red pt-2">
           J’interviens plus généralement s’agissant des mesures restrictives de liberté en lien avec la condition de « patient en psychiatrie » :

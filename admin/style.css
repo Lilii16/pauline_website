@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Source Serif 4", serif;
+}
+
+body{
+      background: url('./assets/bg_error.svg');
+      background-size: cover;
+}
+
+.bg-duck{
+    background-color: #f5ecd4 !important;
+   }
+
+   .display-1{
+    font-size: 10em !important;
+    text-shadow: 1px 1px 13px #f5ecd4 ;
+   }
+
+   h2{
+    font-size: 3em !important;
+    font-weight: 900 !important;
+color: #000000 !important;
+text-shadow: 1px 1px 13px #f5ecd4 ;
+   }

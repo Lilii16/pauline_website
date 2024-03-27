@@ -92,7 +92,7 @@ li{
 .radius {
   background-color: rgb(163,0,1,0.50);
   width: 95vw;
-  height: 100vh;
+  height: 105vh;
   border-radius: 50% 50% 0 0;
 }
 #inputChoice option {
@@ -114,6 +114,12 @@ a:hover {
 .navbar-nav {
   justify-content: center !important;
 }
+
+/* .background-image {
+  background-image: url("assets/pictures/grenade.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+} */
 
 
 .bg-color-red {
