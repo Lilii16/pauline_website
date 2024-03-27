@@ -1,4 +1,31 @@
 
+<script>
+// include "./script.js";
+window.onload = function() {
+    // Sélectionne les sections correspondant à l'identifiant unique sur la page formations.php
+    let thematikSection = document.getElementById('thematik-section');
+    let faqSectionFormations = document.getElementById('faq-section');
+    let devisSectionFormations = document.getElementById('devis-section');
+    // Vérifie si les sections correspondantes ont été trouvées sur la page formations.php
+    if (thematikSection && faqSectionFormations && devisSectionFormations) {
+        // Ajoute un écouteur d'événement au clic sur un élément du menu dropdown
+        document.querySelectorAll('.dropdown-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                // Récupère l'identifiant de la section cible à partir de l'attribut href
+                let targetId = this.getAttribute('href').substring(1);
+                // Sélectionne la section cible par son identifiant
+                let targetSection = document.getElementById(targetId);
+                // Si la section cible existe, faites défiler jusqu'à elle en douceur
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    }
+}
+</script>
+
+
 <section id="thematik-section" class="py-5" style="overflow-x: hidden;">
     <div class="bg-red wh-100 py-3">
         <h1 class="text-center" style="z-index: 1;">
@@ -55,19 +82,20 @@
             <?php
             }
             ?>
-
-
         </div>
 
-        <section id="devis-section">
-            <div class="card text-center bg-beige col-md-6 m-auto">
-                <div class="card-body">
-                    <p class="card-text">Chaque formation étant différente et personnalisable, il est nécéssaire d’estimer le coût via un devis. <br>
-                        Contactez Pauline Renther afin d’avoir plus d’informations. </p>
-                    <a href="#" class="btn text-red border border-warning col-md-4  col-6 rounded-pill border-3">Demander un devis</a>
-                </div>
+
+        <!-- <section id="devis-section"> -->
+        <div class="card text-center bg-beige col-md-6 m-auto" id="devis-section">
+            <div class="card-body">
+                <p class="card-text">Chaque formation étant différente et personnalisable, il est nécéssaire d’estimer le coût via un devis. <br>
+                    Contactez Pauline Renther afin d’avoir plus d’informations. </p>
+                <a href="#" class="btn text-red border border-warning col-md-4  col-6 rounded-pill border-3">Demander un devis</a>
             </div>
-        </section>
+        </div>
+        <!-- </section> -->
+
+
     </div>
 </section>
 

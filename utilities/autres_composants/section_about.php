@@ -1,10 +1,10 @@
 
 
-    <div class="container-fluid h-200 justify-content-center py-5">
-        <div class="row justify-content-center align-items-center h-100">
+    <div class="container-fluid h-200 justify-content-center mt-5 py-5">
+        <div class="row justify-content-center align-items-center mt-5 h-100">
             <div class="col-md-8 bg-color-red vh-75 m-4">
                 <div class="col-md-10 text-center d-flex justify-content-center">
-                    <img src="../../assets/pictures/pauline.png" alt="image de profil de l'avocate Pauline Rhenter" 
+                    <img src="../../assets/pictures/profil.png" alt="image de profil de l'avocate Pauline Rhenter" 
                     class="h-25 col-md-3 col-3 m-md-4 img-fluid" style="margin-bottom: -100px !important; z-index: 2 !important; position:relative; transform: translateX(-25%) translateY(35%)">
                     <h2 class="col-md-6 fs-1 m-4 text-center">Pauline Rhenter</h2>
                 </div>

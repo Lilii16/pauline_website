@@ -38,7 +38,7 @@ require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
         "addressCountry": "France"
       },
       "telephone": "+33 7 72 06 23 77",
-      "email": "contact@rhoder-avocate.fr",
+      "email": "contact@rhenter-avocate-formatrice.fr",
       "priceRange": "€"
     }
     </script>

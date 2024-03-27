@@ -99,6 +99,7 @@ li{
 .inner-radius {
   border-radius: 150px  150px 0 0 ;
   min-height: 100vh;
+
 }
 #inputChoice option {
   color: black !important;
@@ -114,6 +115,12 @@ a:hover {
 .navbar-nav {
   justify-content: center !important;
 }
+
+/* .background-image {
+  background-image: url("assets/pictures/grenade.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+} */
 
 
 .bg-color-red {
