@@ -49,7 +49,7 @@
                     </div>
 
                     <!-- check pour informations correctes -->
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-2">
                         <div class="form-check">
                             <input class="form-check-input bg-beige" type="checkbox" id="gridCheck">
                             <label class="form-check-label" for="gridCheck">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn text-center bg-beige text-red  col-md-4  col-6 rounded-pill border-3 mb-5 mx-auto">Envoyer</button>
+                    <button type="submit" class="btn text-center bg-beige text-red  col-md-4  col-6 rounded-pill border-3 mx-auto">Envoyer</button>
                 </div>
             </div>
         </div>
