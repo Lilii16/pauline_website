@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn text-center bg-beige text-red  col-md-4  col-6 rounded-pill border-3 m-auto">Envoyer</button>
+                    <button type="submit" class="btn text-center bg-beige text-red  col-md-4  col-6 rounded-pill border-3 mb-5 mx-auto">Envoyer</button>
                 </div>
             </div>
         </div>

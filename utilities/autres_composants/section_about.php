@@ -43,8 +43,8 @@
                         </div>
                         <div class="row mt-5 mb-5 d-flex justify-content-center">
                     <div class="col-md-10 row justify-content-md-between justify-content-center gap-5">
-                        <button class="btn btn-light p-1 col-lg-4 col-8 rounded-5"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Aide juridique</a></button>
-                        <button class="btn btn-light p-1 col-lg-4 col-8 rounded-5"><a href="#" class="text-decoration-none" style="color: #0010A3 !important;">Se former</a></button>
+                        <button class="btn btn-light p-1 col-lg-4 col-8 rounded-5"><a href="../../avocate.php" class="text-decoration-none" style="color: #0010A3 !important;">J'ai besoin d'un avocat</a></button>
+                        <button class="btn btn-light p-1 col-lg-4 col-8 rounded-5"><a href="../../formations.php" class="text-decoration-none" style="color: #0010A3 !important;">Je veux me former</a></button>
                     </div>
                 </div>
                     </div>
@@ -58,7 +58,7 @@
                             06 01 26 12 49 <br>
                             rhenter.avocat@protonmail.com
                         </p>
-                        <p>formulaire de contact, <a href="#">cliquez-ici</a></p>
+                        <p>formulaire de contact, <a href="../../contact.php">cliquez-ici</a></p>
                         <img src="../../assets/logos/logoRond.png" alt="logo de Pauline Rhenter, formatrice et avocate." class="w-50 pt-4 mt-4">
                     </div>
                 </div>

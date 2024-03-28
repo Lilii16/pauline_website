@@ -4,7 +4,7 @@
     <footer class="pt-5" style="overflow-x: hidden;">
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3  text-center">
-                <h5 class="mb-5" style="color: #F5ECD4">Mentions légales</h5>
+                <a href="../../mentions.php"><h5 class="mb-5" style="color: #F5ECD4">Mentions légales</h5></a>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="mentions.php" class="nav-link p-0" style="color: #F5ECD4">Voir plus</a></li>
                 </ul>
