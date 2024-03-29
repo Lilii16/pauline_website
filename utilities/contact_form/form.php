@@ -1,5 +1,5 @@
 <div class="w-100 mt-5 bg-red vh-100 radius p-4 relative">
-    <form class="d-flex align-items-center justify-content-center inner-radius bg-light-50-beige mt-auto mx-auto absolute col-md-8">
+    <form class="d-flex align-items-center justify-content-center inner-radius bg-light-50-beige mt-auto mx-auto absolute col-md-8"  method="POST" action="/utilities/contact_form/send_email.php" >
         <!-- contenaire formulaire -->
         <div class="container mt-5 p-md-5">
             <!-- titres-->
@@ -8,17 +8,17 @@
                 <p class="text-danger">Fill in the data below.</p>
             </div>
 
-
             <!-- debut inputs -->
 
             <div class="container col-md-10">
                 <!-- nom et prenom -->
                 <div class="form-group text-start row  row-cols-md-2 row-cols-1">
                     <div class="form-group col mb-4">
-                        <input type="nom" class="form-control shadow rounded-4 bg-beige" id="inputLastName" placeholder="Nom">
+                        <input type="text" class="form-control shadow rounded-4 bg-beige" id="inputLastName"name="name" placeholder="Nom">
                     </div>
                     <div class="form-group col mb-4">
-                        <input type="prénom" class="form-control shadow rounded-4 bg-beige" id="inputFirstName" placeholder="Prénom">
+                        <input type="text"   id="first-name" name="firstName" class="form-control shadow rounded-4 bg-beige"
+                        placeholder="Prénom">
                     </div>
                 </div>
                 <!-- reste des infos -->
@@ -26,20 +26,20 @@
 
                 <!-- div mail -->
                     <div class="form-group mb-4">
-                        <input type="email" class="form-control shadow rounded-5 bg-beige" id="inputEmail" placeholder="Votre adresse e-mail">
+                        <input type="email" name="email" class="form-control shadow rounded-5 bg-beige" id="inputEmail" placeholder="Votre adresse e-mail">
                     </div>
                     <!-- div selecteur -->
                     <div class="form-group mb-4">
                         <!-- selecteur de sujet -->
                         <label for="inputChoice">Votre choix</label>
-                        <select id="inputChoice" class="selectedOption form-control shadow rounded-5 bg-beige">
+                        <select id="inputChoice" class="selectedOption form-control shadow rounded-5 bg-beige" name="selectedOption">
                             <option selected>Aide juridique (avocatie)</option>
                             <option>Formations</option>
                         </select>
                     </div>
                     <!-- div sujet -->
                     <div class="form-group mb-4">
-                        <input type="subject" class="form-control rounded-5 bg-beige" id="inputSubject" placeholder="Sujet">
+                        <input type="text" class="form-control rounded-5 bg-beige" id="sujet" name="sujet" placeholder="Sujet">
                     </div>
                     <!-- Champ pour le message -->
                     <div class="form-group mb-4">

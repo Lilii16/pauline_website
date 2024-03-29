@@ -6,8 +6,9 @@ use PHPMailer\PHPMailer\SMTP;
   $name = clean_input($_POST["name"]);
   $email = clean_input($_POST["email"]);
   $message = clean_input($_POST["message"]);
-    $sujet = clean_input($_POST["sujet"]);
-    
+$sujet = clean_input($_POST["sujet"]);
+$firstname  = clean_input($_POST["firstName"]);
+$selectedOption  = clean_input($_POST["selectedOption"]);
 // on devrai peut etre rajouter sujet et cela nous permettrai de faire un système de trie dans la boite de mail
 $message= $_POST["message"];
 echo("hello");
@@ -16,7 +17,7 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 
     $mail = new PHPMailer;
     $mail->isSMTP();
-     $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+    //  $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
     $mail->Host = 'smtp.hostinger.fr';
     $mail->SMTPAuth = true;
       //SMTP username //SMTP password
@@ -28,7 +29,7 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
     //ici on choisit qui envoie
     $mail->setFrom('contact@becker-avocate.fr', $name, $firstname);
     //  c'est ici qu'on choisit ou envoyer 
-    $mail->addAddress('arandaligia8@gmail.com', 'Moi'); 
+    $mail->addAddress('sonia.98.tavares@gmail.com', 'Moi'); 
     if ($mail->addReplyTo($_POST['email'], $_POST['name'])) {
         //content of email
         $mail->Subject = $sujet;
@@ -38,8 +39,9 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
         $mail->Body = <<<EOT
 E-mail: {$_POST['email']}
 Nom: {$_POST['name']}
-Nom: {$_POST['firstName']}
-Message: {$_POST['message']}
+PRENOM: {$_POST['firstName']}
+OPTION: {$_POST['selectedOption']}
+MESSAGE: {$_POST['message']}
 EOT;
         if (!$mail->send()) {
             $msg = 'Désolé, quelque chose a mal tourné. Veuillez réessayer plus tard.';

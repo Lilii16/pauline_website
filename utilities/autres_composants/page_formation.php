@@ -160,7 +160,7 @@
     <ul>
         <li>Recueil des besoins de formation par téléphone ou par questionnaire</li>
         <li>Proposition devisée</li>
-        <li>Convention</li>
+        <li>Convention</li> 
     </ul>
 
     <h2>Animation :</h2>
