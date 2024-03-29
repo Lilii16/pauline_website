@@ -1,3 +1,4 @@
+<div class="m-5 p-2"></div>
 <div class="w-100 mt-5 bg-red vh-100 radius p-4 relative">
     <form class="d-flex align-items-center justify-content-center inner-radius bg-light-50-beige mt-auto mx-auto absolute col-md-8"  method="POST" action="/utilities/contact_form/send_email.php" >
         <!-- contenaire formulaire -->
@@ -5,7 +6,6 @@
             <!-- titres-->
             <div class="text-center">
                 <h3 class="text-red fx-bold">Formulaire de contact</h3>
-                <p class="text-danger">Fill in the data below.</p>
             </div>
 
             <!-- debut inputs -->

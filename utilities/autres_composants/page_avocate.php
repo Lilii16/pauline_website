@@ -1,3 +1,4 @@
+<div class="m-5 p-2"></div>
 <script>
   window.onload = function() {
     // Sélectionne les sections correspondant à l'identifiant unique sur la page avocate.php
@@ -76,11 +77,12 @@
           Les honoraires sont ajustés en fonction de vos revenus, de la matière ainsi que de la complexité du dossier ou de la procédure. 
         </p>
         <p class="h5 text-red text-break text-light text-center py-md-2 px-md-5">
-          Vous avez peut-être une assurance de protection juridique susceptible de couvrir les frais. Qu’est-ce qu’une assurance de protection juridique ? https://www.service-public.fr/particuliers/vosdroits/F3049
+          Vous avez peut-être une assurance de protection juridique susceptible de couvrir les frais. Qu’est-ce qu’une assurance de protection juridique ?
+          <a href="https://www.service-public.fr/particuliers/vosdroits/F3049">https://www.service-public.fr/particuliers/vosdroits/F3049</a>
         </p>
         <p class="h5 text-red text-break text-light text-center py-md-2 px-md-5">
           Si vous n’avez pas d’assurance de protection juridique, il existe l’aide juridictionnelle, qui est une aide financière destinée à toute personne dont les ressources ne dépassent pas un certain montant.
-          Pour savoir si vous y avez droit : https://www.service-public.fr/particuliers/vosdroits/F18074</p>
+          Pour savoir si vous y avez droit :<a href="https://www.service-public.fr/particuliers/vosdroits/F18074">https://www.service-public.fr/particuliers/vosdroits/F18074</a></p>
         <a href="../../contact.php" class="row pt-md-2 mx-auto"> <button class="text-center bg-beige btn text-red  col-md-4  col-6 rounded-pill border-3 m-auto">Prendre rendez-vous </button> </a>
       </div>
     </div>
