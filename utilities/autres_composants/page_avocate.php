@@ -1,4 +1,3 @@
-<div class="m-5 p-2"></div>
 <script>
   window.onload = function() {
     // Sélectionne les sections correspondant à l'identifiant unique sur la page avocate.php

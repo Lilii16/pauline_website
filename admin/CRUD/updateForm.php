@@ -32,7 +32,7 @@ if(isset($_GET['type'])) {
 <body>
     <div class="card decoration-none">
 <?php if($type === 'question') {?>
-    <form action="update.php" method="post">
+    <form action="updateElement.php" method="post">
     <input type="hidden" name="type" value="question">
         <input type="hidden" name="id" value="<?= isset($question['id']) ? $question['id'] : '' ?>">
         <ul>
@@ -52,7 +52,7 @@ if(isset($_GET['type'])) {
         </ul>
     </form>
 <?php } elseif ($type === 'article') { ?>
-    <form action="update.php" method="post">
+    <form action="updateElement.php" method="post">
     <input type="hidden" name="type" value="article">
         <input type="hidden" name="id" value="<?= isset($article['id']) ? $article['id'] : '' ?>">
         <ul>
@@ -76,7 +76,7 @@ if(isset($_GET['type'])) {
         </ul>
     </form>
 <?php } elseif ($type === 'publication') { ?>
-    <form action="update.php" method="post">
+    <form action="updateElement.php" method="post">
     <input type="hidden" name="type" value="publication">
         <input type="hidden" name="id" value="<?= isset($publication['id']) ? $publication['id'] : '' ?>">
         <ul>

@@ -8,7 +8,7 @@ ini_set('session.use_strict_mode', 1);
 // Configuration des paramètres du cookie de session.
 session_set_cookie_params([
     'lifetime' => 1800,  // Durée de vie du cookie de session en secondes (ici, 30 minutes).
-    'domain' => 'pauline',  // Domaine sur lequel le cookie de session est valide.
+    'domain' => 'pauline-website',  // Domaine sur lequel le cookie de session est valide.
     'path' => '/',  // Chemin sur le serveur où le cookie de session est disponible.
     //petit probleme a regler sur le site hebergé mettre secure = true et verifier s'il marche ou pas
     'secure' => false,  // Indique si le cookie de session doit être transmis uniquement via une connexion HTTPS.

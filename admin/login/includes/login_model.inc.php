@@ -16,7 +16,7 @@ return $result;
 
 
 
-// fonction qui permet de creer le user et mot de pass
+// // fonction qui permet de creer le user et mot de pass
 // function set_user(object $conn, string $username)
 // {
 //     $username = "pauline.p";
@@ -24,7 +24,7 @@ return $result;
 //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
 //     // Préparation de la requête
-//     $query = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+//     $query = $conn->prepare("INSERT INTO user (username, password) VALUES (:username, :password)");
     
 //     // Liaison des paramètres
 //     $query->bindParam(':username', $username);

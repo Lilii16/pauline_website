@@ -31,7 +31,7 @@ $type = $_GET['type'];
         <h2>Ajouter <?php $type ?></h2>
 <!-- Affichage dynamique du formulaire en fonction du type -->
 <?php if ($type === 'question') { ?>
-        <form action="addQuestion.php" method="post" class="d-flex flex-column justify-content-center align-items-center"><br>
+        <form action="addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center"><br>
             <input type="hidden" name="type" value="question">
             <label for="question">Question : </label>
             <input type="text" name="question"><br>
@@ -42,7 +42,7 @@ $type = $_GET['type'];
     </div>
 <?php } elseif ($type === 'article') { ?>
     <!-- Formulaire pour ajouter un article -->
-    <form action="addQuestion.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
+    <form action="addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
         <!-- Autres champs du formulaire pour ajouter un article -->
         <input type="hidden" name="type" value="article">
         <label for="title">Titre : </label>
@@ -56,7 +56,7 @@ $type = $_GET['type'];
     </form>
 <?php } elseif ($type === 'publication') { ?>
     <!-- Formulaire pour ajouter un article -->
-    <form action="addQuestion.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
+    <form action="addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
         <!-- Autres champs du formulaire pour ajouter un article -->
         <input type="hidden" name="type" value="publication">
         <label for="titre">Titre : </label>
@@ -71,7 +71,7 @@ $type = $_GET['type'];
         <input type="submit" value="Ajouter"><br>
     </form>
 <?php } else if ($type === 'faq_formation') { ?>
-        <form action="addQuestion.php" method="post" class="d-flex flex-column justify-content-center align-items-center"><br>
+        <form action="addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center"><br>
             <input type="hidden" name="type" value="faq_formation">
             <label for="question">Question : </label>
             <input type="text" name="question"><br>

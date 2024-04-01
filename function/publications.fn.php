@@ -64,7 +64,7 @@ function downloadPublicationById($conn, $publicationID) {
     header('Content-Disposition: attachment; filename="' . $publication['titre'] . '"');
 
     // Lire le contenu du fichier PDF et l'envoyer au navigateur
-    readfile($publication['path']);
+    // readfile($publication['path']);
         } else {
             // Si la publication n'existe pas, afficher un message d'erreur
             echo "La publication n'existe pas.";

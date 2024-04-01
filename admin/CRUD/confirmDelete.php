@@ -3,7 +3,6 @@ require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 $conn = getPDOlink($config);
 $currentId = $_POST['id'];
-// $question = findQuestionById($conn,$currentId);
 ?>
 
 
@@ -29,7 +28,7 @@ if(isset($_POST['type']) && ($_POST['type'] === 'question' || $_POST['type'] ===
 </head>
 <body>
     <h1>Etes-vous sûr de vouloir supprimer cet élément ?</h1>
-    <form action="deleted.php" method="post">
+    <form action="deletedElement.php" method="post">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <input type="hidden" name="type" value="<?php echo $type; ?>">
         <button type="submit" class="btn btn-danger">Supprimer</button>

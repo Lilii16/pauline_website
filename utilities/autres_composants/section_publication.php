@@ -60,66 +60,6 @@
 </section>
 
 
-<div class="container personnel" style="max-width:  90% !important;">
-        <h3 class="text-red bg-light-beige p-0 my-5">Publications personnelles en ligne ou à télécharger en PDF</h3>
-        <div class="bg-orange rounded-5" style="border-top-left-radius: 0 !important; border-bottom-right-radius: 0 !important;">
-            <!-- foreachici -->
-            <?php
-            $publications = findAllPublications($conn);
-
-            foreach ($publications as $publication) {
-            ?>
-                <div class="m-3 d-flex justify-content-between align-items-center py-2">
-                    <div class="text-light-beige">
-                        <p><?php echo $publication['titre']; ?></p>
-                        <p><?php echo $publication['description']; ?></p>
-                    </div>
-                    <a href="<?php echo $publication['path']; ?>" class="btn rounded-pill bg-beige text-red p-2" download>Telecharger</a>
-                    <a href="download.php?id=<?php echo $publication['id']; ?>" class="btn rounded-pill bg-beige text-red p-2">Télécharger PDF</a>
-                    <button onclick="downloadPDF(<?php echo $publication['id']; ?>)">Télécharger PDF</button>
-                </div>
-                <hr class="text-blue p-1 d-flex m-auto border-3 col-10">
-            <?php
-            }
-            ?>
-            <!-- chercher comment inverser au bout de 2 -->
-        </div>
-    </div>
-
-
-
-
-
-
-    <?php include_once 'publications.fn.php'; ?>
-
-<div class="container personnel" style="max-width:  90% !important;">
-    <h3 class="text-red bg-light-beige p-0 my-5">Publications personnelles en ligne ou à télécharger en PDF</h3>
-    <div class="bg-orange rounded-5" style="border-top-left-radius: 0 !important; border-bottom-right-radius: 0 !important;">
-        <!-- foreachici -->
-        <?php
-        $publications = findAllPublications($conn);
-
-        foreach ($publications as $publication) {
-            // Récupération de l'ID de la publication
-            $CurrentID = $publication['id'];
-            ?>
-            <div class="m-3 d-flex justify-content-between align-items-center py-2">
-                <div class="text-light-beige">
-                    <p><?php echo $publication['titre']; ?></p>
-                    <p><?php echo $publication['description']; ?></p>
-                </div>
-                <!-- Ajout du lien de téléchargement pour chaque publication -->
-                <a href="/utilities/autres_composants/download.php?id=<?php echo $CurrentID; ?>" class="btn rounded-pill bg-beige text-red p-2">Télécharger PDF</a>
-            </div>
-            <hr class="text-blue p-1 d-flex m-auto border-3 col-10">
-        <?php
-        }
-        ?>
-        <!-- chercher comment inverser au bout de 2 -->
-    </div>
-</div>
-
 
 
 

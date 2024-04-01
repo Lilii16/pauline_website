@@ -1,4 +1,4 @@
-<div class="m-5 p-2"></div>
+<!-- <div class="m-5 p-2"></div> -->
 <script>
     // include "./script.js";
     window.onload = function() {
@@ -28,7 +28,7 @@
 </script>
 
 
-<section id="thematik-section" class="py-5" style="overflow-x: hidden;">
+<section id="thematik-section" class="" style="overflow-x: hidden;">
     <div class="bg-red wh-100 py-3">
         <h1 class="text-center" style="z-index: 1;">
             Usager ou professionnel, je souhaite me former 

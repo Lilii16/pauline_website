@@ -22,6 +22,8 @@ require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
     crossorigin="anonymous"></script>
     <!-- <script src="../../script.js"></script> -->
     <!-- <script src="../../script_navBar.js"></script> -->
+      <!-- logo page web -->
+      <link rel="icon" href="../../assets/logos/logoFondRemoved.png" type="image/x-icon">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
