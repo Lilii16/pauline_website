@@ -1,6 +1,6 @@
 <div class="m-5 p-2"></div>
 <div class="w-100 mt-5 bg-red vh-100 radius p-4 relative">
-    <form class="d-flex align-items-center justify-content-center inner-radius bg-light-50-beige mt-auto mx-auto absolute col-md-8"  method="POST" action="/utilities/contact_form/send_email.php" >
+    <form class="d-flex align-items-center justify-content-center inner-radius bg-light-50-beige mt-auto mx-auto absolute col-md-8"  method="POST" action="/utilities/contact_form/send_email.php" id="myForm">
         <!-- contenaire formulaire -->
         <div class="container mt-5 p-md-5">
             <!-- titres-->
@@ -65,3 +65,40 @@
         </div>
     </form>
 </div>
+<!-- https://www.pierre-giraud.com/php-mysql-apprendre-coder-cours/securiser-valider-formulaire/ -->
+<script>
+    function validateForm(event) {
+    var name = document.getElementById('inputLastName').value;
+    var firstName = document.getElementById('first-name').value;
+    var email = document.getElementById('inputEmail').value;
+    // Ajoutez des validations pour d'autres champs ici...
+
+    var nameRegex = /^[a-zA-ZÀ-ÿ\s\-]+$/;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!nameRegex.test(name)) {
+        alert("Nom invalide");
+        event.preventDefault();
+        return false;
+    }
+
+    if (!nameRegex.test(firstName)) {
+        alert("Prénom invalide");
+        event.preventDefault();
+        return false;
+    }
+
+    if (!emailRegex.test(email)) {
+        alert("Adresse e-mail invalide");
+        event.preventDefault();
+        return false;
+    }
+
+    // Autres validations pour les autres champs...
+
+    // Si toutes les validations réussissent, le formulaire sera soumis normalement
+}
+
+document.getElementById('myForm').addEventListener('submit', validateForm);
+
+</script>

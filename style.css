@@ -84,13 +84,14 @@ li{
 }
 
 #border{
-  border-bottom-left-radius: 30px; /* arrondi le coin inférieur gauche */
-  border-bottom-right-radius: 30px; /* arrondi le coin inférieur droit */
+  border-bottom-left-radius: 30px; 
+  border-bottom-right-radius: 30px; 
   justify-content: center !important;
   width: 100vh;
   border: 2px solid  #f5ecd4; 
   position: fixed;
 }
+
 /* section about */
 
 .radius {

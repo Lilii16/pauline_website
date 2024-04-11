@@ -5,6 +5,7 @@ require_once dirname(__DIR__) . '/function/questions.fn.php';
 require_once dirname(__DIR__) . '/function/publications.fn.php';
 require_once dirname(__DIR__) . '/function/articles.fn.php';
 require_once dirname(__DIR__) . '/function/faq_formations.fn.php';
+
 require_once './login/includes/config_session.inc.php';
 require_once './login/includes/login_view.inc.php';
 

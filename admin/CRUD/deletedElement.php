@@ -3,11 +3,8 @@ require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 
 //recupérer 
-// $currentId = $_POST['id'];
-// $delete = deleteQuestionById($conn, $currentId);
   $conn = getPDOlink($config); 
   $type = $_POST['type'];
-  // deleted.php 
   // Vérifier si l'ID et le type sont définis dans la requête POST
   
   if(isset($_POST['id']) && isset($_POST['type'])) {

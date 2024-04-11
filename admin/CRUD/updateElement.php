@@ -39,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                    $conn->query($sql);
                }
 
-            
                // Message de réussite
                echo "Question updated successfully";
        

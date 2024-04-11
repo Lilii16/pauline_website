@@ -28,7 +28,7 @@ $type = $_GET['type'];
 </head>
 <body>
     <div class="d-flex flex-column justify-content-center align-items-center">
-        <h2>Ajouter <?php $type ?></h2>
+        <h2>Ajouter <?php echo $type ?></h2>
 <!-- Affichage dynamique du formulaire en fonction du type -->
 <?php if ($type === 'question') { ?>
         <form action="addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center"><br>

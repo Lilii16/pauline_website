@@ -2,7 +2,7 @@
 // Établir la connexion à la base de données
 $conn = getPDOlink($config);
 
-//création fonction qui permet de récupérer les questions de la bdd pour la page fas-formation
+//création fonction qui permet de récupérer les questions de la bdd pour la page faq-formation
 
 function findAllQuestionsFormation($conn){
     $sql= "SELECT * FROM `faq-formation`";

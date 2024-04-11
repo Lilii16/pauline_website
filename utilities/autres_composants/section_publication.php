@@ -1,9 +1,3 @@
-<?php
-    // include "../composant_general/header.php";
-    // require_once dirname(__DIR__, 2) . '/config/conn.php';
-    // require_once dirname(__DIR__, 2) . '/function/publications.fn.php';
-    // require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
-    ?>
 
 <section class="bg-red-70 pb-5 bg-red">
     <h1 class="text-light-beige text-center bg-orange m-0 wh-100">Publications et autres ressources</h1>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>test orejime</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/orejime@latest/dist/orejime.css"
+    />
+    <script src="https://unpkg.com/orejime@latest/dist/orejime.js"></script>
+
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+  </head>
+
+  <body>
+    <!--
+			since no #orejime div exists, Orejime will create one and put it at
+			the beginning of the body
+		-->
+
+    <div id="app">
+      <div class="Container">
+        <header class="Header">
+          <h1 class="Header-title">Orejime</h1>
+
+          <a href="https://empreintedigitale.fr">
+            <img
+              class="Header-empreinteLogo"
+              src="../../assets/logos/logoFond.png"
+            />
+          </a>
+        </header>
+<!--  -->
+        <main role="main">
+
+          <h2 class="Inset-title">Privacy policy example</h2>
+
+          <div class="Inset" id="privacyPolicy">
+            <p>
+              This is a sample section that acts as the privacy policy page in
+              this example.<br />
+              Here you could, for example, let users open the consent modal
+              anytime with a simple button, or even reset their consent
+              preferences.
+            </p>
+
+            <div class="ButtonGroup">
+              <button type="button" class="Button consent-modal-button">
+                Open consent modal
+              </button>
+              <button type="button" class="Button reset-button">
+                Reset consent
+              </button>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <footer class="Footer" role="contentinfo">
+    
+      </footer>
+    </div>
+
+    <script>
+      // Le but d'une bannière de cookies est d'informer les visiteurs du site web des cookies utilisés sur votre site web. 
+    // 1
+      window.orejimeConfig = {
+        appElement: "#app",
+        privacyPolicy: "http://pauline-website/mentions.php",
+        translations: {
+          en: {
+            consentModal: {
+              description:
+                "Here is an example of Orejime. View the source code to see how everything is done.",
+            },
+            "inline-tracker": {
+              description:
+                "Example of an inline tracking script that sets a dummy cookie",
+            },
+            "external-tracker": {
+              description:
+                "Example of an external tracking script that sets a dummy cookie",
+            },
+            "always-on": {
+              description:
+                'This <a href="http://example.com">example</a> app will not set any cookie',
+            },
+            "disabled-by-default": {
+              description: "This example app will not set any cookie",
+            },
+            purposes: {
+              analytics: "Analytics",
+              security: "Security",
+              ads: "Ads",
+            },
+            categories: {
+              example: {
+                description:
+                  "Applications can be grouped into categories to help users better understand their use.",
+              },
+              "third-party": {
+                description: "These are fake third-party applications.",
+              },
+            },
+          },
+        },
+        apps: [
+          {
+            name: "inline-tracker",
+            title: "Inline Tracker",
+            purposes: ["analytics"],
+            cookies: ["inline-tracker"],
+          },
+          {
+            name: "external-tracker",
+            title: "External Tracker",
+            purposes: ["analytics", "security"],
+            cookies: ["external-tracker"],
+          },
+          {
+            name: "disabled-by-default",
+            title: "Something disabled by default",
+            purposes: ["ads"],
+            default: false,
+          },
+          {
+            name: "always-on",
+            title: "Required app",
+            purposes: [],
+            required: true,
+          },
+        ],
+        categories: [
+          {
+            name: "example",
+            title: "Example category",
+            apps: ["inline-tracker", "disabled-by-default"],
+          },
+          {
+            name: "third-party",
+            title: "Third-party applications",
+            apps: ["external-tracker", "always-on"],
+          },
+        ],
+      };
+    </script>
+
+    <!-- since there is a orejimeConfig global variable in index.js, a window.orejime instance will be initiated when including the lib -->
+
+
+    <script
+      type="opt-in"
+      data-src="example-assets/external-tracker.js"
+      data-type="application/javascript"
+      data-name="external-tracker"
+    ></script>
+
+    <script
+      type="opt-in"
+      data-type="application/javascript"
+      data-name="inline-tracker"
+    >
+    </script>
+
+    <script>
+      document.querySelector(".consent-modal-button").addEventListener(
+        "click",
+        function () {
+          orejime.show();
+        },
+        false
+      );
+
+      document.querySelector(".reset-button").addEventListener(
+        "click",
+        function () {
+          orejime.internals.manager.resetConsent();
+          location.reload();
+        },
+        false
+      );
+    </script>
+
+
+
+
+<script>
+// 2
+  var orejimeConfig = {
+
+    elementID: "orejime",
+    appElement: "#app",
+    cookieName: "Hello World",
+    cookieExpiresAfterDays: 365,
+    cookieDomain: 'pauline-website/',
+
+    stringifyCookie: (contents) => JSON.stringify(contents),
+    parseCookie: (cookie) => JSON.parse(cookie),
+
+    privacyPolicy: "http://pauline-website/mentions.php",
+
+    default: true,
+
+    mustConsent: false,
+
+    mustNotice: false,
+
+    lang: "fr",
+
+    logo: false,
+
+    debug: false,
+
+    translations: {
+        fr: {
+            consentModal: {
+              title: "Les informations que nous collectons",
+                description: "This is an example of how to override an existing translation already used by Orejime",
+            },
+            inlineTracker: {
+                description: "Example of an inline tracking script",
+            },
+            externalTracker: {
+                description: "Example of an external tracking script",
+            },
+            purposes: {
+                analytics: "Analytics",
+                security: "Security"
+            },
+            categories: {
+                analytics: {
+                    description: "A long form description of the category."
+                }
+            }
+        },
+    },
+
+
+    apps: [
+        {
+            name: "google-tag-manager",
+
+  
+            title: "Google Tag Manager",
+
+
+            cookies: [
+                "_ga",
+                "_gat",
+                "_gid",
+                "__utma",
+                "__utmb",
+                "__utmc",
+                "__utmt",
+                "__utmz",
+                "_gat_gtag_" + GTM_UA,
+                "_gat_" + GTM_UA
+            ],
+
+
+            purposes: ["analytics"],
+
+            callback: function(consent, app){
+                console.log("User consent for app " + app.name + ": consent=" + consent)
+            },
+
+            required: false,
+
+            optOut: false,
+
+            default: true,
+
+            onlyOnce: true,
+        },
+        {
+            name: "inline-tracker",
+            title: "Inline Tracker",
+            purposes: ["analytics"],
+            cookies: [
+                "inline-tracker"
+                ["cookieName", "/blog", "." + location.hostname],
+                ["cookieName", "/", "test.mydomain.com"],
+            ]
+        },
+        {
+            name: "external-tracker",
+            title: "External Tracker",
+            purposes: ["analytics", "security"],
+            cookies: ["external-tracker"],
+            required: true
+        }
+    ],
+
+    categories: [
+        {
+            name: "analytics",
+            title: "Analytics",
+            apps: [
+                "google-tag-manager",
+                "external-tracker"
+            ]
+        }
+    ]
+}
+</script>
+  </body>
+</html>

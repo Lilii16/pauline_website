@@ -1,5 +1,4 @@
 <?php
-//  $conn = getPDOlink($config); 
 require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
@@ -19,11 +18,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($type === 'question') {
         $question = htmlspecialchars($_POST['question']);
         $reponse = htmlspecialchars($_POST['reponse']);
-
-        // var_dump($_POST);
         try {
-            $sql = "INSERT INTO `questions` (`question`, `reponse`) VALUES ('$question', '$reponse')";
-            $conn->query($sql);
+            $sql = "INSERT INTO `questions` (`question`, `reponse`) VALUES (:question, :reponse)";
+
+            // Préparation de la requête
+            $stmt = $conn->prepare($sql);
+            
+            // Liaison des valeurs aux paramètres de la requête
+            $stmt->bindParam(':question', $question);
+            $stmt->bindParam(':reponse', $reponse);
+            
+            // Exécution de la requête préparée
+            $stmt->execute();
+            
+            // Fermeture du statement
+            $stmt->closeCursor();
 
             // Message de réussite
             echo "Question ajoutée avec succès";
