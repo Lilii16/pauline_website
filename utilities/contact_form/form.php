@@ -73,116 +73,77 @@
 
 <script>
 // Récupération des éléments du formulaire
-const form =  document.querySelector('form'); // Sélectionne le formulaire entier
-const nomInput = document.querySelector('#InputNom'); // Sélectionne le champ de saisie du nom
-const prenomInput = document.querySelector('#InputPrenom'); // Sélectionne le champ de saisie du prénom
-const emailInput = document.querySelector('input[type=email]'); // Sélectionne le champ de saisie de l'email
-const sujetInput = document.querySelector('#InputSujet'); // Sélectionne le champ de saisie du sujet
-const msgInput = document.querySelector('#InputMessage'); // Sélectionne le champ de saisie du message
+const form = document.querySelector('form');
 
-// Définition des paramètres de validation pour chaque champ du formulaire
+// je vais utiliser un object qui récupére les elements du formulaire pour éviter de le répeter car j'ai plusieurs fontions qui les utilisent
+const inputs = {
+  // Sélectionne le champ de saisie du nom
+  nom: document.getElementById('InputNom'), 
+  // Sélectionne le champ de saisie du prénom
+  prenom: document.getElementById('InputPrenom'), 
+ // Sélectionne le champ de saisie de l'email
+  email: document.querySelector('input[type=email]'),
+// Sélectionne le champ de saisie du sujet
+  sujet: document.getElementById('InputSujet'), 
+ // Sélectionne le champ de saisie du message
+  message: document.getElementById('InputMessage'),
+};
+
+// Sélectionne le bouton "Envoyer", il va me servir à bloquer l'envoie si les infos sont pas bonnes
+const submitButton = document.getElementById('submitButton'); 
+
+// object Expressions régulières de validation idem reutilisé plusieurs fois
+const regex = {
 
 // Expression régulière pour valider le nom et le prénom
-// Autorise les lettres, les tirets, les traits de soulignement et les espaces
+// Autorise les lettres, les tirets, les traits de soulignement et les espaces (car certaines personnes comme moi ont plusieurs noms et prenoms)
 // Doit commencer par une lettre
 // Longueur de 3 à 23 caractères
-const NameRegex = /^[a-zA-Z][a-zA-Z-_ ]{3,23}$/;
-
+  nomPrenom: /^[a-zA-Z][a-zA-Z-_ ]{3,23}$/, 
 // Expression régulière pour valider l'email
 // Doit avoir un format d'email valide
-const EmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-// Expression régulière pour valider le sujet
+  email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  // Expression régulière pour valider le sujet
 // Ne doit pas contenir certains caractères spéciaux (<, >, {, }, $)
-// Longueur de 3 à 200 caractères
-const SujetRegex = /^[^<>{}$]{3,200}$/;
-
+// Longueur de 3 à 200 caractères 
+  sujetMessage: /^[^<>{}$]{3,200}$/, 
 // Expression régulière pour valider le message
 // Ne doit pas contenir certains caractères spéciaux (<, >, {, }, $)
 // Longueur minimale de 24 caractères
-const MessageRegex = /^[^<>{}$]{24,}$/;
+  message: /^[^<>{}$]{24,}$/, 
+};
 
-// Cette fonction vérifie si l'adresse email est valide lors de la saisie et applique les classes CSS en conséquence
-emailInput.addEventListener('input', (e)=>{
-    console.log(e.target.value)
-    if(EmailRegex.test(emailInput.value)){
-        emailInput.classList.add('is-valid'); // Ajoute la classe 'is-valid' pour un email valide
-        emailInput.classList.remove('is-invalid'); // Supprime la classe 'is-invalid' pour un email valide
-    } else{
-        emailInput.classList.add('is-invalid'); // Ajoute la classe 'is-invalid' pour un email invalide
-        emailInput.classList.remove('is-valid'); // Supprime la classe 'is-valid' pour un email invalide
-    }
-}) 
-
-// Cette fonction ajoute ou supprime les classes CSS is-valid et is-invalid en fonction du résultat de la validation regex
-function addClass(element,regex,value,valid) {
-    if (regex.test(value)) {
-        element.classList.add('is-valid') // Ajoute la classe 'is-valid' si la valeur est valide
-        element.classList.remove('is-invalid')  // Supprime la classe 'is-invalid' si la valeur est valide
-        valid = true
-    } else {
-        element.classList.remove('is-valid') // Supprime la classe 'is-valid' si la valeur est invalide
-        element.classList.add('is-invalid') // Ajoute la classe 'is-invalid' si la valeur est invalide
-        valid = false
-    }
+// Fonction pour valider et mettre à jour les classes CSS
+function validateAndUpdate(element, regex) {
+  // Vérifie si la valeur de l'élément passe la validation regex
+  const isValid = regex.test(element.value); 
+  // Ajoute ou supprime les classes CSS 'is-valid' ou 'is-invalid' en fonction du résultat de la validation
+  element.classList.toggle('is-valid', isValid);
+  element.classList.toggle('is-invalid', !isValid);
+ // Renvoie true si la valeur est valide, sinon false
+  return isValid;
 }
 
-// Les événements d'entrée pour chaque champ du formulaire déclenchent la fonction addClass pour la validation
-nomInput.addEventListener('input', e => addClass(nomInput,NameRegex, e.target.value,nomValid));
-prenomInput.addEventListener('input', e => addClass(prenomInput,NameRegex, e.target.value,prenomValid));
-sujetInput.addEventListener('input', e=>addClass(sujetInput,SujetRegex, e.target.value,sujetValid));
-emailInput.addEventListener('input', e=>addClass(emailInput,EmailRegex, e.target.value,emailValid));
-msgInput.addEventListener('input', e=>addClass(msgInput,MessageRegex, e.target.value,msgValid));
+// Écouter les événements d'entrée/saisie dans les champs du formulaire pour la validation
+Object.values(inputs).forEach(input =>
+  input.addEventListener('input', () => {
+    const isValid = validateAndUpdate(input, regex[input.id === 'InputEmail' ? 'email' : 'nomPrenom']);
+    // Si l'input est celui de l'email, déclenche la vérification du formulaire complet
+    if (input.id === 'InputEmail') toggleSubmitButton(); 
+    // Sinon, déclenche la vérification du champ individuel
+    else toggleSubmitButton(isValid); 
+  })
+);
 
-// Cette fonction valide chaque champ du formulaire en fonction du regex fourni et applique les classes CSS en conséquence
-function validateInput(input, regex) {
-    if (regex.test(input.value)) {
-        input.classList.add('is-valid'); // Ajoute la classe 'is-valid' si la valeur est valide
-        input.classList.remove('is-invalid'); // Supprime la classe 'is-invalid' si la valeur est valide
-        return true;
-    } else {
-        input.classList.remove('is-valid'); // Supprime la classe 'is-valid' si la valeur est invalide
-        input.classList.add('is-invalid'); // Ajoute la classe 'is-invalid' si la valeur est invalide
-        return false;
-    }
+// Fonction pour activer ou désactiver le bouton Envoyer
+function toggleSubmitButton(isFormValid) {
+  // Si la validité du formulaire n'est pas fournie, vérifie tous les champs
+  if (isFormValid === undefined) {
+    // Vérifie si tous les champs du formulaire sont valides en utilisant validateAndUpdate pour chacun
+    isFormValid = Object.values(inputs).every(input => validateAndUpdate(input, regex[input.id === 'InputEmail' ? 'email' : 'nomPrenom']));
+  }
+  // Active ou désactive le bouton Envoyer en fonction de la validité du formulaire
+  submitButton.disabled = !isFormValid;
 }
 
-// Les événements d'entrée pour chaque champ du formulaire déclenchent la fonction validateInput pour la validation
-nomInput.addEventListener('input', () => validateInput(nomInput, NameRegex));
-prenomInput.addEventListener('input', () => validateInput(prenomInput, NameRegex));
-sujetInput.addEventListener('input', () => validateInput(sujetInput, SujetRegex));
-emailInput.addEventListener('input', () => validateInput(emailInput, EmailRegex));
-msgInput.addEventListener('input', () => validateInput(msgInput, MessageRegex));
-
-
-</script> 
-<script>
-// Fonction pour activer ou désactiver le bouton Envoyer en fonction de la validation du formulaire
-function toggleSubmitButton() {
-    const submitButton = document.getElementById('submitButton');
-    const nomInput = document.getElementById('InputNom');
-    const prenomInput = document.getElementById('InputPrenom');
-    const emailInput = document.getElementById('inputEmail');
-    const sujetInput = document.getElementById('InputSujet');
-    const msgInput = document.getElementById('InputMessage');
-
-    const isNomValid = /^[a-zA-Z][a-zA-Z-_ ]{3,23}$/.test(nomInput.value);
-    const isPrenomValid = /^[a-zA-Z][a-zA-Z-_ ]{3,23}$/.test(prenomInput.value);
-    const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailInput.value);
-    const isSujetValid = /^[^<>{}$]{3,200}$/.test(sujetInput.value);
-    const isMessageValid = /^[^<>{}$]{24,}$/.test(msgInput.value);
-
-    if (isNomValid && isPrenomValid && isEmailValid && isSujetValid && isMessageValid) {
-        submitButton.disabled = false;
-    } else {
-        submitButton.disabled = true;
-    }
-}
-
-// Écouter les événements de saisie dans les champs du formulaire pour activer ou désactiver le bouton Envoyer
-document.getElementById('InputNom').addEventListener('input', toggleSubmitButton);
-document.getElementById('InputPrenom').addEventListener('input', toggleSubmitButton);
-document.getElementById('inputEmail').addEventListener('input', toggleSubmitButton);
-document.getElementById('InputSujet').addEventListener('input', toggleSubmitButton);
-document.getElementById('InputMessage').addEventListener('input', toggleSubmitButton);
 </script>
