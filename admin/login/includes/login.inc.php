@@ -28,6 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = get_user($conn, $username);
         $hashedPwd = $result["password"];
 
+
+
         if (is_username_wrong($result)) {
             $errors["login_incorrect"] = "Incorrect login info username!";
         }

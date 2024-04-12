@@ -13,6 +13,8 @@ $selectedOption  = clean_input($_POST["selectedOption"]);
 $message = $_POST["message"];
 // echo("hello");
 
+
+
 require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 
 $mail = new PHPMailer;
