@@ -33,13 +33,14 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 
 
+
 <body>
     <div class="container">
         <h1 class="mt-5 mb-4">Administration - Gestion du Droit du Travail</h1>
         <div class="d-flex justify-content-between">
-        <h3><?php 
-            output_username();
-            ?></h3>
+            <h3><?php
+                output_username();
+                ?></h3>
 
             <a href="../index.php">Visualiser le site</a>
             <a href="./login/logout.php">Se déconnecter</a>
@@ -62,6 +63,7 @@ if (!isset($_SESSION['user_id'])) {
         </ul>
 
         <?php
+
         $questions = findAllQuestions($conn);
         $articles = findAllArticles($conn);
         $publications = findAllPublications($conn);
@@ -76,7 +78,10 @@ if (!isset($_SESSION['user_id'])) {
                 <!-- Tableau pour afficher les questions -->
                 <!-- Structure du tableau -->
                 <!-- Insérer les données dynamiquement ici -->
-                <?php foreach ($questions as $index => $question) { ?>
+                <?php foreach ($questions as $index => $question) {
+                    // Récupération du type de question
+                    // $type = "question";
+                ?>
                     <div class="accordion-item mb-4 shadow-sm">
                         <h2 class="accordion-header" id="heading<?php echo $index; ?>">
                             <button class="accordion-button collapsed bg-transparent fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse<?php echo $index; ?>">
@@ -92,16 +97,18 @@ if (!isset($_SESSION['user_id'])) {
                         <!-- Boutons pour modifier la question -->
                         <div class="d-flex justify-content-end mt-2">
                             <a href="./CRUD/updateForm.php?type=question&id=<?php echo $question['id']; ?>" class="btn btn-warning me-2">Modifier</a>
-                            <!-- Boutons pour  supprimer la question -->
-                            <form action="./CRUD/confirmdelete.php" method="post">
-                                <input type="hidden" name="id" value="<?php echo $question['id']; ?>">
-                                <input type="hidden" name="type" value="question">
-                                <button type="submit" class="btn btn-danger">Supprimer</button>
-                            </form>
+
+                    
+                            <!-- Boutons pour supprimer la question -->
+                            <button type="button" class="btn btn-primary trigger-btn" data-toggle="modal" data-target="#myModal" data-type="question" data-id="<?php echo $question['id']; ?>">
+                                Supprimer
+                            </button>
+
 
                         </div>
                     </div>
-                <?php } ?>
+                <?php
+                } ?>
                 <!-- Bouton Ajouter -->
                 <!-- pour envoyer le type, on peut utiliser deux méthodes: soit un lien dans laquel on précise le type
                 (?type=question)=> méthode $GET, soit en formulaire avec la méthode POST dans lequel on rajoute 
@@ -119,7 +126,9 @@ if (!isset($_SESSION['user_id'])) {
                 <!-- Tableau pour afficher les articles -->
                 <!-- Structure du tableau -->
                 <!-- Insérer les données dynamiquement ici -->
-                <?php foreach ($articles as $i => $article) { ?>
+                <?php foreach ($articles as $i => $article) {
+                    // $type = "article";
+                ?>
                     <div class="row row-cols-1 row-cols-md-2 g-4">
                         <div class="col">
                             <div class="card p-3">
@@ -138,11 +147,11 @@ if (!isset($_SESSION['user_id'])) {
                     <!-- Boutons pour modifier et supprimer l'article -->
                     <div class="d-flex justify-content-end mt-2">
                         <a href="./CRUD/toUpdateForm.php?type=article&id=<?php echo $article['id']; ?>" class="btn btn-warning me-2">Modifier</a>
-                        <form action="./CRUD/confirmdelete.php" method="post">
-                            <input type="hidden" name="id" value="<?php echo $article['id']; ?>">
-                            <input type="hidden" name="type" value="article">
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
+
+                        <button type="button" class="btn btn-primary trigger-btn" data-toggle="modal" data-target="#myModal" data-type="article" data-id="<?php echo $article['id']; ?>">
+                                Supprimer
+                            </button>
+
                     </div>
 
                 <?php } ?>
@@ -158,7 +167,10 @@ if (!isset($_SESSION['user_id'])) {
                 <!-- Tableau pour afficher les articles -->
                 <!-- Structure du tableau -->
                 <!-- Insérer les données dynamiquement ici -->
-                <?php foreach ($publications as $i => $publication) { ?>
+                <?php foreach ($publications as $i => $publication) {
+                    // $type = "publication";
+                ?>
+
                     <div class="row row-cols-1 row-cols-md-2 g-4">
                         <div class="col">
                             <div class="card p-3">
@@ -180,11 +192,9 @@ if (!isset($_SESSION['user_id'])) {
                     <!-- Boutons pour modifier et supprimer l'article -->
                     <div class="d-flex justify-content-end mt-2">
                         <a href="./CRUD/toUpdateForm.php?type=publication&id=<?php echo $publication['id']; ?>" class="btn btn-warning me-2">Modifier</a>
-                        <form action="./CRUD/confirmdelete.php" method="post">
-                            <input type="hidden" name="id" value="<?php echo $publication['id']; ?>">
-                            <input type="hidden" name="type" value="publication">
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
+                        <button type="button" class="btn btn-primary trigger-btn" data-toggle="modal" data-target="#myModal" data-type="publication" data-id="<?php echo $publication['id']; ?>">
+                                Supprimer
+                            </button>
                     </div>
 
                 <?php } ?>
@@ -199,7 +209,9 @@ if (!isset($_SESSION['user_id'])) {
                 <h2>FAQ-formations</h2>
                 <!-- Tableau pour afficher les questions -->
 
-                <?php foreach ($faq_formations as $index => $faq_formation) { ?>
+                <?php foreach ($faq_formations as $index => $faq_formation) {
+                    // $type = "faq_formation";
+                ?>
                     <div class="accordion-item mb-4 shadow-sm">
                         <h2 class="accordion-header" id="heading<?php echo $index; ?>">
                             <button class="accordion-button collapsed bg-transparent fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse<?php echo $index; ?>">
@@ -216,11 +228,9 @@ if (!isset($_SESSION['user_id'])) {
                         <div class="d-flex justify-content-end mt-2">
                             <a href="./CRUD/toUpdateForm.php?type=faq_formation&id=<?php echo $faq_formation['id']; ?>" class="btn btn-warning me-2">Modifier</a>
                             <!-- Boutons pour  supprimer la question -->
-                            <form action="./CRUD/confirmdelete.php" method="post">
-                                <input type="hidden" name="id" value="<?php echo $faq_formation['id']; ?>">
-                                <input type="hidden" name="type" value="faq_formation">
-                                <button type="submit" class="btn btn-danger">Supprimer</button>
-                            </form>
+                            <button type="button" class="btn btn-primary trigger-btn" data-toggle="modal" data-target="#myModal" data-type="faq_formation" data-id="<?php echo $faq_formation['id']; ?>">
+                                Supprimer
+                            </button>
 
                         </div>
                     </div>
@@ -272,6 +282,52 @@ if (!isset($_SESSION['user_id'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+    <!-- Modal HTML -->
+    <!-- Modal HTML -->
+    <!-- Modal HTML -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <div class="icon-box">
+                        <i class="material-icons">&#10006;</i>
+                    </div>
+                    <h4 class="modal-title w-100">Êtes-vous sûr de vouloir supprimer?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes-vous vraiment sûr de vouloir supprimer cet élément ?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <form id="delete-form" action="./CRUD/deletedElement.php" method="post" class="row justify-content-center col-6">
+                        <input type="hidden" name="id" id="delete-id">
+                        <input type="hidden" name="type" id="delete-type">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour récupérer les données lors du clic sur le bouton de suppression
+        var triggerBtns = document.querySelectorAll('.trigger-btn');
+
+        triggerBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var type = this.getAttribute('data-type');
+                var id = this.getAttribute('data-id');
+                document.getElementById('delete-type').value = type;
+                document.getElementById('delete-id').value = id;
+            });
+        });
+    </script>
+
 
 
 </body>
