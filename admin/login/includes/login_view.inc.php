@@ -5,7 +5,7 @@ declare(strict_types=1);
 function output_username()
 {
 if (isset($_SESSION["user_username"])) {
-echo "You are logged in as " . $_SESSION["user_username"];
+echo "Bonjour, " . $_SESSION["user_username"]. " bienvenue  &#9829";
 } else {
 echo "Tu n'est pas connecté";
 var_dump($_SESSION['user_username']);

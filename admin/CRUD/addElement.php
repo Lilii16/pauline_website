@@ -47,10 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($type === 'article') {
         $title = htmlspecialchars($_POST['title']);
         $origine = htmlspecialchars($_POST['origine']);
-        $deskription = htmlspecialchars($_POST['deskription']);
+        $description = htmlspecialchars($_POST['deskription']);
 
         try {
-            $sql = "INSERT INTO `articles` (`title`, `origine`, `deskription`) VALUES ('$title', '$origine', '$deskription')";
+            $sql = "INSERT INTO `articles` (`title`, `origine`, `deskription`) VALUES ('$title', '$origine', '$description')";
             $conn->query($sql);
 
             // Message de réussite
