@@ -152,9 +152,9 @@ if (!isset($_SESSION['user_id'])) {
 
                 <!-- Tab panes -->
                 <div class="tab-content">
+
                     <!-- Questions -->
                     <div class="tab-pane fade show active" id="questionsContent" role="tabpanel" aria-labelledby="questions-tab">
-                        <!-- <h2 class="my-3 text-center row">Questions</h2> -->
                         <!-- Tableau pour afficher les questions -->
 
                         <!-- dash example -->
@@ -162,8 +162,8 @@ if (!isset($_SESSION['user_id'])) {
                             <div class="card-header border-bottom d-flex justify-content-between">
                                 <h5 class="mb-0">Gestion des question sur conseil juridique</h5>
                                 <!-- bouton pour ajouter la question -->
-                               
-  <!-- tu travailles ici -->
+
+                                <!-- tu travailles ici -->
                                 <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="question"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                     <span>Ajouter un nouveau</span></button>
 
@@ -181,12 +181,10 @@ if (!isset($_SESSION['user_id'])) {
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <!-- debut boucle -->
-
                                         <!-- Tableau pour afficher les questions -->
-                                        <?php 
-                                        
+                                        <?php
+
                                         foreach ($questions as $index => $question) {
                                         ?> <tr>
                                                 <td>
@@ -195,23 +193,18 @@ if (!isset($_SESSION['user_id'])) {
                                                 <td>23-01-2022</td>
                                                 <!-- Boutons pour afficher la question et la réponse -->
                                                 <td>
-                                                    <!-- <button type="button" class="btn btn-light"><i class="bg-warning"></i>Afficher</button> -->
-   <!-- tu travailles ici -->           
-                                                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal"  data-action="afficher"  data-type="question" data-id="<?php echo $question['id']; ?>"  data-question="<?php echo $question['question']; ?>" data-response="<?php echo $question['reponse']; ?>">
-                                                    Afficher</button>
+                                                    <!-- tu travailles ici -->
+                                                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="question" data-id="<?php echo $question['id']; ?>" data-title="<?php echo $question['question']; ?>" data-description="<?php echo $question['reponse']; ?>">
+                                                        Afficher</button>
                                                 </td>
-
-                                        
                                                 <!-- Boutons pour modifier la question -->
                                                 <td>
-                                                <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal"  data-action="modifier"  data-type="question" data-id="<?php echo $question['id']; ?>" data-question="<?php echo $question['question']; ?>" data-response="<?php echo $question['reponse']; ?>">
-                                                    Modifier</button>
+                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="question" data-id="<?php echo $question['id']; ?>" data-title="<?php echo $question['question']; ?>" data-description="<?php echo $question['reponse']; ?>">
+                                                        Modifier</button>
                                                 </td>
-                                              
-
-   <!-- tu travailles ici -->               <!-- Boutons pour supprimer la question -->
+                                                <!-- tu travailles ici --> <!-- Boutons pour supprimer la question -->
                                                 <td class="text-end">
-                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal"  data-action="supprimer"  data-type="question" data-id="<?php echo $question['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="question" data-id="<?php echo $question['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                                                 </td>
                                             </tr>
@@ -219,8 +212,6 @@ if (!isset($_SESSION['user_id'])) {
                                         <?php
                                         } ?>
                                         <!-- fin boucle -->
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -231,92 +222,214 @@ if (!isset($_SESSION['user_id'])) {
                     <!-- Articles -->
                     <div class="tab-pane fade" id="articlesContent" role="tabpanel" aria-labelledby="articles-tab">
                         <h2>Articles</h2>
-                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="article"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
+                        <!-- dash example -->
+                        <div class="card">
+                            <div class="card-header border-bottom d-flex justify-content-between">
+                                <h5 class="mb-0">Gestion des articles sur page d'accueil</h5>
+                                <!-- bouton pour ajouter la question -->
+
+                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="article"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                     <span>Ajouter un nouveau</span></button>
-                        <!-- Tableau pour afficher les articles -->
-                        <!-- Structure du tableau -->
-                        <!-- Insérer les données dynamiquement ici -->
-                        <?php foreach ($articles as $i => $article) {
-                            // $type = "article";
-                        ?>
-                            <div class="row row-cols-1 row-cols-md-2 g-4">
-                                <div class="col">
-                                    <div class="card p-3">
-                                        <h5 class="card-title heading <?php echo $i; ?>" id="heading<?php echo $article['title']; ?>"><?php echo $article['title']; ?></h5>
-                                        <div class="card-body">
-                                            <p> <?php echo $article['deskription']; ?></p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-muted">
-                                                <a href="<?php echo $article['origine']; ?>"><?php echo $article['origine']; ?></a>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Boutons pour modifier et supprimer l'article -->
-                            <div class="d-flex justify-content-end mt-2">
-                                <a href="./CRUD/updateForm.php?type=article&id=<?php echo $article['id']; ?>" class="btn btn-warning me-2">Modifier</a>
-
-                                <button type="button" class="btn btn-primary trigger-btn" data-toggle="modal" data-target="#myModal" data-type="article" data-id="<?php echo $article['id']; ?>">
-                                    Supprimer
-                                </button>
 
                             </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Article</th>
+                                            <th scope="col">Dernière modification</th>
+                                            <th scope="col">Afficher Tout</th>
+                                            <th scope="col">Modifier</th>
+                                            <th scope="col">Supprimer</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- debut boucle -->
+                                        <!-- Tableau pour afficher les questions -->
+                                        <?php
 
-                        <?php } ?>
-                        <!-- Bouton Ajouter -->
-                        <form action="./CRUD/addForm.php" method="get">
-                            <input type="hidden" name="type" value="article">
-                            <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
-                        </form>
+                                        foreach ($articles as $i => $article) {
+                                        ?> <tr>
+                                                <td>
+                                                    <?php echo $article['title']; ?>
+                                                </td>
+                                                <td>23-01-2022</td>
+                                                <!-- Boutons pour afficher l'article et la réponse -->
+                                                <td>
+                                                    <!-- tu travailles ici -->
+                                                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="article" data-id="<?php echo $article['id']; ?>" data-title="<?php echo $article['title']; ?>" data-description="<?php echo $article['deskription']; ?>" data-lien="<?php echo $article['origine']; ?>">
+                                                        Afficher</button>
+                                                </td>
+                                                <!-- Boutons pour modifier l'article' -->
+                                                <td>
+                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="article" data-id="<?php echo $article['id']; ?>" data-title="<?php echo $article['title']; ?>" data-description="<?php echo $article['origine']; ?>" data-lien="<?php echo $article['origine']; ?>">
+                                                        Modifier</button>
+                                                </td>
+                                                <!-- tu travailles ici --> <!-- Boutons pour supprimer l'article -->
+                                                <td class="text-end">
+                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="article" data-id="<?php echo $article['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                                                </td>
+                                            </tr>
+
+                                        <?php
+                                        } ?>
+                                        <!-- fin boucle -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+
+
+
                     <!-- Publications -->
                     <div class="tab-pane fade" id="publicationsContent" role="tabpanel" aria-labelledby="publications-tab">
                         <h2>Publications</h2>
-                        <!-- Tableau pour afficher les articles -->
-                        <!-- Structure du tableau -->
-                        <!-- Insérer les données dynamiquement ici -->
-                        <?php foreach ($publications as $i => $publication) {
-                            // $type = "publication";
-                        ?>
 
-                            <div class="row row-cols-1 row-cols-md-2 g-4">
-                                <div class="col">
-                                    <div class="card p-3">
-                                        <h5 class="card-title heading<?php echo $i; ?>" id="heading<?php echo $publication['titre']; ?>"><?php echo $publication['titre']; ?></h5>
-                                        <div class="card-body">
-                                            <p> <?php echo $publication['description']; ?></p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-muted">
-                                                <p> <?php echo $publication['source']; ?>"><?php echo $publication['source']; ?></p>
-                                            </small>
-                                            <small class="text-muted">
-                                                <a href="<?php echo $publication['lien']; ?>"><?php echo $publication['lien']; ?></a>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Boutons pour modifier et supprimer l'article -->
-                            <div class="d-flex justify-content-end mt-2">
-                                <a href="./CRUD/toUpdateForm.php?type=publication&id=<?php echo $publication['id']; ?>" class="btn btn-warning me-2">Modifier</a>
-                                <button type="button" class="btn btn-primary trigger-btn" data-toggle="modal" data-target="#myModal" data-type="publication" data-id="<?php echo $publication['id']; ?>">
-                                    Supprimer
-                                </button>
-                            </div>
+      <!-- dash example -->
+      <div class="card">
+                            <div class="card-header border-bottom d-flex justify-content-between">
+                                <h5 class="mb-0">Gestion des Publications sur page d'accueil</h5>
+                                <!-- bouton pour ajouter la question -->
 
-                        <?php } ?>
-                        <!-- Bouton Ajouter -->
-                        <form action="./CRUD/addForm.php" method="get">
-                            <input type="hidden" name="type" value="publication">
-                            <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
-                        </form>
-                    </div>
+                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="publication"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
+                                    <span>Ajouter un nouveau</span></button>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Publication</th>
+                                            <th scope="col">Dernière modification</th>
+                                            <th scope="col">Afficher Tout</th>
+                                            <th scope="col">Modifier</th>
+                                            <th scope="col">Supprimer</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- debut boucle -->
+                                        <!-- Tableau pour afficher les questions -->
+                                        <?php
+
+                                        foreach ($publications as $i => $publication) {
+                                        ?> <tr>
+                                                <td>
+                                                    <?php echo $publication['titre']; ?>
+                                                </td>
+                                                <td>23-01-2022</td>
+                                                <!-- Boutons pour afficher la publication et la réponse -->
+                                                <td>
+                                                    <!-- tu travailles ici -->
+                                                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="publication" data-id="<?php echo $publication['id']; ?>" data-title="<?php echo $publication['titre']; ?>" data-description="<?php echo $publication['description']; ?>" data-lien="<?php echo $publication['source']; ?>">
+                                                        Afficher</button>
+                                                </td>
+                                                <!-- Boutons pour modifier la publication' -->
+                                                <td>
+                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="publication" data-id="<?php echo $publication['id']; ?>" data-title="<?php echo $publication['titre']; ?>" data-description="<?php echo $publication['source']; ?>" data-lien="<?php echo $publication['source']; ?>">
+                                                        Modifier</button>
+                                                </td>
+                                                <!-- tu travailles ici --> <!-- Boutons pour supprimer la publication -->
+                                                <td class="text-end">
+                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="publication" data-id="<?php echo $publication['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                                                </td>
+                                            </tr>
+
+                                        <?php
+                                        } ?>
+                                        <!-- fin boucle -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
                     <!-- faq-formation -->
                     <div class="tab-pane fade" id="faq-formationContent" role="tabpanel" aria-labelledby="faq-formation-tab">
                         <h2>FAQ-formations</h2>
+
+
+
+    <!-- dash example -->
+    <div class="card">
+                            <div class="card-header border-bottom d-flex justify-content-between">
+                                <h5 class="mb-0">Gestion des faq_formations sur conseil juridique</h5>
+                                <!-- bouton pour ajouter la faq_formations -->
+
+                                <!-- tu travailles ici -->
+                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="faq_formations"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
+                                    <span>Ajouter un nouveau</span></button>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Faq_formations</th>
+                                            <th scope="col">Dernière modification</th>
+                                            <th scope="col">Afficher Tout</th>
+                                            <th scope="col">Modifier</th>
+                                            <th scope="col">Supprimer</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- debut boucle -->
+                                        <!-- Tableau pour afficher les faq_formations -->
+                                        <?php
+
+                                        foreach ($faq_formations as $index => $faq_formation) {
+                                        ?> <tr>
+                                                <td>
+                                                    <?php echo $faq_formations['question']; ?>
+                                                </td>
+                                                <td>23-01-2022</td>
+                                                <!-- Boutons pour afficher la faq_formations et la réponse -->
+                                                <td>
+                                                    <!-- tu travailles ici -->
+                                                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="faq_formations" data-id="<?php echo $faq_formations['id']; ?>" data-title="<?php echo $faq_formations['question']; ?>" data-description="<?php echo $faq_formations['reponse']; ?>">
+                                                        Afficher</button>
+                                                </td>
+                                                <!-- Boutons pour modifier la faq_formations -->
+                                                <td>
+                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="faq_formations" data-id="<?php echo $faq_formations['id']; ?>" data-title="<?php echo $faq_formations['question']; ?>" data-description="<?php echo $faq_formations['reponse']; ?>">
+                                                        Modifier</button>
+                                                </td>
+                                                <!-- tu travailles ici --> <!-- Boutons pour supprimer la faq_formations -->
+                                                <td class="text-end">
+                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="faq_formations" data-id="<?php echo $faq_formations['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                                                </td>
+                                            </tr>
+
+                                        <?php
+                                        } ?>
+                                        <!-- fin boucle -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <!-- Tableau pour afficher les questions -->
 
                         <?php foreach ($faq_formations as $index => $faq_formation) {
@@ -376,14 +489,14 @@ if (!isset($_SESSION['user_id'])) {
             <div class="modal-content">
                 <div class="modal-header flex-column">
                     <!-- affichage dynamique titre en js -->
-              
+
                     <!-- <h4 class="modal-title w-100">Ajouter</h4> -->
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <!-- Affichage dynamique du formulaire en fonction du type -->
-                            <div id="add-form-content"></div>
+                        <div id="add-form-content"></div>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -392,11 +505,10 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
         </div>
-</div>
-<!-- script pour ajouter -->
-<script src="modal_script.js"></script>
+    </div>
+    <!-- script pour ajouter -->
+    <script src="modal_script.js"></script>
 
 </body>
 
 </html>
-
