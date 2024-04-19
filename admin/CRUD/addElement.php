@@ -69,10 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $titre = htmlspecialchars($_POST['titre']);
         $description = htmlspecialchars($_POST['description']);
         $source = htmlspecialchars($_POST['source']);
-        $lien = htmlspecialchars($_POST['lien']);
+        $lien = htmlspecialchars($_POST['path']);
 
         try {
-            $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `lien`) VALUES ('$titre', '$description', '$source', '$lien')";
+            $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `path`) VALUES ('$titre', '$description', '$source', '$lien')";
             $conn->query($sql);
 
             // Message de réussite

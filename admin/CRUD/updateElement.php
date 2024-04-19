@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once dirname(__DIR__, 2) . '/config/conn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
@@ -8,78 +8,83 @@ require_once dirname(__DIR__, 2) . '/function/faq_formations.fn.php';
 // Récupérer les données extérieures
 $currentId = $_POST['id'];
 $type = $_POST['type'];
+$currentDate = date('Y-m-d');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération des valeurs du formulaire
-        if ($type === 'question') {
-            try {
-               // Stocker les données actuelles avant la mise à jour
-               $question = htmlspecialchars($_POST['question']);
-               $reponse = htmlspecialchars($_POST['reponse']);
-               $currentData = findQuestionById($conn, $currentId); 
-               $oldData = $currentData;
+    if ($type === 'question') {
+        try {
+            // Stocker les données actuelles avant la mise à jour
+            $question = htmlspecialchars($_POST['question']);
+            $reponse = htmlspecialchars($_POST['reponse']);
+            $currentData = findQuestionById($conn, $currentId);
+            $oldData = $currentData;
+            // La date actuelle
+        
 
-               // Préparer les valeurs à mettre à jour
-               $updateValues = array();
-       
-               // Vérifier chaque champ s'il a changé
-               if ($question != $oldData['question']) {
-                   $updateValues[] = "question = '$question'";
-               }
-               if ($reponse != $oldData['reponse']) {
-                   $updateValues[] = "reponse = '$reponse'";
-               }
-       
-               // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
-               if (!empty($updateValues)) {
+            // Préparer les valeurs à mettre à jour
+            $updateValues = array();
+
+            // Vérifier chaque champ s'il a changé
+            if ($question != $oldData['question']) {
+                $updateValues[] = "question = '$question'";
+            }
+            if ($reponse != $oldData['reponse']) {
+                $updateValues[] = "reponse = '$reponse'";
+            }
+
+            // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+            if (!empty($updateValues)) {
                 //transformation de tableau en string pour envoyer dans la requete sql
                 // implode(string $separator, array $array): string
-                   $updateString = implode(', ', $updateValues);
-                   $sql = "UPDATE questions SET $updateString WHERE id = '$currentId'";
-                   $conn->query($sql);
-               }
-
-               // Message de réussite
-               echo "Question updated successfully";
-       
-               // Redirection après un court délai
-               header("Refresh: 3; url=/admin/dashboard.php");
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
+                      // Ajoutez la date de dernière modification à la liste des valeurs à mettre à jour
+                      $updateValues[] = "last_modified_date = '$currentDate'";
+                $updateString = implode(', ', $updateValues);
+                $sql = "UPDATE questions SET $updateString WHERE id = '$currentId'";
+                $conn->query($sql);
             }
+
+            // Message de réussite
+            echo "Question updated successfully";
+
+            // Redirection après un court délai
+            header("Refresh: 3; url=/admin/dashboard.php");
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     } elseif ($type === 'article') {
         $title = htmlspecialchars($_POST['title']);
         $origine = htmlspecialchars($_POST['origine']);
         $deskription = htmlspecialchars($_POST['deskription']);
-        $currentData = findArticleById($conn, $currentId); 
+        $currentData = findArticleById($conn, $currentId);
         $oldData = $currentData;
         try {
-             // Préparer les valeurs à mettre à jour
-             $updateValues = array();
-       
-             // Vérifier chaque champ s'il a changé
-             if ($title != $oldData['title']) {
-                 $updateValues[] = "title = '$title'";
-             }
-             if ($origine != $oldData['origine']) {
-                 $updateValues[] = "origine = '$origine'";
-             }
-             if ($deskription != $oldData['deskription']) {
+            // Préparer les valeurs à mettre à jour
+            $updateValues = array();
+
+            // Vérifier chaque champ s'il a changé
+            if ($title != $oldData['title']) {
+                $updateValues[] = "title = '$title'";
+            }
+            if ($origine != $oldData['origine']) {
+                $updateValues[] = "origine = '$origine'";
+            }
+            if ($deskription != $oldData['deskription']) {
                 $updateValues[] = "deskription = '$deskription'";
             }
-     
-             // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
-             if (!empty($updateValues)) {
-                 $updateString = implode(', ', $updateValues);
-                 $sql = "UPDATE articles SET $updateString WHERE id = '$currentId'";
-                 $conn->query($sql);
-             }
-     
-             // Message de réussite
-             echo "Article modifié avec succes";
-     
-             // Redirection après un court délai
-             header("Refresh: 3; url=/admin/dashboard.php");
+
+            // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+            if (!empty($updateValues)) {
+                $updateString = implode(', ', $updateValues);
+                $sql = "UPDATE articles SET $updateString WHERE id = '$currentId'";
+                $conn->query($sql);
+            }
+
+            // Message de réussite
+            echo "Article modifié avec succes";
+
+            // Redirection après un court délai
+            header("Refresh: 3; url=/admin/dashboard.php");
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -88,79 +93,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $description = htmlspecialchars($_POST['description']);
         $source = htmlspecialchars($_POST['source']);
         $lien = htmlspecialchars($_POST['lien']);
-        $currentData = findPublicationById($conn, $currentId); 
+        $currentData = findPublicationById($conn, $currentId);
         $oldData = $currentData;
         try {
-             // Préparer les valeurs à mettre à jour
-             $updateValues = array();
-       
-             // Vérifier chaque champ s'il a changé
-             if ($titre != $oldData['titre']) {
-                 $updateValues[] = "titre = '$titre'";
-            }if ($description != $oldData['description']) {
+            // Préparer les valeurs à mettre à jour
+            $updateValues = array();
+
+            // Vérifier chaque champ s'il a changé
+            if ($titre != $oldData['titre']) {
+                $updateValues[] = "titre = '$titre'";
+            }
+            if ($description != $oldData['description']) {
                 $updateValues[] = "description = '$description'";
-            }if ($source != $oldData['source']) {
-                 $updateValues[] = "source = '$source'";
-            }if ($lien != $oldData['lien']) {
+            }
+            if ($source != $oldData['source']) {
+                $updateValues[] = "source = '$source'";
+            }
+            if ($lien != $oldData['path']) {
                 $updateValues[] = "lien = '$lien'";
             }
-     
-             // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
-             if (!empty($updateValues)) {
-                 $updateString = implode(', ', $updateValues);
-                 $sql = "UPDATE publications SET $updateString WHERE id = '$currentId'";
-                 $conn->query($sql);
-             }
-     
-             // Message de réussite
-             echo "Article modifié avec succes";
-     
-             // Redirection après un court délai
-             header("Refresh: 3; url=/admin/dashboard.php");
+
+            // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+            if (!empty($updateValues)) {
+                $updateString = implode(', ', $updateValues);
+                $sql = "UPDATE publications SET $updateString WHERE id = '$currentId'";
+                $conn->query($sql);
+            }
+
+            // Message de réussite
+            echo "publication modifié avec succes";
+
+            // Redirection après un court délai
+            header("Refresh: 3; url=/admin/dashboard.php");
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-    }    else if ($type === 'faq_formation') {
+    } else if ($type === 'faq_formation') {
         try {
-           // Stocker les données actuelles avant la mise à jour
-           $question = htmlspecialchars($_POST['question']);
-           $reponse = htmlspecialchars($_POST['reponse']);
-           $currentData = findAllQuestionsFormationById($conn, $currentId); 
-           $oldData = $currentData;
+            // Stocker les données actuelles avant la mise à jour
+            $question = htmlspecialchars($_POST['question']);
+            $reponse = htmlspecialchars($_POST['reponse']);
+            $currentData = findAllQuestionsFormationById($conn, $currentId);
+            $oldData = $currentData;
 
-           // Préparer les valeurs à mettre à jour
-           $updateValues = array();
-   
-           // Vérifier chaque champ s'il a changé
-           if ($question != $oldData['question']) {
-               $updateValues[] = "question = '$question'";
-           }
-           if ($reponse != $oldData['reponse']) {
-               $updateValues[] = "reponse = '$reponse'";
-           }
-   
-           // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
-           if (!empty($updateValues)) {
-            //transformation de tableau en string pour envoyer dans la requete sql
-            // implode(string $separator, array $array): string
-               $updateString = implode(', ', $updateValues);
-               $sql = "UPDATE `faq-formation` SET $updateString WHERE id = '$currentId'";
-               $conn->query($sql);
-           }
+            // Préparer les valeurs à mettre à jour
+            $updateValues = array();
 
-        
-           // Message de réussite
-           echo "Question updated successfully";
-   
-           // Redirection après un court délai
-           header("Refresh: 3; url=/admin/dashboard.php");
+            // Vérifier chaque champ s'il a changé
+            if ($question != $oldData['question']) {
+                $updateValues[] = "question = '$question'";
+            }
+            if ($reponse != $oldData['reponse']) {
+                $updateValues[] = "reponse = '$reponse'";
+            }
+
+            // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+            if (!empty($updateValues)) {
+                //transformation de tableau en string pour envoyer dans la requete sql
+                // implode(string $separator, array $array): string
+                $updateString = implode(', ', $updateValues);
+                $sql = "UPDATE `faq-formation` SET $updateString WHERE id = '$currentId'";
+                $conn->query($sql);
+            }
+
+
+            // Message de réussite
+            echo "Question updated successfully";
+
+            // Redirection après un court délai
+            header("Refresh: 3; url=/admin/dashboard.php");
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-}  else {
+    } else {
         // Redirection en cas de type invalide
-     
+
         exit;
     }
 }
-?>

@@ -47,8 +47,8 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <div class="">
         <div class="d-flex">
-
-            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-2">
+<!-- side bar -->
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-2 vh-100">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <svg class="bi me-2" width="40" height="32">
                         <use xlink:href="#bootstrap"></use>
@@ -72,36 +72,16 @@ if (!isset($_SESSION['user_id'])) {
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link link-dark">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#speedometer2"></use>
-                            </svg>
-                            Dashboard
-                        </a>
+                    <a class="nav-link link-dark" id="questions-tab" data-toggle="tab" href="#questionsContent" role="tab" aria-controls="questions" aria-selected="false">Questions</a>
+                    </li>
+                    <li>   
+                        <a class="nav-link link-dark" id="articles-tab" data-toggle="tab" href="#articlesContent" role="tab" aria-controls="articles" aria-selected="false">Articles</a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link link-dark">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#table"></use>
-                            </svg>
-                            Orders
-                        </a>
+                    <a class="nav-link link-dark" id="publications-tab" data-toggle="tab" href="#publicationsContent" role="tab" aria-controls="publications" aria-selected="false">Publications</a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link link-dark">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#grid"></use>
-                            </svg>
-                            Products
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link link-dark">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#people-circle"></use>
-                            </svg>
-                            Customers
-                        </a>
+                    <a class="nav-link link-dark" id="faq-formation-tab" data-toggle="tab" href="#faq-formationContent" role="tab" aria-controls="faq-formation" aria-selected="false">FAQ-formations</a>
                     </li>
                 </ul>
                 <hr>
@@ -190,7 +170,8 @@ if (!isset($_SESSION['user_id'])) {
                                                 <td>
                                                     <?php echo $question['question']; ?>
                                                 </td>
-                                                <td>23-01-2022</td>
+                                                <td><?php echo $question['last_modified_date']; ?></td>
+
                                                 <!-- Boutons pour afficher la question et la réponse -->
                                                 <td>
                                                     <!-- tu travailles ici -->
@@ -263,7 +244,7 @@ if (!isset($_SESSION['user_id'])) {
                                                 </td>
                                                 <!-- Boutons pour modifier l'article' -->
                                                 <td>
-                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="article" data-id="<?php echo $article['id']; ?>" data-title="<?php echo $article['title']; ?>" data-description="<?php echo $article['origine']; ?>" data-lien="<?php echo $article['origine']; ?>">
+                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="article" data-id="<?php echo $article['id']; ?>" data-title="<?php echo $article['title']; ?>" data-description="<?php echo $article['deskription']; ?>" data-lien="<?php echo $article['origine']; ?>">
                                                         Modifier</button>
                                                 </td>
                                                 <!-- tu travailles ici --> <!-- Boutons pour supprimer l'article -->
@@ -329,7 +310,7 @@ if (!isset($_SESSION['user_id'])) {
                                                 </td>
                                                 <!-- Boutons pour modifier la publication' -->
                                                 <td>
-                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="publication" data-id="<?php echo $publication['id']; ?>" data-title="<?php echo $publication['titre']; ?>" data-description="<?php echo $publication['source']; ?>" data-lien="<?php echo $publication['source']; ?>">
+                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="publication" data-id="<?php echo $publication['id']; ?>" data-title="<?php echo $publication['titre']; ?>" data-description="<?php echo $publication['description']; ?>" data-lien="<?php echo $publication['path']; ?>" data-source="<?php echo $publication['source']; ?>">
                                                         Modifier</button>
                                                 </td>
                                                 <!-- tu travailles ici --> <!-- Boutons pour supprimer la publication -->
@@ -346,7 +327,7 @@ if (!isset($_SESSION['user_id'])) {
                                 </table>
                             </div>
                         </div>
-
+                        </div>
 
                     <!-- faq-formation -->
                     <div class="tab-pane fade" id="faq-formationContent" role="tabpanel" aria-labelledby="faq-formation-tab">
@@ -361,7 +342,7 @@ if (!isset($_SESSION['user_id'])) {
                                 <!-- bouton pour ajouter la faq_formations -->
 
                                 <!-- tu travailles ici -->
-                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="faq_formations"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
+                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="faq_formation"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                     <span>Ajouter un nouveau</span></button>
 
                             </div>
@@ -385,23 +366,24 @@ if (!isset($_SESSION['user_id'])) {
                                         foreach ($faq_formations as $index => $faq_formation) {
                                         ?> <tr>
                                                 <td>
-                                                    <?php echo $faq_formations['question']; ?>
+                                                    <?php echo $faq_formation['question']; ?>
+    
                                                 </td>
                                                 <td>23-01-2022</td>
                                                 <!-- Boutons pour afficher la faq_formations et la réponse -->
                                                 <td>
                                                     <!-- tu travailles ici -->
-                                                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="faq_formations" data-id="<?php echo $faq_formations['id']; ?>" data-title="<?php echo $faq_formations['question']; ?>" data-description="<?php echo $faq_formations['reponse']; ?>">
+                                                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="faq_formation" data-id="<?php echo $faq_formation['id']; ?>" data-title="<?php echo $faq_formation['question']; ?>" data-description="<?php echo $faq_formation['reponse']; ?>">
                                                         Afficher</button>
                                                 </td>
                                                 <!-- Boutons pour modifier la faq_formations -->
                                                 <td>
-                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="faq_formations" data-id="<?php echo $faq_formations['id']; ?>" data-title="<?php echo $faq_formations['question']; ?>" data-description="<?php echo $faq_formations['reponse']; ?>">
+                                                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="faq_formation" data-id="<?php echo $faq_formation['id']; ?>" data-title="<?php echo $faq_formation['question']; ?>" data-description="<?php echo $faq_formation['reponse']; ?>">
                                                         Modifier</button>
                                                 </td>
                                                 <!-- tu travailles ici --> <!-- Boutons pour supprimer la faq_formations -->
                                                 <td class="text-end">
-                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="faq_formations" data-id="<?php echo $faq_formations['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="faq_formation" data-id="<?php echo $faq_formation['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                                                 </td>
                                             </tr>
@@ -414,58 +396,6 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <!-- Tableau pour afficher les questions -->
-
-                        <?php foreach ($faq_formations as $index => $faq_formation) {
-                            // $type = "faq_formation";
-                        ?>
-                            <div class="accordion-item mb-4 shadow-sm">
-                                <h2 class="accordion-header" id="heading<?php echo $index; ?>">
-                                    <button class="accordion-button collapsed bg-transparent fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse<?php echo $index; ?>">
-                                        <?php echo $faq_formation['question']; ?>
-                                    </button>
-                                </h2>
-                                <div id="collapse<?php echo $index; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $index; ?>">
-                                    <div class="accordion-body">
-                                        <?php echo $faq_formation['reponse']; ?>
-                                    </div>
-                                </div>
-
-                                <!-- Boutons pour modifier la question -->
-                                <div class="d-flex justify-content-end mt-2">
-                                    <a href="./CRUD/toUpdateForm.php?type=faq_formation&id=<?php echo $faq_formation['id']; ?>" class="btn btn-warning me-2">Modifier</a>
-                                    <!-- Boutons pour  supprimer la question -->
-                                    <button type="button" class="btn btn-primary trigger-btn" data-toggle="modal" data-target="#myModal" data-type="faq_formation" data-id="<?php echo $faq_formation['id']; ?>">
-                                        Supprimer
-                                    </button>
-
-                                </div>
-                            </div>
-                        <?php } ?>
-                        <!-- Bouton Ajouter -->
-                        <!-- pour envoyer le type, on peut utiliser deux méthodes: soit un lien dans laquel on précise le type
-                (?type=question)=> méthode $GET, soit en formulaire avec la méthode POST dans lequel on rajoute 
-                un input invisible avec (name = type value= question) -->
-                        <form action="./CRUD/addForm.php" method="get">
-                            <input type="hidden" name="type" value="faq_formation">
-                            <button type="submit" class="btn btn-primary mb-3">Ajouter</button>
-                        </form>
                     </div>
 
 
@@ -496,7 +426,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="modal-body">
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <!-- Affichage dynamique du formulaire en fonction du type -->
-                        <div id="add-form-content"></div>
+                        <div id="add-form-content" class="col-10"></div>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
