@@ -27,6 +27,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration - Gestion du Droit à la Santé mentale</title>
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -48,7 +49,7 @@ if (!isset($_SESSION['user_id'])) {
     <div class="">
         <div class="d-flex">
 <!-- side bar -->
-            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-2 vh-100">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-wine col-2 vh-100">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <svg class="bi me-2" width="40" height="32">
                         <use xlink:href="#bootstrap"></use>
@@ -103,7 +104,7 @@ if (!isset($_SESSION['user_id'])) {
 
             <!-- fin side bar -->
 
-            <div class="col">
+            <div class="col background-image">
                 <h1 class="mt-5 mb-4">Administration - Gestion du Droit de la santé mentale</h1>
 
                 <!-- Nav tabs -->
@@ -131,7 +132,7 @@ if (!isset($_SESSION['user_id'])) {
                 ?>
 
                 <!-- Tab panes -->
-                <div class="tab-content">
+                <div class="tab-content bg-duck">
 
                     <!-- Questions -->
                     <div class="tab-pane fade show active" id="questionsContent" role="tabpanel" aria-labelledby="questions-tab">
