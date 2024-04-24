@@ -47,14 +47,40 @@ if (!isset($_SESSION['user_id'])) {
 
 <body>
     <div class="">
-        <div class="d-flex">
-<!-- side bar -->
+    <?php
+
+// Vérifier si un message de succès est présent dans la session
+if(isset($_SESSION['success_message'])) {
+    // Afficher le message de succès
+    echo '<div class="alert alert-success text-center position-absolute w-100 session" role="alert">' . $_SESSION['success_message'] . '</div>';
+
+    // Supprimer le message de succès de la session pour éviter qu'il ne soit affiché à nouveau
+    unset($_SESSION['success_message']);
+}
+?>
+<!-- JavaScript pour masquer le message de succès après 3 secondes -->
+<script>
+    // Sélectionne l'élément contenant le message de succès
+    var successMessage = document.querySelector('.session');
+
+    // Si l'élément existe
+    if(successMessage) {
+        // Masque l'élément après 3 secondes
+        setTimeout(function() {
+            successMessage.style.display = 'none';
+        }, 6000); // 6sec
+    }
+</script>
+
+     <div class="d-flex">
+            
+            <!-- side bar -->
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-wine col-2 vh-100">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <svg class="bi me-2" width="40" height="32">
                         <use xlink:href="#bootstrap"></use>
                     </svg>
-                    <span class="fs-4">
+                    <span class="fs-4 text-light">
 
                         <?php
                         output_username();
@@ -63,31 +89,29 @@ if (!isset($_SESSION['user_id'])) {
                     </span>
                 </a>
                 <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
+                <ul class="nav nav-pills flex-column mb-auto ">
                     <li class="nav-item">
-                        <a href="../index.php" class="nav-link active" aria-current="page">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#home"></use>
-                            </svg>
+                        <a href="../index.php" class="nav-link link-light text-center" aria-current="page">
+
                             Visualiser le site
                         </a>
                     </li>
                     <li>
-                    <a class="nav-link link-dark" id="questions-tab" data-toggle="tab" href="#questionsContent" role="tab" aria-controls="questions" aria-selected="false">Questions</a>
-                    </li>
-                    <li>   
-                        <a class="nav-link link-dark" id="articles-tab" data-toggle="tab" href="#articlesContent" role="tab" aria-controls="articles" aria-selected="false">Articles</a>
+                        <a class="nav-link link-beige active " id="questions-tab" data-toggle="tab" href="#questionsContent" role="tab" aria-controls="questions" aria-selected="false">Questions</a>
                     </li>
                     <li>
-                    <a class="nav-link link-dark" id="publications-tab" data-toggle="tab" href="#publicationsContent" role="tab" aria-controls="publications" aria-selected="false">Publications</a>
+                        <a class="nav-link link-beige" id="articles-tab" data-toggle="tab" href="#articlesContent" role="tab" aria-controls="articles" aria-selected="false">Articles</a>
                     </li>
                     <li>
-                    <a class="nav-link link-dark" id="faq-formation-tab" data-toggle="tab" href="#faq-formationContent" role="tab" aria-controls="faq-formation" aria-selected="false">FAQ-formations</a>
+                        <a class="nav-link link-beige" id="publications-tab" data-toggle="tab" href="#publicationsContent" role="tab" aria-controls="publications" aria-selected="false">Publications</a>
+                    </li>
+                    <li>
+                        <a class="nav-link link-beige" id="faq-formation-tab" data-toggle="tab" href="#faq-formationContent" role="tab" aria-controls="faq-formation" aria-selected="false">FAQ-formations</a>
                     </li>
                 </ul>
                 <hr>
                 <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="d-flex align-items-center link-beige text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="../assets/logos/logoFond.png" alt="" width="32" height="32" class="rounded-circle me-2">
                         <strong>Pauline</strong>
                     </a>
@@ -105,10 +129,12 @@ if (!isset($_SESSION['user_id'])) {
             <!-- fin side bar -->
 
             <div class="col background-image">
-                <h1 class="mt-5 mb-4">Administration - Gestion du Droit de la santé mentale</h1>
+                <h1 class="mt-5 mb-4 text-light text-center">Administration - Gestion du Droit de la santé mentale</h1>
+
+
 
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <!-- <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="questions-tab" data-toggle="tab" href="#questionsContent" role="tab" aria-controls="questions" aria-selected="false">Questions</a>
                     </li>
@@ -121,7 +147,7 @@ if (!isset($_SESSION['user_id'])) {
                     <li class="nav-item">
                         <a class="nav-link" id="faq-formation-tab" data-toggle="tab" href="#faq-formationContent" role="tab" aria-controls="faq-formation" aria-selected="false">FAQ-formations</a>
                     </li>
-                </ul>
+                </ul> -->
 
                 <?php
 
@@ -129,36 +155,41 @@ if (!isset($_SESSION['user_id'])) {
                 $articles = findAllArticles($conn);
                 $publications = findAllPublications($conn);
                 $faq_formations = findAllQuestionsFormation($conn);
+                $nombre_articles = count($articles);
+                $nombre_questions = count($questions);
+                $nombre_publications = count($publications);
+                $nombre_faq_formation = count($faq_formations);
                 ?>
 
                 <!-- Tab panes -->
-                <div class="tab-content bg-duck">
+                <div class="tab-content">
 
                     <!-- Questions -->
                     <div class="tab-pane fade show active" id="questionsContent" role="tabpanel" aria-labelledby="questions-tab">
                         <!-- Tableau pour afficher les questions -->
 
                         <!-- dash example -->
-                        <div class="card">
-                            <div class="card-header border-bottom d-flex justify-content-between">
+                        <div class="card" style="height: calc(100vh - 130px);">
+                            <div class="card-header border-bottom d-flex justify-content-between text-light">
                                 <h5 class="mb-0">Gestion des question sur conseil juridique</h5>
                                 <!-- bouton pour ajouter la question -->
 
                                 <!-- tu travailles ici -->
-                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="question"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
+                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add text-light" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="question"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                     <span>Ajouter un nouveau</span></button>
 
+
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-nowrap">
-                                    <thead class="table-light">
-                                        <tr>
+                            <div class="table-responsive bg-duck">
+                                <table class="table table-nowrap">
+                                    <thead class="bg-rouille">
+                                        <tr class="align-middle">
                                             <th scope="col">Question</th>
                                             <th scope="col">Dernière modification</th>
                                             <th scope="col">Afficher Tout</th>
                                             <th scope="col">Modifier</th>
                                             <th scope="col">Supprimer</th>
-                                            <th></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -194,8 +225,14 @@ if (!isset($_SESSION['user_id'])) {
                                         <?php
                                         } ?>
                                         <!-- fin boucle -->
+
                                     </tbody>
+
+
                                 </table>
+                                <div class="text-center">
+                                    <h6> Nombre total d'elements: <?php echo " $nombre_questions"; ?></h6>
+                                </div>
                             </div>
                         </div>
 
@@ -203,27 +240,27 @@ if (!isset($_SESSION['user_id'])) {
 
                     <!-- Articles -->
                     <div class="tab-pane fade" id="articlesContent" role="tabpanel" aria-labelledby="articles-tab">
-                        <h2>Articles</h2>
+
                         <!-- dash example -->
-                        <div class="card">
-                            <div class="card-header border-bottom d-flex justify-content-between">
+                        <div class="card" style="height: calc(100vh - 130px);">
+                            <div class="card-header border-bottom d-flex justify-content-between text-light">
                                 <h5 class="mb-0">Gestion des articles sur page d'accueil</h5>
                                 <!-- bouton pour ajouter la question -->
 
-                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="article"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
+                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add text-light" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="article"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                     <span>Ajouter un nouveau</span></button>
 
                             </div>
-                            <div class="table-responsive">
+                            <div class="table-responsive bg-duck">
                                 <table class="table table-hover table-nowrap">
-                                    <thead class="table-light">
-                                        <tr>
+                                    <thead class="bg-rouille">
+                                        <tr class="align-middle">
                                             <th scope="col">Article</th>
                                             <th scope="col">Dernière modification</th>
                                             <th scope="col">Afficher Tout</th>
                                             <th scope="col">Modifier</th>
                                             <th scope="col">Supprimer</th>
-                                            <th></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -257,9 +294,13 @@ if (!isset($_SESSION['user_id'])) {
 
                                         <?php
                                         } ?>
+
                                         <!-- fin boucle -->
                                     </tbody>
                                 </table>
+                                <div class="text-center">
+                                    <h6> Nombre total d'elements: <?php echo " $nombre_articles"; ?></h6>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -268,28 +309,28 @@ if (!isset($_SESSION['user_id'])) {
 
                     <!-- Publications -->
                     <div class="tab-pane fade" id="publicationsContent" role="tabpanel" aria-labelledby="publications-tab">
-                        <h2>Publications</h2>
 
-      <!-- dash example -->
-      <div class="card">
-                            <div class="card-header border-bottom d-flex justify-content-between">
+
+                        <!-- dash example -->
+                        <div class="card" style="height: calc(100vh - 130px);">
+                            <div class="card-header border-bottom d-flex justify-content-between text-light">
                                 <h5 class="mb-0">Gestion des Publications sur page d'accueil</h5>
                                 <!-- bouton pour ajouter la question -->
 
-                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="publication"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
+                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add text-light" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="publication"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                     <span>Ajouter un nouveau</span></button>
 
                             </div>
-                            <div class="table-responsive">
+                            <div class="table-responsive bg-duck">
                                 <table class="table table-hover table-nowrap">
-                                    <thead class="table-light">
-                                        <tr>
+                                    <thead class="bg-rouille">
+                                        <tr class="align-middle">
                                             <th scope="col">Publication</th>
                                             <th scope="col">Dernière modification</th>
                                             <th scope="col">Afficher Tout</th>
                                             <th scope="col">Modifier</th>
                                             <th scope="col">Supprimer</th>
-                                            <th></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -326,37 +367,38 @@ if (!isset($_SESSION['user_id'])) {
                                         <!-- fin boucle -->
                                     </tbody>
                                 </table>
+                                <div class="text-center">
+                                    <h6> Nombre total d'elements: <?php echo " $nombre_publications"; ?></h6>
+                                </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
 
                     <!-- faq-formation -->
                     <div class="tab-pane fade" id="faq-formationContent" role="tabpanel" aria-labelledby="faq-formation-tab">
-                        <h2>FAQ-formations</h2>
 
 
-
-    <!-- dash example -->
-    <div class="card">
-                            <div class="card-header border-bottom d-flex justify-content-between">
+                        <!-- dash example -->
+                        <div class="card" style="height: calc(100vh - 130px);">
+                            <div class="card-header border-bottom d-flex justify-content-between text-light">
                                 <h5 class="mb-0">Gestion des faq_formations sur conseil juridique</h5>
                                 <!-- bouton pour ajouter la faq_formations -->
 
                                 <!-- tu travailles ici -->
-                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="faq_formation"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
+                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add text-light" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="faq_formation"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                     <span>Ajouter un nouveau</span></button>
 
                             </div>
-                            <div class="table-responsive">
+                            <div class="table-responsive bg-duck">
                                 <table class="table table-hover table-nowrap">
-                                    <thead class="table-light">
-                                        <tr>
+                                    <thead class="bg-rouille">
+                                        <tr class="align-middle">
                                             <th scope="col">Faq_formations</th>
                                             <th scope="col">Dernière modification</th>
                                             <th scope="col">Afficher Tout</th>
                                             <th scope="col">Modifier</th>
                                             <th scope="col">Supprimer</th>
-                                            <th></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -368,7 +410,7 @@ if (!isset($_SESSION['user_id'])) {
                                         ?> <tr>
                                                 <td>
                                                     <?php echo $faq_formation['question']; ?>
-    
+
                                                 </td>
                                                 <td>23-01-2022</td>
                                                 <!-- Boutons pour afficher la faq_formations et la réponse -->
@@ -394,6 +436,9 @@ if (!isset($_SESSION['user_id'])) {
                                         <!-- fin boucle -->
                                     </tbody>
                                 </table>
+                                <div class="text-center">
+                                    <h6> Nombre total d'elements: <?php echo " $nombre_faq_formation"; ?></h6>
+                                </div>
                             </div>
                         </div>
 
@@ -416,21 +461,19 @@ if (!isset($_SESSION['user_id'])) {
     <!-- Modale generale -->
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-confirm">
-            <div class="modal-content">
+        <div class="modal-dialog modal-confirm ">
+            <div class="modal-content bg-beige">
                 <div class="modal-header flex-column">
-                    <!-- affichage dynamique titre en js -->
-
-                    <!-- <h4 class="modal-title w-100">Ajouter</h4> -->
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 id="modal-title" class="modal-title w-100"></h4>
                 </div>
+
                 <div class="modal-body">
-                    <div class="d-flex flex-column justify-content-center align-items-center">
+                    <div class="d-flex flex-column justify-content-center align-items-center container col-md-10">
                         <!-- Affichage dynamique du formulaire en fonction du type -->
-                        <div id="add-form-content" class="col-10"></div>
+                        <div id="add-form-content" class="col-12"></div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-secondary col-6" data-dismiss="modal">Annuler</button>
                     </div>
                     </form>
                 </div>

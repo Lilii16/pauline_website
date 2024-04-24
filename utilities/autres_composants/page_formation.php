@@ -61,7 +61,7 @@
                 
                 <div class="modal fade " id="exampleModal<?php echo $modal_count; ?>" tabindex="-1" aria-labelledby="exampleModalLabel<?php echo $modal_count; ?>" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
+                        <div class="modal-content bg-beige">
                             <div class="modal-header">
                                 <h1 class="modal-title text-red text-center fs-5" id="exampleModalLabel<?php echo $modal_count; ?>"><?php echo $formation['titre']; ?></h1>
                                 <button type="button" class="btn-close bg-red" data-bs-dismiss="modal" aria-label="Close"></button>

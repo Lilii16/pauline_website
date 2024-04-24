@@ -2,18 +2,19 @@
 function handleAdd(type) {
   var addForm = document.getElementById("add-form-content");
   addForm.innerHTML = "";
+  document.getElementById("modal-title").innerText ="Modification - " +  type;
 
   // Générer le formulaire d'ajout en fonction du type
   if (type === "question") {
     addForm.innerHTML = `
-            <h2>Ajouter</h2>
+            <h4>Ajouter</h4>
             <form action="./CRUD/addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
                 <input type="hidden" name="type" value="question">
                 <label for="question">Question : </label>
-                <input type="text" name="question"><br>
+                <input type="text" name="question" class="form-control shadow rounded-3"><br>
                 <label for="reponse">Réponse : </label>
-                <textarea name="reponse" style="height: 100px"></textarea><br>
-                <button type="submit" class="btn btn-danger">Ajouter</button>
+                <textarea name="reponse" style="height: 150px" class="form-control shadow rounded-3 "></textarea><br>
+                <button type="submit" class="btn btn-danger col-6 mb-3">Ajouter</button>
             </form>
         `;
   } else if (type === "article") {
@@ -22,12 +23,12 @@ function handleAdd(type) {
                      <form action="./CRUD/addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
                          <input type="hidden" name="type" value="article">
                          <label for="title">Titre : </label>
-                         <input type="text" name="title"><br>
+                         <input type="text"  class="form-control shadow rounded-3" name="title"><br>
                          <label for="origine">Lien : </label>
-                         <input type="text" name="origine"><br>
+                         <input type="text"   class="form-control shadow rounded-3" name="origine"><br>
                          <label for="deskription">Description : </label>
-                         <textarea name="deskription" style="height: 100px"></textarea><br>
-                         <input type="submit" value="Ajouter"><br>
+                         <textarea name="deskription"  class="form-control shadow rounded-3" style="height: 100px"></textarea><br>
+                         <button type="submit" class="btn btn-danger col-6 mb-3">Ajouter</button>
                      </form>
                  `;
   } else if (type === "publication") {
@@ -37,15 +38,15 @@ function handleAdd(type) {
         <!-- Autres champs du formulaire pour ajouter un article -->
         <input type="hidden" name="type" value="publication">
         <label for="titre">Titre : </label>
-        <input type="text" name="titre"><br>
+        <input type="text"  class="form-control shadow rounded-3" name="titre"><br>
         <label for="description">Description : </label>
-        <textarea name="description" style="height: 100px"></textarea><br>
+        <textarea name="description"  class="form-control shadow rounded-3" style="height: 100px"></textarea><br>
         <label for="source">Source : </label>
-        <input type="text" name="source"><br>
+        <input type="text"  class="form-control shadow rounded-3" name="source"><br>
         <label for="lien">Lien : </label>
-        <input type="text" name="path"><br>
+        <input type="text"  class="form-control shadow rounded-3"name="path"><br>
         <!-- Ajoutez d'autres champs pour les articles si nécessaire -->
-        <input type="submit" value="Ajouter"><br>
+        <button type="submit" class="btn btn-danger col-6 mb-3">Ajouter</button>
     </form>`;
   } else if (type === "faq_formation") {
     // Code pour le formulaire d'ajout de FAQ formation
@@ -53,10 +54,10 @@ function handleAdd(type) {
         <form action="./CRUD/addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center"><br>
         <input type="hidden" name="type" value="faq_formation">
         <label for="question">Question : </label>
-        <input type="text" name="question"><br>
+        <input type="text"  class="form-control shadow rounded-3" name="question"><br>
         <label for="reponse">Réponse : </label>
-        <textarea name="reponse" style="height: 100px"></textarea><br>
-        <input type="submit" value="Ajouter"><br>
+        <textarea name="reponse"  class="form-control shadow rounded-3"style="height: 100px"></textarea><br>
+        <button type="submit" class="btn btn-danger col-6 mb-3">Ajouter</button>
     </form>`;
   } else {
     // Redirection en cas de type invalide
@@ -98,8 +99,10 @@ function handleView(type, id, title, description, lien,source) {
         </div>
         <div class="modal-body">
             <input type="hidden" name="id" value="${id}">
-            <p><strong>Question:</strong> ${title}</p>
-            <p><strong>Réponse:</strong> ${description}</p>
+            <p><strong>Question:</strong></p>
+            <p> ${title}</p>
+            <p><strong>Réponse:</strong></p>
+            <p> ${description}</p>
         </div>
     `;
   } else if (type === "article") {
@@ -109,9 +112,12 @@ function handleView(type, id, title, description, lien,source) {
     </div>
     <div class="modal-body">
         <input type="hidden" name="id" value="${id}">
-        <p><strong>Titre:</strong> ${title}</p>
-        <p><strong>Description:</strong> ${description}</p>
-        <p><strong>Lien:</strong> ${lien}</p>
+        <p><strong>Titre:</strong></p>
+        <p> ${title}</p>
+        <p><strong>Description:</strong></p>
+        <p>  ${description}</p>
+        <p><strong>Lien:</strong></p>
+        <p> ${lien}</p>
     </div>`;
   } else if (type === "publication") {
     addForm.innerHTML = `
@@ -120,9 +126,13 @@ function handleView(type, id, title, description, lien,source) {
     </div>
     <div class="modal-body">
         <input type="hidden" name="id" value="${id}">
-        <p><strong>Question:</strong> ${title}</p>
-        <p><strong>Question:</strong> ${description}</p>
-        <p><strong>Réponse:</strong> ${lien}</p>
+        <p><strong>Titre:</strong></p>
+        <p>> ${title}</p>
+        <p><strong>Description:</strong></p>
+        <p> ${description}</p>
+        <p><strong>Lien:</strong></p>
+        <p> ${lien}</p>
+        <a href="${lien}" class="btn rounded-pill bg-warning text-red ms-3 p-2" download>Telecharger</a>
     </div>`;
   } else if (type === "faq_formation") {
     addForm.innerHTML = `
@@ -131,8 +141,10 @@ function handleView(type, id, title, description, lien,source) {
         </div>
         <div class="modal-body">
             <input type="hidden" name="id" value="${id}">
-            <p><strong>Question:</strong> ${title}</p>
+            <p><strong>Question:</strong></p>
+            <p>> ${title}</p>
             <p><strong>Réponse:</strong> ${description}</p>
+            <p>> ${description}</p>
         </div>
     `;
   }
@@ -151,7 +163,7 @@ function handleModify(type, id, title, description, lien,source) {
 </div>
 <div class="modal-body">
     <form action="./CRUD/updateElement.php" method="post">
-        <input name="type" value="${type}">
+        <input type="hidden" name="type" value="${type}">
         <input type="hidden" name="id" value="${id}">
         <div class="mb-3">
             <label for="ask" class="form-label">Question :</label>
@@ -159,10 +171,10 @@ function handleModify(type, id, title, description, lien,source) {
         </div>
         <div class="mb-3">
             <label for="msg" class="form-label">Réponse :</label>
-            <textarea class="form-control" id="msg" name="reponse" rows="3">${description}</textarea>
+            <textarea class="form-control" id="msg" name="reponse" rows="10" style="height=fit-content">${description}</textarea>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Valider les modifications hey</button>
+            <button type="submit" class="btn btn-primary">Valider les modifications</button>
         </div>
     </form>
 </div>
@@ -190,7 +202,7 @@ function handleModify(type, id, title, description, lien,source) {
         
         <div class="mb-3">
             <label for="deskription" class="form-label">Description :</label>
-            <textarea id="deskription" name="deskription" class="form-control" rows="4">${description}</textarea>
+            <textarea id="deskription" name="deskription" class="form-control" rows="6">${description}</textarea>
         </div>
         
         <div class="text-center">
@@ -208,12 +220,12 @@ function handleModify(type, id, title, description, lien,source) {
     
     <div class="mb-3">
         <label for="titre" class="form-label">Titre :</label>
-        <textarea id="titre" name="titre" class="form-control rows="4">${title}</textarea>
+        <textarea id="titre" name="titre" class="form-control rows="6">${title}</textarea>
     </div>
     
     <div class="mb-3">
         <label for="description" class="form-label">Description :</label>
-        <textarea id="description" name="description" class="form-control" rows="4">${description}</textarea>
+        <textarea id="description" name="description" class="form-control" rows="8">${description}</textarea>
     </div>
     
     <div class="mb-3">
@@ -245,7 +257,7 @@ function handleModify(type, id, title, description, lien,source) {
             </div>
             <div class="mb-3">
                 <label for="msg" class="form-label">Réponse :</label>
-                <textarea class="form-control" id="msg" name="reponse" rows="3">${description}</textarea>
+                <textarea class="form-control" id="msg" name="reponse" rows="10">${description}</textarea>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Valider les modifications</button>
@@ -305,3 +317,4 @@ triggerBtnsModify.forEach(function (btn) {
     handleModify(type, id, title, description, lien, source);
   });
 });
+

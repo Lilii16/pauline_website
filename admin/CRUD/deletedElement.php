@@ -33,10 +33,18 @@ require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
       }
   
         // Message de réussite
-        echo "$type supprimée avec succès";
+        // echo "$type supprimée avec succès";
+        
+        session_start();
+        // Message de réussite
+      $success_message = "$type supprimé avec succès";
 
+        // Après avoir réalisé avec succès l'action de suppression
+        $_SESSION['success_message'] = "$type a été supprimé avec succès.";
+        
+   
         // Redirection après un court délai
-        header("Refresh: 3; url=/admin/dashboard.php");
+        header("Refresh:1 ; url=/admin/dashboard.php");
       exit();
   } else {
       // Gérer le cas où l'ID ou le type n'est pas défini
