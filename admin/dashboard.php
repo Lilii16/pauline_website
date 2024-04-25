@@ -9,7 +9,8 @@ require_once dirname(__DIR__) . '/function/faq_formations.fn.php';
 require_once './login/includes/config_session.inc.php';
 require_once './login/includes/login_view.inc.php';
 
-
+// Établir la connexion à la base de données
+$conn = getPDOlink($config);
 
 //vérifie si on s'est connécté sinon redirection vers page de connexion
 // session_start();
@@ -115,7 +116,7 @@ if(isset($_SESSION['success_message'])) {
                         <img src="../assets/logos/logoFond.png" alt="" width="32" height="32" class="rounded-circle me-2">
                         <strong>Pauline</strong>
                     </a>
-                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="">
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" >
                         <li><a class="dropdown-item" href="#">Nous contacter</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -130,24 +131,6 @@ if(isset($_SESSION['success_message'])) {
 
             <div class="col background-image">
                 <h1 class="mt-5 mb-4 text-light text-center">Administration - Gestion du Droit de la santé mentale</h1>
-
-
-
-                <!-- Nav tabs -->
-                <!-- <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="questions-tab" data-toggle="tab" href="#questionsContent" role="tab" aria-controls="questions" aria-selected="false">Questions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="articles-tab" data-toggle="tab" href="#articlesContent" role="tab" aria-controls="articles" aria-selected="false">Articles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="publications-tab" data-toggle="tab" href="#publicationsContent" role="tab" aria-controls="publications" aria-selected="false">Publications</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="faq-formation-tab" data-toggle="tab" href="#faq-formationContent" role="tab" aria-controls="faq-formation" aria-selected="false">FAQ-formations</a>
-                    </li>
-                </ul> -->
 
                 <?php
 

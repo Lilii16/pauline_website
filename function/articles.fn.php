@@ -2,7 +2,7 @@
 require_once 'database.fn.php';
 
 // Établir la connexion à la base de données
-$conn = getPDOlink($config);
+// $conn = getPDOlink($config);
 
 //création fonction qui permet de récupérer les articles de la bdd pour la page ressources
 function findAllArticles($conn){

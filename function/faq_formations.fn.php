@@ -1,6 +1,6 @@
 <?php
 // Établir la connexion à la base de données
-$conn = getPDOlink($config);
+// $conn = getPDOlink($config);
 
 //création fonction qui permet de récupérer les questions de la bdd pour la page faq-formation
 
