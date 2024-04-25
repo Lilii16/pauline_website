@@ -43,3 +43,30 @@ on peut combiner les drapeaux
 on peut utiliser une parenthese pour faire un regroupement de caractères:
 ex: ch(ien|at) ou (pa){2} = papa
 
+
+
+// Cette fonction ajoute ou supprime les classes CSS is-valid et is-invalid en fonction du résultat de la validation regex
+function addClass(element,regex,value,valid) {
+    if (regex.test(value)) {
+        element.classList.add('is-valid') // Ajoute la classe 'is-valid' si la valeur est valide
+        element.classList.remove('is-invalid')  // Supprime la classe 'is-invalid' si la valeur est valide
+        valid = true
+    } else {
+        element.classList.remove('is-valid') // Supprime la classe 'is-valid' si la valeur est invalide
+        element.classList.add('is-invalid') // Ajoute la classe 'is-invalid' si la valeur est invalide
+        valid = false
+    }
+}
+
+// Les événements d'entrée déclenchent la fonction addClass pour la validation
+nomInput.addEventListener('input', e => addClass(nomInput,NameRegex, e.target.value,nomValid));
+prenomInput.addEventListener('input', e => addClass(prenomInput,NameRegex, e.target.value,prenomValid));
+sujetInput.addEventListener('input', e=>addClass(sujetInput,SujetRegex, e.target.value,sujetValid));
+emailInput.addEventListener('input', e=>addClass(emailInput,EmailRegex, e.target.value,emailValid));
+msgInput.addEventListener('input', e=>addClass(msgInput,MessageRegex, e.target.value,msgValid));
+
+    const isNomValid = NameRegex.test(nomInput.value);
+    const isPrenomValid = NameRegex.test(prenomInput.value);
+    const isEmailValid = EmailRegex.test(emailInput.value);
+    const isSujetValid = SujetRegex.test(sujetInput.value);
+    const isMessageValid = MessageRegex.test(msgInput.value);

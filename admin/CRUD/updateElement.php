@@ -44,11 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $conn->query($sql);
             }
 
+            session_start();
             // Message de réussite
-            echo "Question updated successfully";
-
+          $success_message = "$type modifié avec succès";
+    
+            // Après avoir réalisé avec succès l'action de suppression
+            $_SESSION['success_message'] = "$type a été modifié avec succès.";
             // Redirection après un court délai
-            header("Refresh: 3; url=/admin/dashboard.php");
+            header("Location: ../dashboard.php");
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -80,11 +83,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $conn->query($sql);
             }
 
+            session_start();
             // Message de réussite
-            echo "Article modifié avec succes";
-
+          $success_message = "$type modifié avec succès";
+    
+            // Après avoir réalisé avec succès l'action de suppression
+            $_SESSION['success_message'] = "$type a été modifié avec succès.";
             // Redirection après un court délai
-            header("Refresh: 3; url=/admin/dashboard.php");
+            header("Location: ../dashboard.php");
+          
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -120,11 +127,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $conn->query($sql);
             }
 
+            session_start();
             // Message de réussite
-            echo "publication modifié avec succes";
-
+          $success_message = "$type publication avec succès";
+    
+            // Après avoir réalisé avec succès l'action de suppression
+            $_SESSION['success_message'] = "$type a été publication avec succès.";
             // Redirection après un court délai
-            header("Refresh: 3; url=/admin/dashboard.php");
+            header("Location: ../dashboard.php");
+
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -157,11 +168,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
 
+            session_start();
             // Message de réussite
-            echo "Question updated successfully";
-
+          $success_message = "$type modifié avec succès";
+    
+            // Après avoir réalisé avec succès l'action de suppression
+            $_SESSION['success_message'] = "$type a été modifié avec succès.";
             // Redirection après un court délai
-            header("Refresh: 3; url=/admin/dashboard.php");
+            header("Location: ../dashboard.php");
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

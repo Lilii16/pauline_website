@@ -52,7 +52,7 @@ if (!isset($_SESSION['user_id'])) {
 // Vérifier si un message de succès est présent dans la session
 if(isset($_SESSION['success_message'])) {
     // Afficher le message de succès
-    echo '<div class="alert alert-success text-center position-absolute w-100 session" role="alert">' . $_SESSION['success_message'] . '</div>';
+    echo '<div class="alert alert-success text-center position-absolute w-100 session" role="alert"> <h6>' .  $_SESSION['success_message'] . '</h6> </div>';
 
     // Supprimer le message de succès de la session pour éviter qu'il ne soit affiché à nouveau
     unset($_SESSION['success_message']);
@@ -72,7 +72,7 @@ if(isset($_SESSION['success_message'])) {
     }
 </script>
 
-     <div class="d-flex">
+     <div class="d-flex dashboard">
             
             <!-- side bar -->
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-wine col-2 vh-100">
@@ -273,7 +273,7 @@ if(isset($_SESSION['success_message'])) {
                                                 <td>
                                                     <?php echo $article['title']; ?>
                                                 </td>
-                                                <td>23-01-2022</td>
+                                                <td><?php echo $article['last_modified_date']; ?></td>
                                                 <!-- Boutons pour afficher l'article et la réponse -->
                                                 <td>
                                                     <!-- tu travailles ici -->
@@ -343,7 +343,7 @@ if(isset($_SESSION['success_message'])) {
                                                 <td>
                                                     <?php echo $publication['titre']; ?>
                                                 </td>
-                                                <td>23-01-2022</td>
+                                                <td><?php echo $publication['last_modified_date']; ?></td>
                                                 <!-- Boutons pour afficher la publication et la réponse -->
                                                 <td>
                                                     <!-- tu travailles ici -->
@@ -412,7 +412,7 @@ if(isset($_SESSION['success_message'])) {
                                                     <?php echo $faq_formation['question']; ?>
 
                                                 </td>
-                                                <td>23-01-2022</td>
+                                                <td><?php echo $faq_formation['last_modified_date']; ?></td>
                                                 <!-- Boutons pour afficher la faq_formations et la réponse -->
                                                 <td>
                                                     <!-- tu travailles ici -->

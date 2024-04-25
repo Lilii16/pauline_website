@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__DIR__, 2) . '/config/conn.php';
-require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
+require_once '../../function/database.fn.php';
 
 //recupérer 
   $conn = getPDOlink($config); 
@@ -44,7 +44,7 @@ require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
         
    
         // Redirection après un court délai
-        header("Refresh:1 ; url=/admin/dashboard.php");
+        header("Location:../dashboard.php");
       exit();
   } else {
       // Gérer le cas où l'ID ou le type n'est pas défini

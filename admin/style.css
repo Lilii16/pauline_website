@@ -14,6 +14,9 @@ body{
   background-repeat: no-repeat;
 }
 
+ a:hover{
+  color: #bb443c;
+}
 .bg-rouille{
     
     background-color:rgba(193, 68, 37, 0.443) !important;
@@ -38,7 +41,6 @@ color:black !important;
     background-color: #bb443c !important;
   }
 
-  
 .bg-light-50-beige {
     background-color: #f4ead281 !important;
   }
@@ -49,27 +51,12 @@ color:black !important;
     font-size: 10em !important;
     text-shadow: 1px 1px 13px #f5ecd4 ;
    }
-/* 
-   nav .li{
-    color: #f5ecd4;
-   } */
-
- 
  
    .table   :not(caption) > * > * , .card
  {
 
         background-color:rgba(235, 206, 165, 0.443) !important;
     }
-
-
-   /* h2{
-    font-size: 3em !important;
-    font-weight: 900 !important;
-color: #000000 !important;
-text-shadow: 1px 1px 13px #f5ecd4 ;
-   } */
-
 
 
    /* style modale supression */
@@ -86,8 +73,6 @@ text-shadow: 1px 1px 13px #f5ecd4 ;
     text-align: center;
     font-size: 14px;
 }
-
-
 
 .add-form-content{
     width: 300px !important;

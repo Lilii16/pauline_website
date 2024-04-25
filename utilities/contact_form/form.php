@@ -69,81 +69,9 @@
         </div>
     </form>
 </div>
+
 <!-- https://www.pierre-giraud.com/php-mysql-apprendre-coder-cours/securiser-valider-formulaire/ -->
 
-<script>
-// Récupération des éléments du formulaire
-const form = document.querySelector('form');
+<script src="utilities\contact_form\validate_form.js"></script>
 
-// je vais utiliser un object qui récupére les elements du formulaire pour éviter de le répeter car j'ai plusieurs fontions qui les utilisent
-const inputs = {
-  // Sélectionne le champ de saisie du nom
-  nom: document.getElementById('InputNom'), 
-  // Sélectionne le champ de saisie du prénom
-  prenom: document.getElementById('InputPrenom'), 
- // Sélectionne le champ de saisie de l'email
-  email: document.querySelector('input[type=email]'),
-// Sélectionne le champ de saisie du sujet
-  sujet: document.getElementById('InputSujet'), 
- // Sélectionne le champ de saisie du message
-  message: document.getElementById('InputMessage'),
-};
 
-// Sélectionne le bouton "Envoyer", il va me servir à bloquer l'envoie si les infos sont pas bonnes
-const submitButton = document.getElementById('submitButton'); 
-
-// object Expressions régulières de validation idem reutilisé plusieurs fois
-const regex = {
-
-// Expression régulière pour valider le nom et le prénom
-// Autorise les lettres, les tirets, les traits de soulignement et les espaces (car certaines personnes comme moi ont plusieurs noms et prenoms)
-// Doit commencer par une lettre
-// Longueur de 3 à 23 caractères
-  nomPrenom: /^[a-zA-Z][a-zA-Z-_ ]{3,23}$/, 
-// Expression régulière pour valider l'email
-// Doit avoir un format d'email valide
-  email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  // Expression régulière pour valider le sujet
-// Ne doit pas contenir certains caractères spéciaux (<, >, {, }, $)
-// Longueur de 3 à 200 caractères 
-  sujetMessage: /^[^<>{}$]{3,200}$/, 
-// Expression régulière pour valider le message
-// Ne doit pas contenir certains caractères spéciaux (<, >, {, }, $)
-// Longueur minimale de 24 caractères
-  message: /^[^<>{}$]{24,}$/, 
-};
-
-// Fonction pour valider et mettre à jour les classes CSS
-function validateAndUpdate(element, regex) {
-  // Vérifie si la valeur de l'élément passe la validation regex
-  const isValid = regex.test(element.value); 
-  // Ajoute ou supprime les classes CSS 'is-valid' ou 'is-invalid' en fonction du résultat de la validation
-  element.classList.toggle('is-valid', isValid);
-  element.classList.toggle('is-invalid', !isValid);
- // Renvoie true si la valeur est valide, sinon false
-  return isValid;
-}
-
-// Écouter les événements d'entrée/saisie dans les champs du formulaire pour la validation
-Object.values(inputs).forEach(input =>
-  input.addEventListener('input', () => {
-    const isValid = validateAndUpdate(input, regex[input.id === 'InputEmail' ? 'email' : 'nomPrenom']);
-    // Si l'input est celui de l'email, déclenche la vérification du formulaire complet
-    if (input.id === 'InputEmail') toggleSubmitButton(); 
-    // Sinon, déclenche la vérification du champ individuel
-    else toggleSubmitButton(isValid); 
-  })
-);
-
-// Fonction pour activer ou désactiver le bouton Envoyer
-function toggleSubmitButton(isFormValid) {
-  // Si la validité du formulaire n'est pas fournie, vérifie tous les champs
-  if (isFormValid === undefined) {
-    // Vérifie si tous les champs du formulaire sont valides en utilisant validateAndUpdate pour chacun
-    isFormValid = Object.values(inputs).every(input => validateAndUpdate(input, regex[input.id === 'InputEmail' ? 'email' : 'nomPrenom']));
-  }
-  // Active ou désactive le bouton Envoyer en fonction de la validité du formulaire
-  submitButton.disabled = !isFormValid;
-}
-
-</script>

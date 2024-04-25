@@ -12,6 +12,7 @@ if (isset($_POST['type']) && ($_POST['type'] === 'question' || $_POST['type'] ==
     header("Location: ../dashboard.php");
     exit();
 }
+$currentDate = date('Y-m-d');
 
 //récupérer les données rentrées dans le formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $question = htmlspecialchars($_POST['question']);
         $reponse = htmlspecialchars($_POST['reponse']);
         try {
-            $sql = "INSERT INTO `questions` (`question`, `reponse`) VALUES (:question, :reponse)";
+            $sql = "INSERT INTO `questions` (`question`, `reponse`, `last_modified_date`) VALUES (:question, :reponse, :currentDate)";
 
             // Préparation de la requête
             $stmt = $conn->prepare($sql);
@@ -27,18 +28,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Liaison des valeurs aux paramètres de la requête
             $stmt->bindParam(':question', $question);
             $stmt->bindParam(':reponse', $reponse);
-            
+            $stmt->bindParam(':currentDate',  $currentDate);
+
             // Exécution de la requête préparée
             $stmt->execute();
             
             // Fermeture du statement
             $stmt->closeCursor();
 
+            session_start();
             // Message de réussite
-            echo "Question ajoutée avec succès";
-
+          $success_message = "$type ajouté avec succès";
+    
+            // Après avoir réalisé avec succès l'action de suppression
+            $_SESSION['success_message'] = "$type a été ajouté avec succès.";
             // Redirection après un court délai
-            header("Refresh: 3; url=/admin/dashboard.php");
+            header("Location: ../dashboard.php");
             exit; // Sortir du script après la redirection
         } catch (PDOException $e) {
             //annuler tous les changements de la transaction en cours
@@ -50,16 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $description = htmlspecialchars($_POST['deskription']);
 
         try {
-            $sql = "INSERT INTO `articles` (`title`, `origine`, `deskription`) VALUES ('$title', '$origine', '$description')";
+            $sql = "INSERT INTO `articles` (`title`, `origine`, `deskription`,`last_modified_date`) VALUES ('$title', '$origine', '$description', '$currentDate')";
             $conn->query($sql);
 
+            session_start();
             // Message de réussite
-            echo "
-        <h1> Article ajouté avec succès</h1>
-    ";
-
+          $success_message = "$type supprimé avec succès";
+    
+            // Après avoir réalisé avec succès l'action de suppression
+            $_SESSION['success_message'] = "$type a été supprimé avec succès.";
             // Redirection après un court délai
-            header("Refresh: 3; url=/admin/dashboard.php");
+            header("Location: ../dashboard.php");
             exit; // Sortir du script après la redirection
         } catch (PDOException $e) {
             //annuler tous les changements de la transaction en cours
@@ -72,16 +78,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lien = htmlspecialchars($_POST['path']);
 
         try {
-            $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `path`) VALUES ('$titre', '$description', '$source', '$lien')";
+            $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `path`, `last_modified_date`) VALUES ('$titre', '$description', '$source', '$lien','$currentDate')";
             $conn->query($sql);
 
+            session_start();
             // Message de réussite
-            echo "
-        <h1> Publication ajoutée avec succès</h1>
-    ";
-
+          $success_message = "$type supprimé avec succès";
+    
+            // Après avoir réalisé avec succès l'action de suppression
+            $_SESSION['success_message'] = "$type a été supprimé avec succès.";
             // Redirection après un court délai
-            header("Refresh: 3; url=/admin/dashboard.php");
+            header("Location: ../dashboard.php");
             exit; // Sortir du script après la redirection
         } catch (PDOException $e) {
             //annuler tous les changements de la transaction en cours
@@ -93,14 +100,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // var_dump($_POST);
         try {
-            $sql = "INSERT INTO `faq-formation` (`question`, `reponse`) VALUES ('$question', '$reponse')";
+            $sql = "INSERT INTO `faq-formation` (`question`, `reponse`,`last_modified_date`) VALUES ('$question', '$reponse','$currentDate')";
             $conn->query($sql);
 
-            // Message de réussite
-            echo "Question ajoutée avec succès";
+            session_start();
+        // Message de réussite
+      $success_message = "$type supprimé avec succès";
 
+        // Après avoir réalisé avec succès l'action de suppression
+        $_SESSION['success_message'] = "$type a été supprimé avec succès.";
             // Redirection après un court délai
-            header("Refresh: 3; url=/admin/dashboard.php");
+            header("Location: ../dashboard.php");
             exit; // Sortir du script après la redirection
         } catch (PDOException $e) {
             //annuler tous les changements de la transaction en cours
