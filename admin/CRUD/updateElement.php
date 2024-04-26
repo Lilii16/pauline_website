@@ -1,5 +1,6 @@
 <?php
 require_once dirname(__DIR__, 2) . '/config/conn.php';
+require_once dirname(__DIR__, 2) . '/function/database.fn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
 require_once dirname(__DIR__, 2) . '/function/publications.fn.php';

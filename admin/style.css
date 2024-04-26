@@ -9,14 +9,11 @@ body{
       background-size: cover;
 }
 .background-image {
-  background-image: url("../assets/pictures/grenade.png");
+  background-image: url("../assets/pictures/grenade.webp");
   background-size: cover;
   background-repeat: no-repeat;
 }
 
- a:hover{
-  color: #bb443c;
-}
 .bg-rouille{
     
     background-color:rgba(193, 68, 37, 0.443) !important;
@@ -31,9 +28,27 @@ body{
 background-color: antiquewhite !important;
 color:black !important;
 }
+
 .link-beige{
     color: #f5ecd4 !important;
 }
+ .link-beige:hover{
+  color: #000000 !important;
+}
+
+
+.btn:hover {
+  color: black !important;
+  background-color: beige !important;
+  border-color: var(--bs-btn-hover-border-color);
+}
+
+.btn-light:hover {
+  color: #f5ecd4  !important;
+  background-color: #bb443c !important;
+
+}
+
 .bg-duck{
     background-color: #f5ecd4 !important;
    }

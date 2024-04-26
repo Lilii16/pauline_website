@@ -1,5 +1,5 @@
 <?php 
-require_once 'database.fn.php';
+// require_once 'database.fn.php';
 
 // Établir la connexion à la base de données
 //    $conn = getPDOlink($config);

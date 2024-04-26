@@ -48,51 +48,44 @@ if (!isset($_SESSION['user_id'])) {
 
 <body>
     <div class="">
-    <?php
+        <?php
 
-// Vérifier si un message de succès est présent dans la session
-if(isset($_SESSION['success_message'])) {
-    // Afficher le message de succès
-    echo '<div class="alert alert-success text-center position-absolute w-100 session" role="alert"> <h6>' .  $_SESSION['success_message'] . '</h6> </div>';
+        // Vérifier si un message de succès est présent dans la session
+        if (isset($_SESSION['success_message'])) {
+            // Afficher le message de succès
+            echo '<div class="alert alert-success text-center position-absolute w-100 session" role="alert"> <h6>' .  $_SESSION['success_message'] . '</h6> </div>';
 
-    // Supprimer le message de succès de la session pour éviter qu'il ne soit affiché à nouveau
-    unset($_SESSION['success_message']);
-}
-?>
-<!-- JavaScript pour masquer le message de succès après 3 secondes -->
-<script>
-    // Sélectionne l'élément contenant le message de succès
-    var successMessage = document.querySelector('.session');
+            // Supprimer le message de succès de la session pour éviter qu'il ne soit affiché à nouveau
+            unset($_SESSION['success_message']);
+        }
+        ?>
+        <!-- JavaScript pour masquer le message de succès après 3 secondes -->
+        <script>
+            // Sélectionne l'élément contenant le message de succès
+            var successMessage = document.querySelector('.session');
 
-    // Si l'élément existe
-    if(successMessage) {
-        // Masque l'élément après 3 secondes
-        setTimeout(function() {
-            successMessage.style.display = 'none';
-        }, 6000); // 6sec
-    }
-</script>
+            // Si l'élément existe
+            if (successMessage) {
+                // Masque l'élément après 3 secondes
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 6000); // 6sec
+            }
+        </script>
 
-     <div class="d-flex dashboard">
-            
+        <div class="d-flex dashboard">
+
             <!-- side bar -->
-            <div class="d-flex flex-column flex-shrink-0 p-3 bg-wine col-2 vh-100">
+             <div class="d-flex flex-column flex-shrink-0 p-3 bg-wine col-2 vh-100">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                    <span class="fs-4 text-light">
-
-                        <?php
-                        output_username();
-                        ?>
-
-                    </span>
+                <span class="fs-4 text-light">
+                                    <?php output_username(); ?>
+                                </span>
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto ">
                     <li class="nav-item">
-                        <a href="../index.php" class="nav-link link-light text-center" aria-current="page">
+                        <a href="../index.php" class="nav-link link-light text-center link-opacity-10-hover" aria-current="page">
 
                             Visualiser le site
                         </a>
@@ -125,7 +118,8 @@ if(isset($_SESSION['success_message'])) {
 
                     </ul>
                 </div>
-            </div>
+            </div> 
+
 
             <!-- fin side bar -->
 
@@ -152,7 +146,14 @@ if(isset($_SESSION['success_message'])) {
                         <!-- Tableau pour afficher les questions -->
 
                         <!-- dash example -->
-                        <div class="card" style="height: calc(100vh - 130px);">
+                        <style>
+                            @media (min-width: 992px) {
+                                .dashcard {
+                                    height: calc(100vh - 130px);
+                                }
+                            }
+                        </style>
+                        <div class="card dashcard">
                             <div class="card-header border-bottom d-flex justify-content-between text-light">
                                 <h5 class="mb-0">Gestion des question sur conseil juridique</h5>
                                 <!-- bouton pour ajouter la question -->
@@ -200,7 +201,7 @@ if(isset($_SESSION['success_message'])) {
                                                 </td>
                                                 <!-- tu travailles ici --> <!-- Boutons pour supprimer la question -->
                                                 <td class="text-end">
-                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="question" data-id="<?php echo $question['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    <button type="button" class="btn  btn-sm btn-square btn-neutral btn-light trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="question" data-id="<?php echo $question['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
                                                 </td>
                                             </tr>

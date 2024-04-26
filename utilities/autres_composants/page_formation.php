@@ -1,5 +1,5 @@
 <!-- <div class="m-5 p-2"></div> -->
-<script>
+<!-- <script>
     // include "./script.js";
     window.onload = function() {
         // Sélectionne les sections correspondant à l'identifiant unique sur la page formations.php
@@ -25,7 +25,7 @@
             });
         }
     }
-</script>
+</script> -->
 
 
 <section id="thematik-section" class="" style="overflow-x: hidden;">

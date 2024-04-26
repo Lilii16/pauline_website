@@ -29,8 +29,9 @@
 
     <?php  
     if (session_status() === PHP_SESSION_ACTIVE) {
-      // La session est active, procédez avec le reste du code
+      header("Location: ../dashboard.php");
       echo "Session is active.";
+  exit;
   }
     ?>
 
