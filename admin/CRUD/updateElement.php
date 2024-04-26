@@ -19,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($type) {
         case 'question':
             try {
-            
-                updateQuestion($conn, $currentId) ;
+
+                updateQuestion($conn, $currentId);
                 session_start();
                 // Message de réussite
                 $success_message = "$type modifié avec succès";
@@ -33,120 +33,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             break;
         case 'article':
-            $title = htmlspecialchars($_POST['title']);
-            $origine = htmlspecialchars($_POST['origine']);
-            $deskription = htmlspecialchars($_POST['deskription']);
-            $currentData = findArticleById($conn, $currentId);
-            $oldData = $currentData;
+
             try {
-                // Préparer les valeurs à mettre à jour
-                $updateValues = array();
-
-                // Vérifier chaque champ s'il a changé
-                if ($title != $oldData['title']) {
-                    $updateValues[] = "title = '$title'";
-                }
-                if ($origine != $oldData['origine']) {
-                    $updateValues[] = "origine = '$origine'";
-                }
-                if ($deskription != $oldData['deskription']) {
-                    $updateValues[] = "deskription = '$deskription'";
-                }
-
-                // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
-                if (!empty($updateValues)) {
-                    $updateString = implode(', ', $updateValues);
-                    $sql = "UPDATE articles SET $updateString WHERE id = '$currentId'";
-                    $conn->query($sql);
-                }
-
+                updateArticle($conn, $currentId);
                 session_start();
                 // Message de réussite
                 $success_message = "$type modifié avec succès";
                 $_SESSION['success_message'] = "$type a été modifié avec succès.";
 
-                // Redirection après un court délai
-                header("Location: ../dashboard.php");
+
+                // Redirection vers la page avec le paramètre de section spécifié
+                header("Location: ../dashboard.php?section=articleContent");
+                exit; // Assure que le script s'arrête ici pour éviter toute exécution supplémentaire
+
+
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
             }
             break;
         case 'publication':
-            $titre = htmlspecialchars($_POST['titre']);
-            $description = htmlspecialchars($_POST['description']);
-            $source = htmlspecialchars($_POST['source']);
-            $lien = htmlspecialchars($_POST['lien']);
-            $currentData = findPublicationById($conn, $currentId);
-            $oldData = $currentData;
             try {
-                // Préparer les valeurs à mettre à jour
-                $updateValues = array();
-
-                // Vérifier chaque champ s'il a changé
-                if ($titre != $oldData['titre']) {
-                    $updateValues[] = "titre = '$titre'";
-                }
-                if ($description != $oldData['description']) {
-                    $updateValues[] = "description = '$description'";
-                }
-                if ($source != $oldData['source']) {
-                    $updateValues[] = "source = '$source'";
-                }
-                if ($lien != $oldData['path']) {
-                    $updateValues[] = "lien = '$lien'";
-                }
-
-                // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
-                if (!empty($updateValues)) {
-                    $updateString = implode(', ', $updateValues);
-                    $sql = "UPDATE publications SET $updateString WHERE id = '$currentId'";
-                    $conn->query($sql);
-                }
-
+                updatePublication($conn, $currentId);
                 session_start();
                 // Message de réussite
                 $success_message = "$type modifié avec succès";
                 $_SESSION['success_message'] = "$type a été modifié avec succès.";
 
-                // Redirection après un court délai
-                header("Location: ../dashboard.php");
+                // Redirection vers la page avec le paramètre de section spécifié
+                header("Location: ../dashboard.php?section=publicationContent");
+                exit; // Assure que le script s'arrête ici pour éviter toute exécution supplémentaire
+
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
             }
             break;
         case 'faq_formation':
             try {
-                // Stocker les données actuelles avant la mise à jour
-                $question = htmlspecialchars($_POST['question']);
-                $reponse = htmlspecialchars($_POST['reponse']);
-                $currentData = findAllQuestionsFormationById($conn, $currentId);
-                $oldData = $currentData;
-
-                // Préparer les valeurs à mettre à jour
-                $updateValues = array();
-
-                // Vérifier chaque champ s'il a changé
-                if ($question != $oldData['question']) {
-                    $updateValues[] = "question = '$question'";
-                }
-                if ($reponse != $oldData['reponse']) {
-                    $updateValues[] = "reponse = '$reponse'";
-                }
-
-                // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
-                if (!empty($updateValues)) {
-                    $updateString = implode(', ', $updateValues);
-                    $sql = "UPDATE `faq-formation` SET $updateString WHERE id = '$currentId'";
-                    $conn->query($sql);
-                }
+                updateQuestionsFormation($conn,$currentId);
 
                 session_start();
                 // Message de réussite
                 $success_message = "$type modifié avec succès";
-                
+                $_SESSION['success_message'] = "$type a été modifié avec succès.";
+                // Redirection vers la page avec le paramètre de section spécifié
+                header("Location: ../dashboard.php?section=faq_formationContent");
+                exit; // Assure que le script s'arrête ici pour éviter toute exécution supplémentaire
 
-                // Redirection après un court délai
-                header("Location: ../dashboard.php");
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
             }
@@ -156,4 +88,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
     }
 }
-?>

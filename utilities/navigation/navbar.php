@@ -55,7 +55,7 @@
                                 <!-- Menu déroulant pour les options liées à la formatrice -->
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownFormatrice">
                                     <!-- Option "J'ai besoin de me former" -->
-                                    <li><a class="menu dropdown-item" href="formations.php#thematik-section">J'ai besoin de me former</a></li>
+                                    <li><a class="menu dropdown-item" href="formations.php#thematique-section">J'ai besoin de me former</a></li>
                                     <!-- Ligne de séparation dans le menu déroulant -->
                                     <li><hr class="dropdown-divider"></li>
                                     <!-- Option "FAQ" -->
@@ -82,30 +82,7 @@
 </div>
 
 
-
-<script>
-// Récupération de l'élément ayant l'ID "border" du document HTML
-var border = document.getElementById("border");
-
-// Sélection de tous les éléments avec la classe CSS ".link" du document HTML
-var links = document.querySelectorAll(".link");
-
-// Pour chaque élément de la liste des liens sélectionnés
-links.forEach(function(link) {
-    // Ajout d'un écouteur d'événement pour l'événement "mouseover" (survol de la souris)
-    link.addEventListener("mouseover", function() {
-        // Changement du style de bordure de l'élément avec l'ID "border" lors du survol de la souris sur le lien
-        border.style.border = "2px solid #0010a3";
-    });
-
-    // Ajout d'un écouteur d'événement pour l'événement "mouseout" (déplacement de la souris hors du lien)
-    link.addEventListener("mouseout", function() {
-        // Rétablissement du style de bordure initial de l'élément avec l'ID "border" lorsque la souris quitte le lien
-        border.style.border = "2px solid #f5ecd4";
-    });
-});
-
-</script>
+<script src="utilities\navigation\script_navBar.js"></script>
 
 
 </div>

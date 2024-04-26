@@ -102,3 +102,67 @@ function deletePublicationById($conn, $currentID) {
         return false;
     }
 }
+
+function updatePublication($conn, $currentId)
+{
+    try {
+        // Stocker les données actuelles avant la mise à jour
+        $currentData = findPublicationById($conn, $currentId);
+
+        // Récupérer les valeurs du formulaire
+        $titre = isset($_POST['titre']) ? htmlspecialchars($_POST['titre']) : '';
+        $description = isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '';
+        $source = isset($_POST['source']) ? htmlspecialchars($_POST['source']) : '';
+        $lien = isset($_POST['lien']) ? htmlspecialchars($_POST['lien']) : '';
+
+        // Préparer les valeurs à mettre à jour
+        $updateValues = array();
+        $params = array();
+
+        // Vérifier chaque champ s'il a changé
+        if ($titre != $currentData['titre']) {
+            $updateValues[] = "titre = ?";
+            $params[] = $titre;
+        }
+        if ($description != $currentData['description']) {
+            $updateValues[] = "description = ?";
+            $params[] = $description;
+        }
+        if ($source != $currentData['source']) {
+            $updateValues[] = "source = ?";
+            $params[] = $source;
+        }
+        if ($lien != $currentData['path']) {
+            $updateValues[] = "lien = ?";
+            $params[] = $lien;
+        }
+
+        // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+        if (!empty($updateValues)) {
+            $currentDate = date('Y-m-d');
+            $updateValues[] = "last_modified_date = ?";
+            $params[] = $currentDate;
+
+            // Construire la requête SQL avec des déclarations préparées
+            $updateString = implode(', ', $updateValues);
+            $sql = "UPDATE publications SET $updateString WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+
+            // Binder les paramètres
+            foreach ($params as $index => $param) {
+                $stmt->bindValue($index + 1, $param);
+            }
+            $stmt->bindValue(count($params) + 1, $currentId);
+
+            // Exécuter la requête
+            $stmt->execute();
+        }
+
+        // Retourner true pour indiquer que la mise à jour s'est déroulée avec succès
+        return true;
+    } catch (PDOException $e) {
+        // Gestion des erreurs PDO
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}

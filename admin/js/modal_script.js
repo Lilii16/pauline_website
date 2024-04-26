@@ -2,7 +2,7 @@
 function handleAdd(type) {
   var addForm = document.getElementById("add-form-content");
   addForm.innerHTML = "";
-  document.getElementById("modal-title").innerText ="Modification - " +  type;
+  document.getElementById("modal-title").innerText ="Ajouter - " +  type;
 
   // Générer le formulaire d'ajout en fonction du type
   if (type === "question") {
@@ -69,6 +69,7 @@ function handleAdd(type) {
 function handleDelete(type, id) {
   var addForm = document.getElementById("add-form-content");
   addForm.innerHTML = "";
+  document.getElementById("modal-title").innerText ="Supprimer - " +  type;
 
   // Générer le formulaire de suppression
   addForm.innerHTML = `
@@ -90,6 +91,7 @@ function handleDelete(type, id) {
 function handleView(type, id, title, description, lien,source) {
   var addForm = document.getElementById("add-form-content");
   addForm.innerHTML = "";
+  document.getElementById("modal-title").innerText ="Visualiser - " +  type;
 
   // Générer le contenu de la modal avec les données de la question et de la réponse
   if (type === "question") {
@@ -154,6 +156,7 @@ function handleView(type, id, title, description, lien,source) {
 function handleModify(type, id, title, description, lien,source) {
   var addForm = document.getElementById("add-form-content");
   addForm.innerHTML = "";
+  document.getElementById("modal-title").innerText ="Modification - " +  type;
 
   // Générer le contenu de la modal avec les données de la question et de la réponse
   if (type === "question") {
@@ -249,7 +252,7 @@ function handleModify(type, id, title, description, lien,source) {
     </div>
     <div class="modal-body">
         <form action="./CRUD/updateElement.php" method="post">
-            <input type="hidden" name="type" value="${type}">
+            <input type="hidden" name="type" value="faq_formation">
             <input type="hidden" name="id" value="${id}">
             <div class="mb-3">
                 <label for="ask" class="form-label">Question :</label>

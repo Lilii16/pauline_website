@@ -1,33 +1,4 @@
-<!-- <script>
-  window.onload = function() {
-    // Sélectionne les sections correspondant à l'identifiant unique sur la page avocate.php
-    let competencesSection = document.getElementById('competences-section');
-    let honorairesSection = document.getElementById('honoraires-section');
-    let questionsSectionAvocate = document.getElementById('questions-section');
 
-    // Vérifie si les sections correspondantes ont été trouvées sur la page avocate.php
-    if (competencesSection && honorairesSection && questionsSectionAvocate) {
-      // Ajoute un écouteur d'événement au clic sur un élément du menu dropdown
-      document.querySelectorAll('.dropdown-item').forEach(function(item) {
-        item.addEventListener('click', function() {
-          // Récupère l'identifiant de la section cible à partir de l'attribut href
-          let targetId = this.getAttribute('href').substring(1);
-          //  substring: Cela est fait pour exclure le premier caractère de la chaîne, qui est généralement un symbole "#" lorsqu'il s'agit d'une ancre interne dans une URL. Cette étape est nécessaire pour obtenir uniquement l'identifiant de l'ancre, qui est utilisé pour naviguer vers une section spécifique de la page.
-
-          // Sélectionne la section cible par son identifiant
-          let targetSection = document.getElementById(targetId);
-          // Si la section cible existe, faites défiler jusqu'à elle en douceur
-          if (targetSection) {
-            targetSection.scrollIntoView({
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
-    }
-
-  }
-</script> -->
 
 <section id="competences-section" class="py-5 section_juridique" style="overflow: hidden;">
   <div class="bg-red wh-100 front py-3">

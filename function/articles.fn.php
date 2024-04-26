@@ -68,3 +68,61 @@ function deleteArticleById($conn, $currentID) {
     }
 }
 
+function updateArticle($conn, $currentId)
+{
+    try {
+        // Stocker les données actuelles avant la mise à jour
+        $currentData = findArticleById($conn, $currentId);
+        $currentDate = date('Y-m-d');
+
+        // Stocker les données actuelles avant la mise à jour
+        $title = isset($_POST['title']) ? htmlspecialchars($_POST['title']) : '';
+        $description = isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '';
+        $origine = isset($_POST['origine']) ? htmlspecialchars($_POST['origine']) : '';
+
+        // Préparer les valeurs à mettre à jour
+        $updateValues = array();
+        $params = array();
+
+        // Vérifier chaque champ s'il a changé
+        if ($title != $currentData['title']) {
+            $updateValues[] = "title = ?";
+            $params[] = $title;
+        }
+        if ($description != $currentData['deskription']) {
+            $updateValues[] = "deskription = ?";
+            $params[] = $description;
+        }
+        if ($origine != $currentData['origine']) {
+            $updateValues[] = "origine = ?";
+            $params[] = $origine;
+        }
+
+        // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
+        if (!empty($updateValues)) {
+            $updateValues[] = "last_modified_date = ?";
+            $params[] = $currentDate;
+
+            // Construire la requête SQL avec des déclarations préparées
+            $updateString = implode(', ', $updateValues);
+            $sql = "UPDATE articles SET $updateString WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+
+            // Binder les paramètres
+            foreach ($params as $index => $param) {
+                $stmt->bindValue($index + 1, $param);
+            }
+            $stmt->bindValue(count($params) + 1, $currentId);
+
+            // Exécuter la requête
+            $stmt->execute();
+        }
+
+        // Retourner true pour indiquer que la mise à jour s'est déroulée avec succès
+        return true;
+    } catch (PDOException $e) {
+        // Gestion des erreurs PDO
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}

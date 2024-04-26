@@ -1,52 +1,27 @@
 <?php
-require_once '../config/conn.php';
-require_once '../function/database.fn.php';
-require_once dirname(__DIR__) . '/function/questions.fn.php';
-require_once dirname(__DIR__) . '/function/publications.fn.php';
-require_once dirname(__DIR__) . '/function/articles.fn.php';
-require_once dirname(__DIR__) . '/function/faq_formations.fn.php';
-
-require_once './login/includes/config_session.inc.php';
-require_once './login/includes/login_view.inc.php';
-
-// Établir la connexion à la base de données
-$conn = getPDOlink($config);
-
-//vérifie si on s'est connécté sinon redirection vers page de connexion
-// session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ./login/login.poo.php");
-    exit;
-}
-
+require_once "./Components/header.php"
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration - Gestion du Droit à la Santé mentale</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <!-- autres liens -->
+    <!-- <script src="js/script_section.js"></script> -->
+    <script >
+          document.addEventListener('DOMContentLoaded', function() {
+        // Récupère la section spécifiée dans l'URL
+        var section = '<?php echo isset($_GET["section"]) ? $_GET["section"] : ""; ?>';
 
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/faqs/faq-2/assets/css/faq-2.css">
-    <script src="https://unpkg.com/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        // Si une section est spécifiée, active l'onglet correspondant
+        if (section) {
+            var tabPane = document.getElementById(section);
+            if (tabPane) {
+                var tabId = tabPane.getAttribute("aria-labelledby");
+                var tab = document.getElementById(tabId);
+                if (tab) {
+                    tab.click(); // Active l'onglet
+                }
+            }
+        }
+    });
+    </script>
 
-    <!-- jQuery, Popper.js, Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-
-
-
-<body>
     <div class="">
         <?php
 
@@ -60,67 +35,14 @@ if (!isset($_SESSION['user_id'])) {
         }
         ?>
         <!-- JavaScript pour masquer le message de succès après 3 secondes -->
+        <script src="js/hide_message.js"></script>
         <script>
-            // Sélectionne l'élément contenant le message de succès
-            var successMessage = document.querySelector('.session');
-
-            // Si l'élément existe
-            if (successMessage) {
-                // Masque l'élément après 3 secondes
-                setTimeout(function() {
-                    successMessage.style.display = 'none';
-                }, 6000); // 6sec
-            }
+            hideSuccessMessage()
         </script>
-
         <div class="d-flex dashboard">
 
-            <!-- side bar -->
-             <div class="d-flex flex-column flex-shrink-0 p-3 bg-wine col-2 vh-100">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <span class="fs-4 text-light">
-                                    <?php output_username(); ?>
-                                </span>
-                </a>
-                <hr>
-                <ul class="nav nav-pills flex-column mb-auto ">
-                    <li class="nav-item">
-                        <a href="../index.php" class="nav-link link-light text-center link-opacity-10-hover" aria-current="page">
-
-                            Visualiser le site
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link link-beige active " id="questions-tab" data-toggle="tab" href="#questionsContent" role="tab" aria-controls="questions" aria-selected="false">Questions</a>
-                    </li>
-                    <li>
-                        <a class="nav-link link-beige" id="articles-tab" data-toggle="tab" href="#articlesContent" role="tab" aria-controls="articles" aria-selected="false">Articles</a>
-                    </li>
-                    <li>
-                        <a class="nav-link link-beige" id="publications-tab" data-toggle="tab" href="#publicationsContent" role="tab" aria-controls="publications" aria-selected="false">Publications</a>
-                    </li>
-                    <li>
-                        <a class="nav-link link-beige" id="faq-formation-tab" data-toggle="tab" href="#faq-formationContent" role="tab" aria-controls="faq-formation" aria-selected="false">FAQ-formations</a>
-                    </li>
-                </ul>
-                <hr>
-                <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center link-beige text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../assets/logos/logoFond.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                        <strong>Pauline</strong>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" >
-                        <li><a class="dropdown-item" href="#">Nous contacter</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li> <a class="dropdown-item text-danger" href="./login/logout.php">Se déconnecter</a></li>
-
-                    </ul>
-                </div>
-            </div> 
-
-
+            <!-- side bar navigation -->
+            <?php include "./Components/navBar.php" ?>
             <!-- fin side bar -->
 
             <div class="col background-image">
@@ -161,7 +83,6 @@ if (!isset($_SESSION['user_id'])) {
                                 <!-- tu travailles ici -->
                                 <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add text-light" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="question"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                     <span>Ajouter un nouveau</span></button>
-
 
                             </div>
                             <div class="table-responsive bg-duck">
@@ -223,7 +144,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
 
                     <!-- Articles -->
-                    <div class="tab-pane fade" id="articlesContent" role="tabpanel" aria-labelledby="articles-tab">
+                    <div class="tab-pane fade" id="articleContent" role="tabpanel" aria-labelledby="articles-tab">
 
                         <!-- dash example -->
                         <div class="card" style="height: calc(100vh - 130px);">
@@ -292,7 +213,7 @@ if (!isset($_SESSION['user_id'])) {
 
 
                     <!-- Publications -->
-                    <div class="tab-pane fade" id="publicationsContent" role="tabpanel" aria-labelledby="publications-tab">
+                    <div class="tab-pane fade" id="publicationContent" role="tabpanel" aria-labelledby="publications-tab">
 
 
                         <!-- dash example -->
@@ -359,7 +280,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
 
                     <!-- faq-formation -->
-                    <div class="tab-pane fade" id="faq-formationContent" role="tabpanel" aria-labelledby="faq-formation-tab">
+                    <div class="tab-pane fade" id="faq_formationContent" role="tabpanel" aria-labelledby="faq-formation-tab">
 
 
                         <!-- dash example -->
@@ -427,9 +348,6 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
 
                     </div>
-
-
-
                     <!-- fin div tab pans -->
                 </div>
                 <!-- div col body -->
@@ -440,32 +358,12 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
 
-
-
     <!-- Modale generale -->
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-confirm ">
-            <div class="modal-content bg-beige">
-                <div class="modal-header flex-column">
-                    <h4 id="modal-title" class="modal-title w-100"></h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="d-flex flex-column justify-content-center align-items-center container col-md-10">
-                        <!-- Affichage dynamique du formulaire en fonction du type -->
-                        <div id="add-form-content" class="col-12"></div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-secondary col-6" data-dismiss="modal">Annuler</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+    include './Components/modal_view.php'
+    ?>
     <!-- script pour ajouter -->
-    <script src="modal_script.js"></script>
+    <script src="js/modal_script.js"></script>
 
 </body>
 

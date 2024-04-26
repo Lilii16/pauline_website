@@ -14,8 +14,9 @@ $conn = getPDOlink($config);
 if (isset($_POST['type']) && ($_POST['type'] === 'question' || $_POST['type'] === 'article' || $_POST['type'] === 'publication' || $_POST['type'] === 'faq_formation')) {
     $type = $_POST['type'];
 } else {
-    // Redirection en cas de type non valide (vers une page erreur qi rederige ensuite vers dashboard)
-    header("Location: ../dashboard.php");
+    // Redirection en cas de type non valide (vers une page erreur qui rederige ensuite vers dashboard)
+    // header("Location: ../dashboard.php");
+    var_dump($type);
     exit();
 }
 
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->closeCursor();
                 session_start();
                 $_SESSION['success_message'] = "$type a été ajouté avec succès.";
-                header("Location: ../dashboard.php");
+                header("Location: ../dashboard.php?section=" . $type . "Content");
                 exit;
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();
@@ -52,7 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $conn->query($sql);
                 session_start();
                 $_SESSION['success_message'] = "$type a été ajouté avec succès.";
-                header("Location: ../dashboard.php");
+                header("Location: ../dashboard.php?section=" . $type . "Content");
+
                 exit;
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();
@@ -68,7 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $conn->query($sql);
                 session_start();
                 $_SESSION['success_message'] = "$type a été ajouté avec succès.";
-                header("Location: ../dashboard.php");
+                header("Location: ../dashboard.php?section=" . $type . "Content");
+
                 exit;
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();
@@ -78,11 +81,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $question = htmlspecialchars($_POST['question']);
             $reponse = htmlspecialchars($_POST['reponse']);
             try {
-                $sql = "INSERT INTO `faq-formation` (`question`, `reponse`,`last_modified_date`) VALUES ('$question', '$reponse','$currentDate')";
+                $sql = "INSERT INTO `faq_formation` (`question`, `reponse`,`last_modified_date`) VALUES ('$question', '$reponse','$currentDate')";
                 $conn->query($sql);
                 session_start();
                 $_SESSION['success_message'] = "$type a été ajouté avec succès.";
-                header("Location: ../dashboard.php");
+                header("Location: ../dashboard.php?section=" . $type . "Content");
+
                 exit;
             } catch (PDOException $e) {
                 echo "Erreur : " . $e->getMessage();
@@ -90,7 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         default:
             // Redirection en cas de type invalide
-            header("Location: ../dashboard.php");
+            // header("Location: ../dashboard.php");
+            var_dump("oups");
             exit;
     }
 } else {

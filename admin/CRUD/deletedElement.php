@@ -22,7 +22,7 @@ if(isset($_POST['id']) && isset($_POST['type'])) {
             $table = 'publications';
             break;
         case 'faq_formation':
-            $table = 'faq-formation';
+            $table = 'faq_formation';
             break;
         default:
             // Gérer le cas où le type n'est pas reconnu
@@ -41,9 +41,10 @@ if(isset($_POST['id']) && isset($_POST['type'])) {
     $success_message = "$type supprimé avec succès";
     $_SESSION['success_message'] = "$type a été supprimé avec succès.";
     
-    // Redirection après un court délai
-    header("Location:../dashboard.php");
-    exit();
+    header("Location: ../dashboard.php?section=" . $type . "Content");
+
+exit; // Assure que le script s'arrête ici pour éviter toute exécution supplémentaire
+
 } else {
     // Gérer le cas où l'ID ou le type n'est pas défini
     echo "ID ou type non défini.";
