@@ -81,20 +81,20 @@ require_once "./Components/header.php"
                             <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add text-light" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="question"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                 <span>Ajouter un nouveau</span></button>
 
-                                <div class="tri  d-flex justify-content-end">
-                            <form action="" method="Post">
-                     
-<!-- trie des elements -->
-                                <form method="post">
-                                    <select name="tri" class="form-select container  justify-content-end bg-duck" aria-label="Default select example" onchange="this.form.submit()">
-                                        <option value="">Trier</option>
-                                        <option value="last_modified_date" <?php if (isset($tri) && $tri == 'last_modified_date') echo 'selected="selected"'; ?>>Trier par Date</option>
-                                        <option value="question" <?php if (isset($tri) && $tri == 'question') echo 'selected="selected"'; ?>>Trier par Titre</option>
-                                    </select>
-                                </form>
+                            <div class="tri  d-flex justify-content-end">
+                                <form action="" method="Post">
+
+                                    <!-- trie des elements -->
+                                    <form method="post">
+                                        <select name="tri" class="form-select container  justify-content-end bg-duck" aria-label="Default select example" onchange="this.form.submit()">
+                                            <option value="">Aucun Trie</option>
+                                            <option value="last_modified_date" <?php if (isset($tri) && $tri == 'last_modified_date') echo 'selected="selected"'; ?>>Trier par Date</option>
+                                            <option value="question" <?php if (isset($tri) && $tri == 'question') echo 'selected="selected"'; ?>>Trier par Titre</option>
+                                        </select>
+                                    </form>
+                            </div>
                         </div>
-                        </div>
-               
+
                         <div class="table-responsive bg-duck">
                             <table class="table table-nowrap">
                                 <thead class="bg-rouille">
@@ -108,6 +108,9 @@ require_once "./Components/header.php"
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php // Utilisation de la fonction pour afficher les questions avec pagination
+                                    $items_per_page = 2; // Nombre d'éléments par page
+                                    displayQuestionsWithPagination($conn, $tri, $items_per_page); ?>
                                     <!-- debut boucle -->
                                     <!-- Tableau pour afficher les questions -->
                                     <?php

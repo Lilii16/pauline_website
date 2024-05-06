@@ -10,6 +10,8 @@
 function findAllQuestions($conn, $tri = '') {
     $sql = "SELECT * FROM `questions`";
     
+
+// crée une fonction generale plus tard attention
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération de la valeur sélectionnée dans le formulaire
     $tri = $_POST["tri"];
@@ -20,6 +22,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } elseif ($tri == 'question') {
     $sql .= " ORDER BY question ASC";
 }
+    $requete = $conn->query($sql);
+    $questions = $requete->fetchAll();
+    return $questions;
+}
+
+function findAllQuestionsPagination($conn, $tri, $items_per_page, $offset) {
+    $sql = "SELECT * FROM `questions`";
+
+    // Ajout du tri si un critère de tri est spécifié
+    if ($tri == 'last_modified_date') {
+        $sql .= " ORDER BY last_modified_date DESC";
+    } elseif ($tri == 'question') {
+        $sql .= " ORDER BY question ASC";
+    }
+
+    // Ajout de l'offset et du nombre d'éléments par page
+    $sql .= " LIMIT $offset, $items_per_page";
+
+    // Exécution de la requête SQL
     $requete = $conn->query($sql);
     $questions = $requete->fetchAll();
     return $questions;
@@ -141,3 +162,67 @@ function updateQuestion($conn, $currentId)
         return false;
     }
 }
+
+
+function pagination($total_items, $items_per_page, $current_page, $page_url) {
+    // Calculer le nombre total de pages
+    $total_pages = ceil($total_items / $items_per_page);
+
+    // Afficher les liens de pagination
+    $pagination = '<ul class="pagination">';
+
+    // Lien vers la première page
+    $pagination .= '<li class="page-item"><a class="page-link" href="' . $page_url . '&page=1">Première</a></li>';
+
+    // Lien vers les pages précédentes
+    for ($i = max(1, $current_page - 2); $i <= min($current_page + 2, $total_pages); $i++) {
+        $pagination .= '<li class="page-item ' . ($current_page == $i ? 'active' : '') . '"><a class="page-link" href="' . $page_url . '&page=' . $i . '">' . $i . '</a></li>';
+    }
+
+    // Lien vers la dernière page
+    $pagination .= '<li class="page-item"><a class="page-link" href="' . $page_url . '&page=' . $total_pages . '">Dernière</a></li>';
+
+    $pagination .= '</ul>';
+
+    return $pagination;
+}
+
+
+// Fonction pour afficher les questions avec pagination
+function displayQuestionsWithPagination($conn, $tri, $items_per_page) {
+    // Récupérer le numéro de page actuelle depuis l'URL, par défaut 1 si non spécifié
+    $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+    // Récupérer le nombre total de questions
+    $total_questions = count(findAllQuestions($conn, $tri));
+
+    // Calculer l'index de départ pour la requête SQL en fonction de la page actuelle
+    $offset = ($current_page - 1) * $items_per_page;
+
+    // Récupérer les questions pour la page actuelle en utilisant l'offset
+    $questions = findAllQuestionsPagination($conn, $tri, $items_per_page, $offset);
+
+    // Afficher les questions
+    foreach ($questions as $question) {
+        // Affichage de chaque question
+        echo "<p>" . $question['question'] . "</p>";
+
+
+
+
+
+
+
+
+
+
+
+        
+    }
+
+    // Afficher la pagination
+    echo pagination($total_questions, $items_per_page, $current_page, "?tri=$tri");
+}
+
+
+
