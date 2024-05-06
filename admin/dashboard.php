@@ -54,10 +54,13 @@ require_once "./Components/header.php"
             $articles = findAllArticles($conn);
             $publications = findAllPublications($conn);
             $faq_formations = findAllQuestionsFormation($conn);
+            // compteurs d'elements
             $nombre_articles = count($articles);
             $nombre_questions = count($questions);
             $nombre_publications = count($publications);
             $nombre_faq_formation = count($faq_formations);
+            // initialiser la variable trie pour le filtre de selection
+            $tri = isset($_POST['tri']) ? $_POST['tri'] : '';
             ?>
 
             <!-- Tab panes -->
@@ -78,7 +81,20 @@ require_once "./Components/header.php"
                             <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add text-light" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="question"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                 <span>Ajouter un nouveau</span></button>
 
+                                <div class="tri  d-flex justify-content-end">
+                            <form action="" method="Post">
+                     
+<!-- trie des elements -->
+                                <form method="post">
+                                    <select name="tri" class="form-select container  justify-content-end bg-duck" aria-label="Default select example" onchange="this.form.submit()">
+                                        <option value="">Trier</option>
+                                        <option value="last_modified_date" <?php if (isset($tri) && $tri == 'last_modified_date') echo 'selected="selected"'; ?>>Trier par Date</option>
+                                        <option value="question" <?php if (isset($tri) && $tri == 'question') echo 'selected="selected"'; ?>>Trier par Titre</option>
+                                    </select>
+                                </form>
                         </div>
+                        </div>
+               
                         <div class="table-responsive bg-duck">
                             <table class="table table-nowrap">
                                 <thead class="bg-rouille">
@@ -221,13 +237,11 @@ require_once "./Components/header.php"
 
                         </div>
                         <div class="trie">
-                            <!-- filtre prix -->
-                            <!--  si la valeur de $sortOrder correspond à la valeur de chaque option l'attribut selected est ajouté à l'option, ce qui la rendra pré-sélectionnée dans le menu déroulant 
-L'attribut dans selected est une partie de la balise <option> en HTML. Dans un menu déroulant (<select>), l'attribut selected est utilisé pour indiquer quelle option doit 
-  être initialement sélectionnée lorsque la page est chargée.
-<option value="2" selected>Option 2</option>
--->
-                           
+
+                            <select id="tri" class="form-select">
+                                <option value="last_modified_date">Date</option>
+                                <option value="question">Titre</option>
+                            </select>
 
                         </div>
                         <div class="table-responsive bg-duck">

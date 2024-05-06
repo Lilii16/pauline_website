@@ -7,13 +7,24 @@
 
 //création fonction qui permet de récupérer les questions de la bdd pour la page ressouce
 
-function findAllQuestions($conn)
-{
+function findAllQuestions($conn, $tri = '') {
     $sql = "SELECT * FROM `questions`";
+    
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération de la valeur sélectionnée dans le formulaire
+    $tri = $_POST["tri"];
+}
+   // Ajout du tri si un critère de tri est spécifié
+   if ($tri == 'last_modified_date') {
+    $sql .= " ORDER BY last_modified_date DESC";
+} elseif ($tri == 'question') {
+    $sql .= " ORDER BY question ASC";
+}
     $requete = $conn->query($sql);
     $questions = $requete->fetchAll();
     return $questions;
 }
+
 
 //pour visualiser le contenu du tableau qui est récupéré (attention echo ne pourra pas afficher le tableau)
 
