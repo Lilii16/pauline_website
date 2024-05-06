@@ -12,13 +12,13 @@
       href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
     <!--  -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/orejime@latest/dist/orejime.css"
     />
-<!--  -->
+    <!--  -->
     <script src="https://unpkg.com/orejime@latest/dist/orejime.js"></script>
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
   </head>
@@ -41,9 +41,8 @@
             />
           </a>
         </header>
-<!--  -->
+        <!--  -->
         <main role="main">
-
           <h2 class="Inset-title">Privacy policy example</h2>
 
           <div class="Inset" id="privacyPolicy">
@@ -67,14 +66,12 @@
         </main>
       </div>
 
-      <footer class="Footer" role="contentinfo">
-    
-      </footer>
+      <footer class="Footer" role="contentinfo"></footer>
     </div>
 
     <script>
-      // Le but d'une bannière de cookies est d'informer les visiteurs du site web des cookies utilisés sur votre site web. 
-    // 1
+      // Le but d'une bannière de cookies est d'informer les visiteurs du site web des cookies utilisés sur votre site web.
+      // 1
       window.orejimeConfig = {
         appElement: "#app",
         privacyPolicy: "http://pauline-website/mentions.php",
@@ -158,7 +155,6 @@
 
     <!-- since there is a orejimeConfig global variable in index.js, a window.orejime instance will be initiated when including the lib -->
 
-
     <script
       type="opt-in"
       data-src="example-assets/external-tracker.js"
@@ -170,8 +166,7 @@
       type="opt-in"
       data-type="application/javascript"
       data-name="inline-tracker"
-    >
-    </script>
+    ></script>
 
     <script>
       document.querySelector(".consent-modal-button").addEventListener(
@@ -192,87 +187,82 @@
       );
     </script>
 
+    <script>
+      // 2
+      var orejimeConfig = {
+        elementID: "orejime",
+        appElement: "#app",
+        cookieName: "Hello World",
+        cookieExpiresAfterDays: 365,
+        cookieDomain: "pauline-website/",
 
+        stringifyCookie: (contents) => JSON.stringify(contents),
+        parseCookie: (cookie) => JSON.parse(cookie),
 
+        privacyPolicy: "http://pauline-website/mentions.php",
 
-<script>
-// 2
-  var orejimeConfig = {
+        default: true,
 
-    elementID: "orejime",
-    appElement: "#app",
-    cookieName: "Hello World",
-    cookieExpiresAfterDays: 365,
-    cookieDomain: 'pauline-website/',
+        mustConsent: false,
 
-    stringifyCookie: (contents) => JSON.stringify(contents),
-    parseCookie: (cookie) => JSON.parse(cookie),
+        mustNotice: false,
 
-    privacyPolicy: "http://pauline-website/mentions.php",
+        lang: "fr",
 
-    default: true,
+        logo: false,
 
-    mustConsent: false,
+        debug: false,
 
-    mustNotice: false,
-
-    lang: "fr",
-
-    logo: false,
-
-    debug: false,
-
-    translations: {
-        fr: {
+        translations: {
+          fr: {
             consentModal: {
               title: "Les informations que nous collectons",
-                description: "This is an example of how to override an existing translation already used by Orejime",
+              description:
+                "This is an example of how to override an existing translation already used by Orejime",
             },
             inlineTracker: {
-                description: "Example of an inline tracking script",
+              description: "Example of an inline tracking script",
             },
             externalTracker: {
-                description: "Example of an external tracking script",
+              description: "Example of an external tracking script",
             },
             purposes: {
-                analytics: "Analytics",
-                security: "Security"
+              analytics: "Analytics",
+              security: "Security",
             },
             categories: {
-                analytics: {
-                    description: "A long form description of the category."
-                }
-            }
+              analytics: {
+                description: "A long form description of the category.",
+              },
+            },
+          },
         },
-    },
 
-
-    apps: [
-        {
+        apps: [
+          {
             name: "google-tag-manager",
 
-  
             title: "Google Tag Manager",
 
-
             cookies: [
-                "_ga",
-                "_gat",
-                "_gid",
-                "__utma",
-                "__utmb",
-                "__utmc",
-                "__utmt",
-                "__utmz",
-                "_gat_gtag_" + GTM_UA,
-                "_gat_" + GTM_UA
+              "_ga",
+              "_gat",
+              "_gid",
+              "__utma",
+              "__utmb",
+              "__utmc",
+              "__utmt",
+              "__utmz",
+              "_gat_gtag_" + GTM_UA,
+              "_gat_" + GTM_UA,
             ],
-
 
             purposes: ["analytics"],
 
-            callback: function(consent, app){
-                console.log("User consent for app " + app.name + ": consent=" + consent)
+            callback: function (consent, app) {
+              console.log(
+                "User consent for app " + app.name + ": consent=" + consent
+              );
             },
 
             required: false,
@@ -282,37 +272,35 @@
             default: true,
 
             onlyOnce: true,
-        },
-        {
+          },
+          {
             name: "inline-tracker",
             title: "Inline Tracker",
             purposes: ["analytics"],
             cookies: [
-                "inline-tracker"
-                ["cookieName", "/blog", "." + location.hostname],
-                ["cookieName", "/", "test.mydomain.com"],
-            ]
-        },
-        {
+              "inline-tracker"[
+                ("cookieName", "/blog", "." + location.hostname)
+              ],
+              ["cookieName", "/", "test.mydomain.com"],
+            ],
+          },
+          {
             name: "external-tracker",
             title: "External Tracker",
             purposes: ["analytics", "security"],
             cookies: ["external-tracker"],
-            required: true
-        }
-    ],
+            required: true,
+          },
+        ],
 
-    categories: [
-        {
+        categories: [
+          {
             name: "analytics",
             title: "Analytics",
-            apps: [
-                "google-tag-manager",
-                "external-tracker"
-            ]
-        }
-    ]
-}
-</script>
+            apps: ["google-tag-manager", "external-tracker"],
+          },
+        ],
+      };
+    </script>
   </body>
 </html>

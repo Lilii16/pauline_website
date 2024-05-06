@@ -5,8 +5,8 @@ require_once('./utilities/navigation/navbar.php');
 <section class="vh-100 text-light text-center m-0 p-0">
     <div class="middle d-flex flex-column justify-content-center align-items-center h-75">
         <div class="align-text-middle">
-           <h1 class="display-1 fw-bolder">Pauline Rhenter</h1>
-        <h3 class="">Avocate au Barreau de Marseille</h3> 
+            <h1 class="display-1 fw-bolder">Pauline Rhenter</h1>
+            <h3 class="">Avocate au Barreau de Marseille</h3>
         </div>
     </div>
     <h3 class="bottom align-text-bottom pb-5">Nothing about us, without us</h3>

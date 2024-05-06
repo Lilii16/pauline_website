@@ -1,5 +1,5 @@
+
 </main>
-</body>
 
 <div class="container-fluid bg-bk">
     <footer class="pt-5" style="overflow-x: hidden;">
@@ -9,6 +9,16 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="mentions.php" class="nav-link p-0" style="color: #F5ECD4">Voir plus</a></li>
                 </ul>
+                <!-- Boutons modale consentement cookies -->
+                <div class="ButtonGroup">
+              <button type="button" class="Button  btn rounded-pill bg-beige text-red m-3 consent-modal-button">
+                Open consent modal
+              </button>
+              <button type="button" class="Button  btn rounded-pill bg-beige text-red m-3 reset-button">
+                Reset consent
+              </button>
+            </div>
+
             </div>
             <div class="col-md-2 mb-3 d-md-flex align-items-center justify-content-center" style="color: #0010A3">
                 <div class="vr d-none d-md-block"></div>
@@ -37,6 +47,12 @@
         </div>
     </div>
 </footer>
-
 </div>
+</div>
+<!-- script cookies -->
+<script src="utilities\composant_general\Cookies_origime.js"></script>
+
+  
+</body>
+
         

@@ -74,7 +74,7 @@ color:black !important;
     }
 
 
-   /* style modale supression */
+   /* style modale*/
    
 .modal-confirm {
     color: #636363;
@@ -98,4 +98,10 @@ color:black !important;
     display: inline-block;
     margin: 100px auto;
 }
-   /* fin style modale suppression */
+   /* fin style modale */
+
+   @media (min-width: 992px) {
+    .dashcard {
+        height: calc(100vh - 130px);
+    }
+}

@@ -68,13 +68,7 @@ require_once "./Components/header.php"
                         <!-- Tableau pour afficher les questions -->
 
                         <!-- dash example -->
-                        <style>
-                            @media (min-width: 992px) {
-                                .dashcard {
-                                    height: calc(100vh - 130px);
-                                }
-                            }
-                        </style>
+                    
                         <div class="card dashcard">
                             <div class="card-header border-bottom d-flex justify-content-between text-light">
                                 <h5 class="mb-0">Gestion des question sur conseil juridique</h5>

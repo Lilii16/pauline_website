@@ -10,7 +10,7 @@
 }
 body {
   position: relative;
-  background-image: url("assets/pictures/grenades.jpg") !important;
+  background-image: url("../pictures/grenade.webp") !important;
   background-size: contain;
   font-family: "Ruluko", serif !important;
   color: #f5ecd4 !important;
@@ -235,6 +235,11 @@ a:hover {
 }
 
 /* responsive */
+@media screen and (max-width: 700px){
+  body{
+    background-size: 100vh;
+  }
+}
 
 /* Media queries pour les écrans  */
 @media screen and (min-width: 500px){
@@ -291,6 +296,11 @@ a:hover {
  {
   font-size: 1.3em !important;
 }
+
+.orejime-ModalWrapper {
+
+  top: 55% !important;
+}
 }
 
 /* pour ecrans extra larges */
@@ -308,6 +318,11 @@ a:hover {
     padding-top: 5% !important;
     margin: unset !important;
     margin-left: 37vw !important;
+  }
+  .orejime-ModalWrapper {
+      max-width: 100% !important;
+      max-height: 100% !important;
+    
   }
 }
 
@@ -336,3 +351,12 @@ a:hover {
 .custom-card {
   box-shadow: 10px 10px #a30000!important;
 }
+
+
+
+.orejime-ModalWrapper {
+  max-width: 90% !important;
+  max-height: 70% !important;
+}
+
+
