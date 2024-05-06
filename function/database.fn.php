@@ -1,5 +1,4 @@
 <?php
-
 // Cette fonction établit une connexion à la base de données en utilisant les informations de configuration fournies.
 // Le paramètre $config est un tableau associatif qui contient les informations de connexion à la base de données.
 function getPDOlink($config)

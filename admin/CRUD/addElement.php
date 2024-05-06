@@ -60,23 +60,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Erreur : " . $e->getMessage();
             }
             break;
-        case 'publication':
-            $titre = htmlspecialchars($_POST['titre']);
-            $description = htmlspecialchars($_POST['description']);
-            $source = htmlspecialchars($_POST['source']);
-            $lien = htmlspecialchars($_POST['path']);
-            try {
-                $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `path`, `last_modified_date`) VALUES ('$titre', '$description', '$source', '$lien','$currentDate')";
-                $conn->query($sql);
-                session_start();
-                $_SESSION['success_message'] = "$type a été ajouté avec succès.";
-                header("Location: ../dashboard.php?section=" . $type . "Content");
-
-                exit;
-            } catch (PDOException $e) {
-                echo "Erreur : " . $e->getMessage();
-            }
-            break;
+            case 'publication':
+                $titre = htmlspecialchars($_POST['titre']);
+                $description = htmlspecialchars($_POST['description']);
+                $lien = htmlspecialchars($_POST['path']);
+            
+                // Vérification si le fichier a bien été téléchargé
+                if(isset($_FILES['source']) && $_FILES['source']['error'] == 0){
+                    $uploadfolder = '../../assets/publications_perso/';
+                    $uploadfile = $uploadfolder . basename($_FILES['source']['name']);
+                    $file_extension = strtolower(pathinfo($_FILES['source']['name'], PATHINFO_EXTENSION));
+                    
+                    // Vérification du type de fichier
+                    if ($file_extension != "pdf") {
+                        echo "Seuls les fichiers PDF sont autorisés.";
+                        exit;
+                    }
+                    
+                    // Vérification de la taille du fichier (max 10 Mo = 10 * 1024 * 1024 octets)
+                    $max_file_size = 10 * 1024 * 1024; // 10 Mo
+                    if ($_FILES['source']['size'] > $max_file_size) {
+                        echo "La taille du fichier dépasse la limite autorisée.";
+                        exit;
+                    }
+                    
+                    if (move_uploaded_file($_FILES['source']['tmp_name'], $uploadfile)) {
+                        // Succès du téléchargement
+                        $source = $uploadfile;
+                    } else {
+                        // Échec du téléchargement
+                        echo "Erreur lors du téléchargement du fichier.";
+                        exit;
+                    }
+                } else {
+                    // Aucun fichier n'a été téléchargé
+                    echo "Aucun fichier n'a été téléchargé.";
+                    exit;
+                }
+                
+                try {
+                    $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `path`, `last_modified_date`) VALUES ('$titre', '$description', '$source', '$lien','$currentDate')";
+                    $conn->query($sql);
+                    session_start();
+                    $_SESSION['success_message'] = "$type a été ajouté avec succès.";
+                    header("Location: ../dashboard.php?section=" . $type . "Content");
+                    exit;
+                } catch (PDOException $e) {
+                    echo "Erreur : " . $e->getMessage();
+                }
+                break;
+            
+            
         case 'faq_formation':
             $question = htmlspecialchars($_POST['question']);
             $reponse = htmlspecialchars($_POST['reponse']);
@@ -103,4 +137,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: ../dashboard.php");
     exit;
 }
-?>

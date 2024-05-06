@@ -1,5 +1,4 @@
 <?php
-
 // Tableau de configuration contenant les variables d'environnement pour la base de données (BDD).
 // Ces informations sont nécessaires pour établir une connexion avec la BDD.
 $config = [

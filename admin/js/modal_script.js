@@ -34,18 +34,18 @@ function handleAdd(type) {
   } else if (type === "publication") {
     // Code pour le formulaire d'ajout de publication
     addForm.innerHTML = ` 
-        <form action="./CRUD/addElement.php" method="post" class="d-flex flex-column justify-content-center align-items-center">
+    <!-- Le type d'encodage des données, enctype, DOIT être spécifié comme ce qui suit -->
+        <form enctype="multipart/form-data" action="./CRUD/addElement.php"  method="post" class="d-flex flex-column justify-content-center align-items-center">
         <!-- Autres champs du formulaire pour ajouter un article -->
         <input type="hidden" name="type" value="publication">
         <label for="titre">Titre : </label>
         <input type="text"  class="form-control shadow rounded-3" name="titre"><br>
         <label for="description">Description : </label>
         <textarea name="description"  class="form-control shadow rounded-3" style="height: 100px"></textarea><br>
-        <label for="source">Source : </label>
-        <input type="text"  class="form-control shadow rounded-3" name="source"><br>
-        <label for="lien">Lien : </label>
-        <input type="text"  class="form-control shadow rounded-3"name="path"><br>
-        <!-- Ajoutez d'autres champs pour les articles si nécessaire -->
+        <!-- MAX_FILE_SIZE doit précéder le champ input de type file -->
+        
+        <label for="source">Fichier : </label>
+        <input type="file"  class="form-control shadow rounded-3" name="source"><br>
         <button type="submit" class="btn btn-danger col-6 mb-3">Ajouter</button>
     </form>`;
   } else if (type === "faq_formation") {
