@@ -42,10 +42,11 @@ function handleAdd(type) {
         <input type="text"  class="form-control shadow rounded-3" name="titre"><br>
         <label for="description">Description : </label>
         <textarea name="description"  class="form-control shadow rounded-3" style="height: 100px"></textarea><br>
+        <label for="source">Source : </label>
+        <input type="text"  class="form-control shadow rounded-3" name="source"><br>
         <!-- MAX_FILE_SIZE doit précéder le champ input de type file -->
-        
-        <label for="source">Fichier : </label>
-        <input type="file"  class="form-control shadow rounded-3" name="source"><br>
+        <label for="path">Fichier : </label>
+        <input type="file"  class="form-control shadow rounded-3" name="path"><br>
         <button type="submit" class="btn btn-danger col-6 mb-3">Ajouter</button>
     </form>`;
   } else if (type === "faq_formation") {
@@ -132,9 +133,9 @@ function handleView(type, id, title, description, lien,source) {
         <p>> ${title}</p>
         <p><strong>Description:</strong></p>
         <p> ${description}</p>
-        <p><strong>Lien:</strong></p>
-        <p> ${lien}</p>
-        <a href="${lien}" class="btn rounded-pill bg-warning text-red ms-3 p-2" download>Telecharger</a>
+        <p><strong>Source:</strong></p>
+        <p> ${source}</p>
+        <a href="${lien}" class="btn rounded-pill bg-primary text-light m-2 p-1" download>Telecharger</a>
     </div>`;
   } else if (type === "faq_formation") {
     addForm.innerHTML = `
@@ -217,7 +218,7 @@ function handleModify(type, id, title, description, lien,source) {
 `;
   } else if (type === "publication") {
     addForm.innerHTML = `   
-    <form action="./CRUD/updateElement.php" method="post">
+    <form enctype="multipart/form-data"  action="./CRUD/updateElement.php" method="post">
     <input type="hidden" name="type" value="${type}">
     <input type="hidden" name="id" value="${id}">
     
@@ -236,10 +237,15 @@ function handleModify(type, id, title, description, lien,source) {
         <textarea id="source" name="source" class="form-control">${source}</textarea>
     </div>
     <div class="mb-3">
-    <label for="source" class="form-label">Lien :</label>
-    <textarea id="source" name="lien" class="form-control">${lien}</textarea>
+    <label for="path" class="form-label col-12">Visualiser le fichier :</label>
+    <a href="${lien}" class="btn rounded-2 bg-primary text-red text-light m-3 p-1 col-4" download>Télecharger</a>
+    <textarea id="path" name="path" class="form-control">${lien}</textarea>
 </div>
-    
+    <div class="mb-3">
+    <!-- MAX_FILE_SIZE doit précéder le champ input de type file -->
+    <label for="new_path">Choisir un autre fichier : </label>
+    <input type="file"  class="form-control shadow rounded-3" name="new_path"><br>
+    </div>
     <div class="text-center">
         <button type="submit" class="btn btn-primary">Valider les modifications</button>
     </div>

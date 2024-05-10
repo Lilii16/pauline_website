@@ -63,13 +63,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             case 'publication':
                 $titre = htmlspecialchars($_POST['titre']);
                 $description = htmlspecialchars($_POST['description']);
-                $lien = htmlspecialchars($_POST['path']);
+                $source = htmlspecialchars($_POST['source']);
+                $path = htmlspecialchars($_POST['path']);
             
                 // Vérification si le fichier a bien été téléchargé
-                if(isset($_FILES['source']) && $_FILES['source']['error'] == 0){
+                if(isset($_FILES['path']) && $_FILES['path']['error'] == 0){
                     $uploadfolder = '../../assets/publications_perso/';
-                    $uploadfile = $uploadfolder . basename($_FILES['source']['name']);
-                    $file_extension = strtolower(pathinfo($_FILES['source']['name'], PATHINFO_EXTENSION));
+                    $uploadfile = $uploadfolder . basename($_FILES['path']['name']);
+                    $file_extension = strtolower(pathinfo($_FILES['path']['name'], PATHINFO_EXTENSION));
                     
                     // Vérification du type de fichier
                     if ($file_extension != "pdf") {
@@ -79,14 +80,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     // Vérification de la taille du fichier (max 10 Mo = 10 * 1024 * 1024 octets)
                     $max_file_size = 10 * 1024 * 1024; // 10 Mo
-                    if ($_FILES['source']['size'] > $max_file_size) {
+                    if ($_FILES['path']['size'] > $max_file_size) {
                         echo "La taille du fichier dépasse la limite autorisée.";
                         exit;
                     }
                     
-                    if (move_uploaded_file($_FILES['source']['tmp_name'], $uploadfile)) {
+                    if (move_uploaded_file($_FILES['path']['tmp_name'], $uploadfile)) {
                         // Succès du téléchargement
-                        $source = $uploadfile;
+                        $path = $uploadfile;
                     } else {
                         // Échec du téléchargement
                         echo "Erreur lors du téléchargement du fichier.";
@@ -99,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 
                 try {
-                    $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `path`, `last_modified_date`) VALUES ('$titre', '$description', '$source', '$lien','$currentDate')";
+                    $sql = "INSERT INTO `publications` (`titre`, `description`, `source`, `path`, `last_modified_date`) VALUES ('$titre', '$description', '$source', '$path','$currentDate')";
                     $conn->query($sql);
                     session_start();
                     $_SESSION['success_message'] = "$type a été ajouté avec succès.";

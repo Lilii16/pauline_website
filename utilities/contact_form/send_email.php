@@ -49,13 +49,18 @@ EOT;
   if (!$mail->send()) {
     $msg = 'Désolé, quelque chose a mal tourné. Veuillez réessayer plus tard.';
   } else {
+    session_start();
     $msg = 'Message envoyé ! Merci de nous avoir contactés.';
+    $_SESSION['success_message'] = $msg;
+  
+
+    header("Location: ../../index.php");
+
   }
 } else {
   $msg = 'Partagez-les avec nous !';
 }
 
-echo $msg;
 
 // Fonction pour nettoyer les données entrées par l'utilisateur
 function clean_input($data)

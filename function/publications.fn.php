@@ -143,7 +143,6 @@ function deletePublicationById($conn, $currentID) {
         return false;
     }
 }
-
 function updatePublication($conn, $currentId)
 {
     try {
@@ -154,7 +153,7 @@ function updatePublication($conn, $currentId)
         $titre = isset($_POST['titre']) ? htmlspecialchars($_POST['titre']) : '';
         $description = isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '';
         $source = isset($_POST['source']) ? htmlspecialchars($_POST['source']) : '';
-        $lien = isset($_POST['lien']) ? htmlspecialchars($_POST['lien']) : '';
+        $lien = isset($_POST['new_path']) ? htmlspecialchars($_POST['new_path']) : '';
 
         // Préparer les valeurs à mettre à jour
         $updateValues = array();
@@ -173,9 +172,44 @@ function updatePublication($conn, $currentId)
             $updateValues[] = "source = ?";
             $params[] = $source;
         }
+
+        // Vérifier si un nouveau fichier a été téléchargé
+        if(isset($_FILES['new_path']) && $_FILES['new_path']['error'] == 0){
+            $uploadfolder = '../../assets/publications_perso/';
+            $uploadfile = $uploadfolder . basename($_FILES['new_path']['name']);
+            $file_extension = strtolower(pathinfo($_FILES['new_path']['name'], PATHINFO_EXTENSION));
+            
+            // Vérification du type de fichier
+            if ($file_extension != "pdf") {
+                echo "Seuls les fichiers PDF sont autorisés.";
+                exit;
+            }
+            
+            // Vérification de la taille du fichier (max 10 Mo = 10 * 1024 * 1024 octets)
+            $max_file_size = 10 * 1024 * 1024; // 10 Mo
+            if ($_FILES['new_path']['size'] > $max_file_size) {
+                echo "La taille du fichier dépasse la limite autorisée.";
+                exit;
+            }
+            
+            if (move_uploaded_file($_FILES['new_path']['tmp_name'], $uploadfile)) {
+                // Succès du téléchargement
+                $lien = $uploadfile;
+            } else {
+                // Échec du téléchargement
+                echo "Erreur lors du téléchargement du fichier.";
+                exit;
+            }
+        }
+
+        // Vérifier si le fichier a été modifié
         if ($lien != $currentData['path']) {
-            $updateValues[] = "lien = ?";
+            // ajouter au tableau de modifications sinon la requete ne s'envoie
+            $updateValues[] = "path = ?";
             $params[] = $lien;
+
+            // Supprimer l'ancien fichier PDF
+            unlink($currentData['path']);
         }
 
         // S'il y a des valeurs à mettre à jour, exécuter la requête SQL
@@ -186,14 +220,15 @@ function updatePublication($conn, $currentId)
 
             // Construire la requête SQL avec des déclarations préparées
             $updateString = implode(', ', $updateValues);
-            $sql = "UPDATE publications SET $updateString WHERE id = ?";
+            $sql = "UPDATE publications SET $updateString, path = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
 
             // Binder les paramètres
             foreach ($params as $index => $param) {
                 $stmt->bindValue($index + 1, $param);
             }
-            $stmt->bindValue(count($params) + 1, $currentId);
+            $stmt->bindValue(count($params) + 1, $lien);
+            $stmt->bindValue(count($params) + 2, $currentId);
 
             // Exécuter la requête
             $stmt->execute();
@@ -207,6 +242,7 @@ function updatePublication($conn, $currentId)
         return false;
     }
 }
+
 
 
 function displayPublicationsWithPagination($conn, $tri, $items_per_page) {
@@ -229,7 +265,7 @@ function displayPublicationsWithPagination($conn, $tri, $items_per_page) {
                 <td>' . $publication['titre'] . '</td>
                 <td>' . $publication['last_modified_date'] . '</td>
                 <td>
-                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="publication" data-id="' . $publication['id'] . '" data-title="' . $publication['titre'] . '" data-description="' . $publication['description'] . '" data-lien="' . $publication['source'] . '">Afficher</button>
+                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="publication" data-id="' . $publication['id'] . '" data-title="' . $publication['titre'] . '" data-description="' . $publication['description'] . '" data-lien="' . $publication['path']. '" data-source="' . $publication['source']  . '">Afficher</button>
                 </td>
                 <td>
                     <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="publication" data-id="' . $publication['id'] . '" data-title="' . $publication['titre'] . '" data-description="' . $publication['description'] . '" data-lien="' . $publication['path'] . '" data-source="' . $publication['source'] . '">Modifier</button>

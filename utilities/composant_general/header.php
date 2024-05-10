@@ -6,6 +6,8 @@ require_once dirname(__DIR__, 2) . '/function/articles.fn.php';
 require_once dirname(__DIR__, 2) . '/function/faq_formations.fn.php';
 require_once dirname(__DIR__, 2) . '/function/questions.fn.php';
 $conn = getPDOlink($config);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +28,7 @@ $conn = getPDOlink($config);
   <script src="https://unpkg.com/orejime@2.2.1/dist/orejime.js"></script>
 
 
- 
+
 
 
   <!-- logo page web -->
@@ -55,8 +57,23 @@ $conn = getPDOlink($config);
 
 <body>
 
-<!-- <script src="Cookies_origime.js"></script> -->
- <!-- <div id="orejime"></div> -->
-  <div id="app" class="app">  
-  <main class="bg-red-70">
- 
+  <!-- <script src="Cookies_origime.js"></script> -->
+  <!-- <div id="orejime"></div> -->
+  <div id="app" class="app">
+    <main class="bg-red-70">
+  <?php    
+   session_start();
+// Vérifier si un message de succès est présent dans la session
+if (isset($_SESSION['success_message'])) {
+  // Afficher le message de succès
+  echo '<div class="alert alert-success text-center position-fixed bottom-0 start-50 translate-middle-x session" role="alert"> <h6>' .  $_SESSION['success_message'] . '</h6> </div>';
+
+
+  // Supprimer le message de succès de la session pour éviter qu'il ne soit affiché à nouveau
+  unset($_SESSION['success_message']);
+} ?>
+<!-- JavaScript pour masquer le message de succès après 3 secondes -->
+<script src="../../admin/js/hide_message.js"></script>
+<script>
+  hideSuccessMessage()
+</script>
