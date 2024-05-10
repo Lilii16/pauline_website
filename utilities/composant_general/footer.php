@@ -49,7 +49,8 @@
 </footer>
 </div>
 </div>
-
+<!-- script cookies -->
+<script src="utilities\composant_general\Cookies_origime.js"></script>
   
 </body>
 

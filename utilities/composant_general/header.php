@@ -28,9 +28,6 @@ $conn = getPDOlink($config);
   <script src="https://unpkg.com/orejime@2.2.1/dist/orejime.js"></script>
 
 
-
-
-
   <!-- logo page web -->
   <link rel="icon" href="../../assets/logos/logoFondRemoved.png" type="image/x-icon">
   <script type="application/ld+json">
