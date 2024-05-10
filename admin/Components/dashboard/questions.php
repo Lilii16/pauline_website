@@ -18,7 +18,7 @@
                                     <!-- trie des elements -->
                                     <form method="post">
                                         <select name="tri" class="form-select container  justify-content-end bg-duck" aria-label="Default select example" onchange="this.form.submit()">
-                                            <option value="">Aucun Trie</option>
+                                            <option value="">Aucun Tri</option>
                                             <option value="last_modified_date" <?php if (isset($tri) && $tri == 'last_modified_date') echo 'selected="selected"'; ?>>Trier par Date</option>
                                             <option value="question" <?php if (isset($tri) && $tri == 'question') echo 'selected="selected"'; ?>>Trier par Titre</option>
                                         </select>

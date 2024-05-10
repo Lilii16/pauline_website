@@ -64,7 +64,7 @@ require_once "./Components/header.php"
             $tri = isset($_POST['tri']) ? $_POST['tri'] : '';
             ?>
 
-            <!-- Tab panes -->
+            <!-- Système d'onglets  -->
             <div class="tab-content">
 
                 <!-- Questions -->
@@ -94,6 +94,46 @@ include './Components/modal_view.php'
 ?>
 <!-- script pour ajouter -->
 <script src="js/modal_script.js"></script>
+
+
+
+<!--script gestion url-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sélectionnez tous les liens de navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Ajoutez un gestionnaire d'événements à chaque lien
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                // Empêchez le comportement par défaut du lien
+                event.preventDefault();
+
+                // Récupérez l'URL associée au lien
+                const href = link.getAttribute('href');
+
+                // Analysez l'URL actuelle
+                const url = new URL(window.location.href);
+
+                // Récupérez les paramètres de la requête actuelle
+                const params = new URLSearchParams(url.search);
+
+                // Remplacez ou ajoutez la pagination
+                params.set('page', '1');
+
+                // Remplacez la section dans l'URL actuelle par celle du lien
+                const section = href.split('#')[1];
+                params.set('section', section);
+
+                // Construisez la nouvelle URL
+                const newUrl = url.origin + url.pathname + '?' + params.toString() ;
+
+                // Redirigez vers la nouvelle URL
+                window.location.href = newUrl;
+            });
+        });
+    });
+</script>
 
 
 </body>
