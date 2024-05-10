@@ -1,9 +1,4 @@
 <?php
-// require_once 'database.fn.php';
-
-
-// Établir la connexion à la base de données
-// $conn = getPDOlink($config);
 
 //création fonction qui permet de récupérer les questions de la bdd pour la page ressouce
 
@@ -164,37 +159,16 @@ function updateQuestion($conn, $currentId)
 }
 
 
-function pagination($total_items, $items_per_page, $current_page, $page_url) {
-    // Calculer le nombre total de pages
-    $total_pages = ceil($total_items / $items_per_page);
-
-    // Afficher les liens de pagination
-    $pagination = '<ul class="pagination">';
-
-    // Lien vers la première page
-    $pagination .= '<li class="page-item"><a class="page-link" href="' . $page_url . '&page=1">Première</a></li>';
-
-    // Lien vers les pages précédentes
-    for ($i = max(1, $current_page - 2); $i <= min($current_page + 2, $total_pages); $i++) {
-        $pagination .= '<li class="page-item ' . ($current_page == $i ? 'active' : '') . '"><a class="page-link" href="' . $page_url . '&page=' . $i . '">' . $i . '</a></li>';
-    }
-
-    // Lien vers la dernière page
-    $pagination .= '<li class="page-item"><a class="page-link" href="' . $page_url . '&page=' . $total_pages . '">Dernière</a></li>';
-
-    $pagination .= '</ul>';
-
-    return $pagination;
-}
 
 
+// Fonction pour afficher les questions avec pagination
 // Fonction pour afficher les questions avec pagination
 function displayQuestionsWithPagination($conn, $tri, $items_per_page) {
     // Récupérer le numéro de page actuelle depuis l'URL, par défaut 1 si non spécifié
     $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
     // Récupérer le nombre total de questions
-    $total_questions = count(findAllQuestions($conn, $tri));
+    $total_items = count(findAllQuestions($conn, $tri));
 
     // Calculer l'index de départ pour la requête SQL en fonction de la page actuelle
     $offset = ($current_page - 1) * $items_per_page;
@@ -205,24 +179,31 @@ function displayQuestionsWithPagination($conn, $tri, $items_per_page) {
     // Afficher les questions
     foreach ($questions as $question) {
         // Affichage de chaque question
-        echo "<p>" . $question['question'] . "</p>";
-
-
-
-
-
-
-
-
-
-
-
-        
+        echo  '<tr>
+        <td>' . $question['question'] . '</td>
+        <td>' . $question['last_modified_date'] . '</td>
+        <td>
+            <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="question" data-id="' . $question['id'] . '" data-title="' . $question['question'] . '" data-description="' . $question['reponse'] . '">Afficher</button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="question" data-id="' . $question['id'] . '" data-title="' . $question['question'] . '" data-description="' . $question['reponse'] . '">Modifier</button>
+        </td>
+        <td class="text-end">
+            <button type="button" class="btn  btn-sm btn-square btn-neutral btn-light trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="question" data-id="' . $question['id'] . '"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </td>
+        </tr>';
     }
+    echo '</tbody></table>'; // Fermeture de la balise <tbody> et <table>
 
     // Afficher la pagination
-    echo pagination($total_questions, $items_per_page, $current_page, "?tri=$tri");
+    if (!function_exists('pagination')) {
+        include 'pagination.fn.php';
+    }
+    $page_url = "?tri=$tri"; // Définir votre URL de page ici
+    $section = "questionContent"; // Mettez votre section ici si nécessaire
+    echo pagination($total_items, $items_per_page, $current_page, $page_url, $section);
 }
+
 
 
 

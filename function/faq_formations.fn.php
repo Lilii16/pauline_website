@@ -4,13 +4,52 @@
 
 //création fonction qui permet de récupérer les questions de la bdd pour la page faq_formation
 
-function findAllQuestionsFormation($conn){
-    $sql= "SELECT * FROM `faq_formation`";
+// function findAllQuestionsFormation($conn){
+//     $sql= "SELECT * FROM `faq_formation`";
+//     $requete = $conn->query($sql);
+//     $questions = $requete->fetchAll();
+//     return $questions;
+// }
+
+
+function findAllQuestionsFormation($conn, $tri = '') {
+    $sql = "SELECT * FROM `faq_formation`";
+    
+
+// crée une fonction generale plus tard attention
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération de la valeur sélectionnée dans le formulaire
+    $tri = $_POST["tri"];
+}
+   // Ajout du tri si un critère de tri est spécifié
+   if ($tri == 'last_modified_date') {
+    $sql .= " ORDER BY last_modified_date DESC";
+} elseif ($tri == 'question') {
+    $sql .= " ORDER BY question ASC";
+}
     $requete = $conn->query($sql);
-    $questions = $requete->fetchAll();
-    return $questions;
+    $faq_formation = $requete->fetchAll();
+    return $faq_formation;
 }
 
+function findAllQuestionsFormationPagination($conn, $tri, $items_per_page, $offset) {
+    $sql = "SELECT * FROM `faq_formation`";
+
+    // Ajout du tri si un critère de tri est spécifié
+    if ($tri == 'last_modified_date') {
+        $sql .= " ORDER BY last_modified_date DESC";
+    } elseif ($tri == 'question') {
+        $sql .= " ORDER BY question ASC";
+    }
+
+    // Ajout de l'offset et du nombre d'éléments par page
+    $sql .= " LIMIT $offset, $items_per_page";
+
+    // Exécution de la requête SQL
+    $requete = $conn->query($sql);
+    $faq_formation = $requete->fetchAll();
+    return $faq_formation;
+}
 
 //création fonction qui permet de récupérer les questions de la bdd pour la page ressouce
 function findAllQuestionsFormationById($conn, $currentID) {
@@ -121,3 +160,45 @@ function updateQuestionsFormation($conn, $currentId)
         return false;
     }
 }
+
+function displayQuestionsFormationWithPagination($conn, $tri, $items_per_page) {
+    // Récupérer le numéro de page actuelle depuis l'URL, par défaut 1 si non spécifié
+    $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+    // Récupérer le nombre total de faq_formation
+    $total_items = count(findAllQuestionsFormation($conn, $tri));
+
+    // Calculer l'index de départ pour la requête SQL en fonction de la page actuelle
+    $offset = ($current_page - 1) * $items_per_page;
+
+    // Récupérer les faq_formation pour la page actuelle en utilisant l'offset
+    $faq_formation = findAllQuestionsFormationPagination($conn, $tri, $items_per_page, $offset);
+
+    // Afficher les faq_formation
+    foreach ($faq_formation as $faq) {
+        // Affichage de chaque faq
+        echo '<tr>
+            <td>' . $faq['question'] . '</td>
+            <td>' . $faq['last_modified_date'] . '</td>
+            <td>
+                <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="faq_formation" data-id="' . $faq['id'] . '" data-title="' . $faq['question'] . '" data-description="' . $faq['reponse'] . '">Afficher</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="faq_formation" data-id="' . $faq['id'] . '" data-title="' . $faq['question'] . '" data-description="' . $faq['reponse'] . '">Modifier</button>
+            </td>
+            <td class="text-end">
+                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="faq_formation" data-id="' . $faq['id'] . '"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td>
+        </tr>';
+    }
+    echo '</tbody></table>';
+
+    // Afficher la pagination
+    if (!function_exists('pagination')) {
+        include 'pagination.fn.php';
+    }
+    $page_url = "?tri=$tri"; // Définir votre URL de page ici
+    $section = "faq_formationContent"; // Mettez votre section ici si nécessaire
+    echo pagination($total_items, $items_per_page, $current_page, $page_url, $section);
+}
+

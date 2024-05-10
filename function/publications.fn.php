@@ -4,10 +4,51 @@
 // Établir la connexion à la base de données
 //    $conn = getPDOlink($config);
 
-//création fonction qui permet de récupérer les questions de la bdd pour la page ressouce
+//création fonction qui permet de récupérer les titles de la bdd pour la page ressouce
 
-function findAllPublications($conn){
-    $sql= "SELECT * FROM `publications`";
+// function findAllPublications($conn){
+//     $sql= "SELECT * FROM `publications`";
+//     $requete = $conn->query($sql);
+//     $publications = $requete->fetchAll();
+//     return $publications;
+// }
+
+
+
+function findAllPublications($conn, $tri = '') {
+    $sql = "SELECT * FROM `publications`";
+    
+
+// crée une fonction generale plus tard attention
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération de la valeur sélectionnée dans le formulaire
+    $tri = $_POST["tri"];
+}
+   // Ajout du tri si un critère de tri est spécifié
+   if ($tri == 'last_modified_date') {
+    $sql .= " ORDER BY last_modified_date DESC";
+} elseif ($tri == 'title') {
+    $sql .= " ORDER BY title ASC";
+}
+    $requete = $conn->query($sql);
+    $publications = $requete->fetchAll();
+    return $publications;
+}
+
+function findAllPublicationsPagination($conn, $tri, $items_per_page, $offset) {
+    $sql = "SELECT * FROM `publications`";
+
+    // Ajout du tri si un critère de tri est spécifié
+    if ($tri == 'last_modified_date') {
+        $sql .= " ORDER BY last_modified_date DESC";
+    } elseif ($tri == 'title') {
+        $sql .= " ORDER BY title ASC";
+    }
+
+    // Ajout de l'offset et du nombre d'éléments par page
+    $sql .= " LIMIT $offset, $items_per_page";
+
+    // Exécution de la requête SQL
     $requete = $conn->query($sql);
     $publications = $requete->fetchAll();
     return $publications;
@@ -165,4 +206,44 @@ function updatePublication($conn, $currentId)
         echo "Error: " . $e->getMessage();
         return false;
     }
+}
+
+
+function displayPublicationsWithPagination($conn, $tri, $items_per_page) {
+    // Récupérer le numéro de page actuelle depuis l'URL, par défaut 1 si non spécifié
+    $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+    // Récupérer le nombre total de publications
+    $total_items = count(findAllPublications($conn, $tri));
+
+    // Calculer l'index de départ pour la requête SQL en fonction de la page actuelle
+    $offset = ($current_page - 1) * $items_per_page;
+
+    // Récupérer les publications pour la page actuelle en utilisant l'offset
+    $publications = findAllPublicationsPagination($conn, $tri, $items_per_page, $offset);
+
+    // Afficher les publications
+    foreach ($publications as $publication) {
+        // Affichage de chaque publication
+        echo '<tr>
+                <td>' . $publication['titre'] . '</td>
+                <td>' . $publication['last_modified_date'] . '</td>
+                <td>
+                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="publication" data-id="' . $publication['id'] . '" data-title="' . $publication['titre'] . '" data-description="' . $publication['description'] . '" data-lien="' . $publication['source'] . '">Afficher</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="publication" data-id="' . $publication['id'] . '" data-title="' . $publication['titre'] . '" data-description="' . $publication['description'] . '" data-lien="' . $publication['path'] . '" data-source="' . $publication['source'] . '">Modifier</button>
+                </td>
+                <td class="text-end">
+                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="publication" data-id="' . $publication['id'] . '"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+            </tr>';
+    }
+    echo '</tbody>
+        </table>';
+
+   // Afficher la pagination
+   $page_url = "?tri=$tri"; // Définir votre URL de page ici
+   $section = "publicationContent"; // Mettez votre section ici si nécessaire
+   echo pagination($total_items, $items_per_page, $current_page, $page_url, $section);
 }

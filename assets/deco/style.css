@@ -359,4 +359,32 @@ a:hover {
   max-height: 70% !important;
 }
 
+/* pagination */
+.active>.page-link, .page-link.active{
+  z-index: 3;
+  color: #3cbb88 !important;
+  background-color: #fff3cd !important;
+  border-color: #49bb3c !important;
+}
 
+.active>.page-link, .page-link.active {
+  color: green !important;
+}
+
+.page-link {
+  color: #3cbb88 !important;
+}
+/* 
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: purple !important;
+    border: solid 1px purple !important;
+}
+
+/* CSS pour personnaliser la couleur de fond des éléments de pagination actifs */
+.pagination .page-item.active .page-link {
+  background-color: green !important;
+  color: green !important; 
+}

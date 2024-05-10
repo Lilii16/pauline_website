@@ -1,19 +1,45 @@
 <?php
-// require_once 'database.fn.php';
-
-// Établir la connexion à la base de données
-// $conn = getPDOlink($config);
 
 //création fonction qui permet de récupérer les articles de la bdd pour la page ressources
-function findAllArticles($conn){
-    $sql= "SELECT * FROM `articles`";
+function  findAllArticles($conn, $tri = '') {
+    $sql = "SELECT * FROM `articles`";
+// crée une fonction generale plus tard attention
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération de la valeur sélectionnée dans le formulaire
+    $tri = $_POST["tri"];
+}
+   // Ajout du tri si un critère de tri est spécifié
+   if ($tri == 'last_modified_date') {
+    $sql .= " ORDER BY last_modified_date DESC";
+} elseif ($tri == 'article') {
+    $sql .= " ORDER BY question ASC";
+}
     $requete = $conn->query($sql);
     $articles = $requete->fetchAll();
     return $articles;
+    
 }
 
 //pour visualiser le contenu du tableau qui est récupéré (attention echo ne pourra pas afficher le tableau)
 
+function findAllArticlesPagination($conn, $tri, $items_per_page, $offset) {
+    $sql = "SELECT * FROM `articles`";
+
+    // Ajout du tri si un critère de tri est spécifié
+    if ($tri == 'last_modified_date') {
+        $sql .= " ORDER BY last_modified_date DESC";
+    } elseif ($tri == 'title') {
+        $sql .= " ORDER BY title ASC";
+    }
+
+    // Ajout de l'offset et du nombre d'éléments par page
+    $sql .= " LIMIT $offset, $items_per_page";
+
+    // Exécution de la requête SQL
+    $requete = $conn->query($sql);
+    $articles = $requete->fetchAll();
+    return $articles;
+}
 
 // cette fonction nous permet de regarder un seul artcile séléctionnée grâce à son id
 function findArticleById($conn, $currentID) {
@@ -125,4 +151,46 @@ function updateArticle($conn, $currentId)
         echo "Error: " . $e->getMessage();
         return false;
     }
+}
+
+
+// Fonction pour afficher les articles avec pagination
+function displayArticlesWithPagination($conn, $tri, $items_per_page) {
+    // Récupérer le numéro de page actuelle depuis l'URL, par défaut 1 si non spécifié
+    $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+    // Récupérer le nombre total d'articles
+    $total_items = count(findAllArticles($conn, $tri));
+
+    // Calculer l'index de départ pour la requête SQL en fonction de la page actuelle
+    $offset = ($current_page - 1) * $items_per_page;
+
+    // Récupérer les articles pour la page actuelle en utilisant l'offset
+    $articles = findAllArticlesPagination($conn, $tri, $items_per_page, $offset);
+
+    // Afficher les articles
+    foreach ($articles as $article) {
+        // Affichage de chaque article
+        echo '<tr>
+                <td>' . $article['title'] . '</td>
+                <td>' . $article['last_modified_date'] . '</td>
+                <td>
+                    <button type="button" class="btn btn-light trigger-btn-view" data-toggle="modal" data-target="#myModal" data-action="afficher" data-type="article" data-id="' . $article['id'] . '" data-title="' . $article['title'] . '" data-deskription="' . $article['deskription'] . '" data-lien="' . $article['origine'] . '">Afficher</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-light trigger-btn-modify" data-toggle="modal" data-target="#myModal" data-action="modifier" data-type="article" data-id="' . $article['id'] . '" data-title="' . $article['title'] . '" data-deskription="' . $article['deskription'] . '" data-lien="' . $article['origine'] . '">Modifier</button>
+                </td>
+                <td class="text-end">
+                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-delete" data-toggle="modal" data-target="#myModal" data-action="supprimer" data-type="article" data-id="' . $article['id'] . '"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+            </tr>';
+    }
+    echo '</tbody>
+        </table>';
+
+    // Afficher la pagination
+     // Définir votre URL de page ici
+    $page_url = "?tri=$tri";
+    $section = "articleContent";
+    echo pagination($total_items, $items_per_page, $current_page, $page_url, $section);
 }
