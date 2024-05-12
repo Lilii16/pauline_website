@@ -58,7 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" || isset($_GET['login'])) {
   require_once './includes/login_view.inc.php';
   check_login_errors();
 }
-
   ?>
 </div>
 </body>

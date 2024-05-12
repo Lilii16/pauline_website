@@ -8,7 +8,7 @@
                             <h5 class="mb-0">Gestion des question sur conseil juridique</h5>
                             <!-- bouton pour ajouter la question -->
 
-                            <!-- tu travailles ici -->
+                            <!-- Bouton ajouter -->
                             <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover trigger-btn-add text-light" data-toggle="modal" data-target="#myModal" data-action="ajouter" data-type="question"> <i class="fa fa-plus text-warning" aria-hidden="true"></i>
                                 <span>Ajouter un nouveau</span></button>
 
